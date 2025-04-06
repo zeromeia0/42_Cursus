@@ -6,22 +6,12 @@
 /*   By: vivaz-ca <vivaz-ca@student.42lisboa.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 21:50:14 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/04/06 22:13:52 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/04/06 22:18:31 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdlib.h>
-
-int	ft_strlen(const char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
 
 void	my_strcat(char *dest, const char *src, int start)
 {
