@@ -6,11 +6,11 @@
 /*   By: vivaz-ca <vivaz-ca@student.42lisboa.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 15:22:52 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/04/05 15:31:33 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/04/06 21:42:03 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "libft.h"
+#include "libft.h"
 #include <stddef.h>
 #include <stdlib.h>
 
@@ -33,7 +33,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	}
 	return (str);
 }
-
+/*
 #include <stdio.h>
 int main(void)
 {
@@ -42,4 +42,4 @@ int main(void)
 		size_t len = 15;
 		printf("%s\n", ft_substr(str, start, len));
 		return (0);
-}
+}*/
