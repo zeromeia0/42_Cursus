@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-//#include <ctype.h>
 
 int	ft_isdigit(int c)
 {
@@ -24,6 +23,7 @@ int	ft_isdigit(int c)
 }
 /*
 #include <stdio.h>
+#include <ctype.h>
 int main(void)
 {
 	char a = '5';

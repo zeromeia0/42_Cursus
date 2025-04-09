@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-//#include <stddef.h>
+#include <stddef.h>
 
 void	ft_bzero(void *s, size_t n)
 {
@@ -26,3 +26,17 @@ void	ft_bzero(void *s, size_t n)
 		i++;
 	}
 }
+/*
+#include <stdio.h>
+#include <string.h>
+int main(void)
+{
+	char str1[] = "da minha voz";
+	char str2[] = "da minha voz";
+	size_t n = 5;
+
+	ft_bzero(&str1[6], n);
+	bzero (&str2[6], n);
+	printf("My function: %s\nOriginal: %s\n", str1, str2);
+	return (0);
+}*/

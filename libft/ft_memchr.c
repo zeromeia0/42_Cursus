@@ -35,7 +35,7 @@ void	*ft_memchr(const void *s, int c, size_t n)
 int main(void)
 {
 	char str[] = "Hello people";
-	char c = ' ';
+	char c = 'p';
 	size_t a = sizeof(str);
 	printf("MY function: %s\nOriginal: %s\n",
 		(char *)ft_memchr(str, c, a), (char *)memchr(str, c, a));

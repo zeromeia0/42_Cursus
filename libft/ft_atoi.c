@@ -11,9 +11,8 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-//#include <stdlib.h>
 
-int	is_space(char c)
+static int	is_space(char c)
 {
 	return ((c >= 9 && c <= 13) || c == ' ');
 }
@@ -44,9 +43,10 @@ int	ft_atoi(const char *nptr)
 }
 /*
 #include <stdio.h>
+#include <stdlib.h>
 int main(void)
 {
-		char str[] = "     \t\t\v\r ---424234";
+		char str[] = "     \t\t\v\r -424233234";
 		printf("My function: %d\nOriginal: %d\n",
 				ft_atoi(str), atoi(str));
 		return (0);

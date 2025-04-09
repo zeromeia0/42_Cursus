@@ -13,7 +13,7 @@
 #include "libft.h"
 #include <stdlib.h>
 
-static	size_t	nums(int n)
+static	size_t	putnbr_fake(int n)
 {
 	size_t	i;
 
@@ -21,11 +21,11 @@ static	size_t	nums(int n)
 	if (n < 0)
 	{
 		i++;
-		num = -num;
+		n = -n;
 	}
 	while (n > 0)
 	{
-		num / 10;
+		n /= 10;
 		i++;
 	}
 	return (i);
@@ -38,7 +38,7 @@ char	*ft_itoa(int n)
 	int		num;
 
 	num = n;
-	digits = nums(n);
+	digits = putnbr_fake(n);
 	if (n < 0)
 	{
 		num *= -1;

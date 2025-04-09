@@ -22,11 +22,11 @@ typedef struct s_list
 }	t_list;
 
 //ALL THE C FILES
-int		ft_atoi(const char *nptr);
-void	ft_bzero(void *s, size_t n);
-void	*ft_calloc(size_t nmemb, size_t size);
-int		ft_isalnum(int c);
-int		ft_isalpha(int c);
+int		ft_atoi(const char *nptr); 	//OK
+void	ft_bzero(void *s, size_t n);	//OK
+void	*ft_calloc(size_t nmemb, size_t size);	//OK	
+int		ft_isalnum(int c);	//OK
+int		ft_isalpha(int c);	//OK
 int		ft_isascii(int c);
 int		ft_isdigit(int c);
 int		ft_isprint(int c);

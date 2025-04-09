@@ -11,19 +11,18 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-//#include <ctype.h>
 
-int	is_num(char c)
+static int	is_num(char c)
 {
 	return (c >= '0' && c <= '9');
 }
 
-int	is_lower(char c)
+static int	is_lower(char c)
 {
 	return (c >= 'a' && c <= 'z');
 }
 
-int	is_upper(char c)
+static int	is_upper(char c)
 {
 	return (c >= 'A' && c <= 'Z');
 }
@@ -39,6 +38,7 @@ int	ft_isalnum(int c)
 }
 /*
 #include <stdio.h>
+#include <ctype.h>
 int main(void)
 {
 	char a = 'a';

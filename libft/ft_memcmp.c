@@ -30,15 +30,15 @@ int	ft_memcmp(const void *s1, const void *s2, size_t n)
 			return (src[i] - dest[i]);
 		i++;
 	}
-	return (0);
+	return (src[i] - dest[i]);
 }
 /*
 #include <stdio.h>
 int main(void)
 {
 		char str[] = "Salve";
-		char dest[] = "Sal  ";
-		size_t n = 0;
+		char dest[] = "SalVe";
+		size_t n = 5;
 		printf("My function: %d\nOriginal: %d\n",
 				ft_memcmp(str, dest, n), memcmp(str, dest, n));
 		return (0);
