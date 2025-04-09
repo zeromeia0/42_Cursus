@@ -27,20 +27,20 @@ void	ft_bzero(void *s, size_t n);	//OK
 void	*ft_calloc(size_t nmemb, size_t size);	//OK	
 int		ft_isalnum(int c);	//OK
 int		ft_isalpha(int c);	//OK
-int		ft_isascii(int c);
-int		ft_isdigit(int c);
-int		ft_isprint(int c);
-int		ft_tolower(int c);
-int		ft_toupper(int c);
-char	*ft_itoa(int n);
-void	*ft_memchr(const void *s, int c, size_t n);
-int		ft_memcmp(const void *s1, const void *s2, size_t n);
-void	*ft_memcpy(void *restrict dest, const void *restrict src, size_t n);
-void	*ft_memmove(void *dest, const void *src, size_t n);
-void	*ft_memset(void *s, int c, size_t n);
-void	ft_putchar_fd(char c, int fd);
-void	ft_putendl_fd(char *s, int fd);
-void	ft_putnbr_fd(int n, int fd);
+int		ft_isascii(int c);	//OK
+int		ft_isdigit(int c);  //OK
+int		ft_isprint(int c);  //OK
+int		ft_tolower(int c);  //OK
+int		ft_toupper(int c);	//OK
+char	*ft_itoa(int n);	//OK
+void	*ft_memchr(const void *s, int c, size_t n);	//OK
+int		ft_memcmp(const void *s1, const void *s2, size_t n); //OK
+void	*ft_memcpy(void *restrict dest, const void *restrict src, size_t n);	//OK
+void	*ft_memmove(void *dest, const void *src, size_t n); //OK
+void	*ft_memset(void *s, int c, size_t n); //OK
+void	ft_putchar_fd(char c, int fd); //OK
+void	ft_putendl_fd(char *s, int fd); //OK
+void	ft_putnbr_fd(int n, int fd);	//
 void	ft_putstr_fd(char *s, int fd);
 char	**ft_split(char const *s, char c);
 char	*ft_strchr(const char *s, int c);
