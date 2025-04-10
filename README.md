@@ -1,50 +1,12 @@
-FINISHED THE FIRST FUNCTIONS
+**TO DO LIST**
 
-• isalpha
+- Add Bonus functions into their respective HEADER
+- Protect Necessary Codes
+- Unprotect Necessary Codes
 
-• toupper
+**STUDY LIST**
 
-• isdigit
-
-• tolower
-
-• isalnum
-
-• isascii
-
-• strchr
-
-• isprint
-
-• strrchr
-
-• strlen
-
-• strncmp
-
-• memset
-
-• bzero
-
-• memchr
-
-• memcpy
-
-• memcmp
-
-• memmove
-
-• strnstr
-
-• strlcpy
-
-• strlcat
-
-• atoi
-
-THEY STILL NEED TO BE REVISED TO BE 100% SURE
-
-TO DO LIST
-- REVISE ALL FUNCTIONS
-- FIX LIBFT.H
-- STUDY MAKEFILE + HEADERS
+- Lists + Linked Lists + My Own Lists
+- Structures
+- File Directors
+- Split (**REALLY NECESSARY)**
