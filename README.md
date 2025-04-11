@@ -8,4 +8,3 @@
 - Lists + Linked Lists + My Own Lists
 - Structures
 - File Directors
-- Split (**REALLY NECESSARY)**
