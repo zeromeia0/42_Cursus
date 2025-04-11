@@ -6,11 +6,12 @@
 /*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 15:10:21 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/04/11 09:04:48 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/04/11 09:28:16 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdlib.h>
 
 typedef struct s_short
 {
@@ -40,7 +41,7 @@ static size_t	ft_count(char const *s, char c)
 	return (count);
 }
 
-int	make_short(char const *s, char c, t_short *var)
+int	extract_from_str(char const *s, char c, t_short *var)
 {
 	int		start;
 
@@ -68,12 +69,12 @@ char	**ft_split(char const *s, char c)
 	if (!s)
 		return (NULL);
 	var.strs = (char **)malloc((ft_count(s, c) + 1) * sizeof(char *));
-	if (var.strs)
+	if (!var.strs)
 		return (NULL);
 	while (s[var.k])
 	{
 		if (s[var.k] != c)
-			make_short(s, c, &var);
+			extract_from_str(s, c, &var);
 		else
 			var.k++;
 	}
@@ -84,7 +85,7 @@ char	**ft_split(char const *s, char c)
 #include <stdio.h>
 int main(void)
 {
-    char **str = ft_split("Hello world", ' ');
+    char **str = ft_split("HelWlWo woWrlWd WWW", 'W');
     int i = 0;
 
     while (str[i])
