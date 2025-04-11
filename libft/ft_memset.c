@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 17:03:33 by vvazzs            #+#    #+#             */
-/*   Updated: 2025/04/10 21:35:10 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/04/11 08:45:29 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,12 @@ void	*ft_memset(void *s, int c, size_t n)
 }
 /*
 #include <stdio.h>
-#include <string.
+#include <string.h>
 int main(void)
 {
-	char str[] = "hellow world! :)";
-	char c = 'K';
-	size_t n = 5;
+	char str[] = "";
+	char c = '\0';
+	size_t n = sizeof(str);
 	printf("MY function: %s\nOriginal: %s\n", 
 	(char *)ft_memset(str, c, n), (char *)memset(str, c, n));
 	return (0);

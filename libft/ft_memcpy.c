@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 17:44:59 by vvazzs            #+#    #+#             */
-/*   Updated: 2025/04/10 21:32:40 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/04/11 08:55:50 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,11 @@ void	*ft_memcpy(void	*restrict dest, const void *restrict src, size_t n)
 #include <string.h>
 int main(void)
 {
-	char str[] = "just the 2 of us";
-	char dest[50];
+	char str[] = "adadasdad";
+	char dest[3];
 	size_t n = sizeof(str);
-	printf("My function: %s\nOriginal: %s\n", 
-	(char *)ft_memcpy(dest, str, n), (char *)memcpy(dest, str, n));
+	printf("My function: %s\n", 
+	(char *)ft_memcpy(dest, str, n) //(char *)memcpy(dest, str, n));
+	);
 	return (0);
 }*/

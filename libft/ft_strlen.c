@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 16:51:04 by vvazzs            #+#    #+#             */
-/*   Updated: 2025/04/10 21:34:00 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/04/11 08:42:48 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ size_t	ft_strlen(const char *s)
 }
 /*
 #include <stdio.h>
-#include <stddef.h>
+#include <string.h>
 int main(void)
 {
-	char str[] = "hellow";
-	printf("%ld\n", ft_strlen(str));
+	char str[] = "";
+	printf("%ld\n%ld\n", ft_strlen(str), strlen(str));
 	return (0);
 }*/

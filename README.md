@@ -1,6 +1,5 @@
 **TO DO LIST**
 
-- Add Bonus functions into their respective HEADER
 - Protect Necessary Codes
 - Unprotect Necessary Codes
 

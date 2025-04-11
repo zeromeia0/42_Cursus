@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 17:40:10 by vvazzs            #+#    #+#             */
-/*   Updated: 2025/04/10 21:31:09 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/04/11 08:46:34 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,17 @@ void	ft_bzero(void *s, size_t n)
 		i++;
 	}
 }
-/*
+
 #include <stdio.h>
 #include <string.h>
 int main(void)
 {
 	char str1[] = "da minha voz";
 	char str2[] = "da minha voz";
-	size_t n = 5;
+	size_t n = 30;
 
 	ft_bzero(&str1[6], n);
 	bzero (&str2[6], n);
 	printf("My function: %s\nOriginal: %s\n", str1, str2);
 	return (0);
-}*/
+}
