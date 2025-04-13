@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 11:41:26 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/04/13 15:50:32 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/04/13 22:31:40 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ int	ft_memcmp(const void *s1, const void *s2, size_t n)
 	src = (const unsigned char *)s1;
 	dest = (const unsigned char *)s2;
 	i = 0;
-	if ((!s1 || !s2) && n > 0)
-		return (0);
 	if (n == 0)
 		return (0);
 	while (i < n)

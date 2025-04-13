@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 17:40:10 by vvazzs            #+#    #+#             */
-/*   Updated: 2025/04/13 15:43:10 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/04/13 22:27:02 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ void	ft_bzero(void *s, size_t n)
 
 	i = 0;
 	str = (unsigned char *)s;
-	if (!s && n > 0)
-		return ;
 	while (i < n)
 	{
 		str[i] = '\0';

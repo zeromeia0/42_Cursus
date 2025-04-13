@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 17:03:33 by vvazzs            #+#    #+#             */
-/*   Updated: 2025/04/13 15:53:07 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/04/13 22:29:52 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,9 @@ void	*ft_memset(void *s, int c, size_t n)
 	unsigned char	character;
 
 	i = 0;
-	if (!s && n > 0)
-		return (NULL);
 	str = (unsigned char *)s;
 	character = (unsigned char)c;
-	while (str[i] && i < n)
+	while (i < n)
 	{
 		str[i] = character;
 		i++;

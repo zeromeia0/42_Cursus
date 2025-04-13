@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+         #
+#    By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/11 15:53:18 by vivaz-ca          #+#    #+#              #
-#    Updated: 2025/04/13 16:15:34 by vivaz-ca         ###   ########.fr        #
+#    Updated: 2025/04/13 22:20:37 by vivaz-ca         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,6 +59,7 @@ BONUS_SRC = ft_lstadd_back_bonus.c \
             ft_lstsize_bonus.c
 
 BONUS_OBJ = $(BONUS_SRC:.c=.o)
+
 AR = ar rcs
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
@@ -73,9 +74,6 @@ bonus: $(OBJ) $(BONUS_OBJ)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
-	
-$(BONUS_OBJ): $(BONUS_SRC)
-	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	rm -f $(OBJ) $(BONUS_OBJ)
@@ -86,5 +84,3 @@ fclean: clean
 re: fclean all
 
 .PHONY: all clean fclean re bonus
-
-

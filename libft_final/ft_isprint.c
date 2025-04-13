@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 16:49:22 by vvazzs            #+#    #+#             */
-/*   Updated: 2025/04/11 16:27:40 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/04/13 22:45:33 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,7 @@
 
 int	ft_isprint(int c)
 {
-	char	a;
-
-	a = (char)c;
-	if (!(a >= 32 && a <= 126))
+	if (!(c >= 32 && c <= 126))
 		return (0);
 	return (1);
 }

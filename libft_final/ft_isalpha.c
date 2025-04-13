@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 16:29:10 by vvazzs            #+#    #+#             */
-/*   Updated: 2025/04/11 16:27:32 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/04/13 22:43:58 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,7 @@
 
 int	ft_isalpha(int c)
 {
-	char	chr;
-
-	chr = (char)c;
-	if (!(chr >= 'a' && chr <= 'z') && !(chr >= 'A' && chr <= 'Z'))
+	if (!(c >= 'a' && c <= 'z') && !(c >= 'A' && c <= 'Z'))
 		return (0);
 	return (1);
 }

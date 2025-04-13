@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 14:19:20 by vvazzs            #+#    #+#             */
-/*   Updated: 2025/04/13 16:12:39 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/04/13 22:30:41 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 	mt.source = (const unsigned char *)src;
 	if (mt.dst == mt.source || n == 0)
 		return (dest);
-	if ((!mt.dst || !src) && n > 0)
-		return (NULL);
 	if (mt.dst > mt.source)
 	{
 		mt.z = n;
