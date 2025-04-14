@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 15:10:21 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/04/13 17:39:42 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/04/14 08:21:34 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,14 @@ static size_t	ft_count(char const *s, char c)
 	return (count);
 }
 
-int	extract_from_str(char const *s, char c, t_short *var)
+static void	ft_clean(char **strs, int i)
+{
+	while (--i >= 0)
+		free(strs[i]);
+	free(strs);
+}
+
+static int	extract_from_str(char const *s, char c, t_short *var)
 {
 	int		start;
 
@@ -46,7 +53,7 @@ int	extract_from_str(char const *s, char c, t_short *var)
 	var->strs[var->i] = ft_substr(s, start, var->k - start);
 	if (!var->strs[var->i])
 	{
-		var->strs[var->i] = NULL;
+		ft_clean(var->strs, var->i);
 		return (0);
 	}
 	var->i++;
@@ -67,13 +74,17 @@ char	**ft_split(char const *s, char c)
 	while (s[var.k])
 	{
 		if (s[var.k] != c)
-			extract_from_str(s, c, &var);
+		{
+			if (!extract_from_str(s, c, &var))
+				return (NULL);
+		}
 		else
 			var.k++;
 	}
 	var.strs[var.i] = NULL;
 	return (var.strs);
 }
+
 /*
 #include <stdio.h>
 int main(void)
