@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/15 19:14:32 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/04/18 17:46:06 by vivaz-ca         ###   ########.fr       */
+/*   Created: 2025/04/05 13:51:18 by vivaz-ca          #+#    #+#             */
+/*   Updated: 2025/04/19 23:02:23 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ typedef struct s_hexa
 char			*decimal_to_hexadecimal(unsigned int nb, char base);
 int				ft_print_char(int c);
 int				ft_print_dec_int_number(int nb);
-int				ft_print_hexa(int nb, int lowercase);
+int				ft_print_hexa(unsigned int nb, int lowercase);
 int				ft_print_ptr(void *ptr);
 int				ft_print_str(const char *str);
 unsigned int	ft_print_unsigned_int(int nb);

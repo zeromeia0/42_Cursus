@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_hexa.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 16:27:30 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/04/18 17:33:54 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/04/19 22:24:20 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_print_hexa(int nb, int lowercase)
+int	ft_print_hexa(unsigned int nb, int lowercase)
 {
 	char	*str;
 	int		count;
