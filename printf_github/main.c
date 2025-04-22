@@ -9,7 +9,13 @@ int main(void)
 	printf("a''''%d''''\n",      printf(z, "a todos", NULL, NULL, 2147483647, -2147483648, -32, -12334567, -1, "ola bom dia a todos"));
 	ft_printf("\n");
 	ft_printf("a''''%d''''\n",ft_printf(z, "a todos", NULL, NULL, 2147483647, -2147483648, -32, -12334567, -1, "ola bom dia a todos"));
- 
+
+	char *y = "ola bom dia %K%s %p %% %s %i %X %u\0";
+	printf("a''''%d''''\n",      printf(y, "a todos", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL));
+	ft_printf("\n");
+	ft_printf("a''''%d''''\n",ft_printf(y, "a todos", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL));
+
+	
 	// Printando characters: %c
 	int a = 0;
 	printf("Lidando com %%c\n");
