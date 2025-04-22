@@ -1,21 +1,47 @@
 #include "ft_printf.h"
 #include <stdio.h>
+#include <limits.h>
 
 int main(void)
 {
-	printf("-------------TESTING EDGE CASES-------------\n\n\n");
+	printf("\n\n\n-------------TESTING EDGE CASES-------------\n\n\n");
 
 	char *z = "ola bom dia %K%s %p %% %i %i %X %u\0";
 	printf("a''''%d''''\n",      printf(z, "a todos", NULL, NULL, 2147483647, -2147483648, -32, -12334567, -1, "ola bom dia a todos"));
 	ft_printf("\n");
 	ft_printf("a''''%d''''\n",ft_printf(z, "a todos", NULL, NULL, 2147483647, -2147483648, -32, -12334567, -1, "ola bom dia a todos"));
 
+	printf("\n\n\n");
+	
 	char *y = "ola bom dia %K%s %p %% %s %i %X %u\0";
 	printf("a''''%d''''\n",      printf(y, "a todos", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL));
 	ft_printf("\n");
 	ft_printf("a''''%d''''\n",ft_printf(y, "a todos", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL));
 
-	
+	printf("\n\n\n");
+
+	printf("Some test\n");
+	printf("%d %d\n", printf("%c ", 'a'), ft_printf("%c ", 'a'));
+
+	printf("\n\n\n");
+
+	// teste ale
+	printf("\nTeste do ale\n");
+	printf("My own: %i\n", ft_printf(NULL));
+	printf("Original: %i\n", printf(NULL));
+
+	printf("\n\n\n");
+
+
+	// testes mal
+	printf("\n\nteste mal\n");
+	void *ptra = malloc(16);
+	memset(ptra, 127, 3);
+	printf("Original: %p || %p\n", ptra, malloc(1));
+	ft_printf("My own: %p || %p\n", ptra, malloc(1));
+
+
+	printf("\n\n\n");
 	// Printando characters: %c
 	int a = 0;
 	printf("Lidando com %%c\n");
@@ -131,4 +157,8 @@ int main(void)
 	ft_printf("My own %X\n", ben10 + 10 * 2);
 	ft_printf("My own %X\n", 'a');
 	ft_printf("My own %X\n\n", 14 / 2 * (12 / 7));
+
+	fclose(stdout);
+	fprintf(stderr, "PRINTF: %d\n", printf("teste123\n"));
+	fprintf(stderr, "FT_PRINTF: %d\n", ft_printf("teste123\n"));
 }

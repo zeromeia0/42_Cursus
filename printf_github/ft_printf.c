@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 20:32:20 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/04/22 17:07:24 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/04/22 20:22:35 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,11 @@ int	ft_printf(const char *format, ...)
 	int		count;
 
 	va_start(args, format);
+	if (!format)
+		return (-1);
 	count = ft_printf_setup(format, args);
+	if (count < 0)
+		return (-1);
 	va_end(args);
 	return (count);
 }
