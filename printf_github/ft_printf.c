@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 20:32:20 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/04/21 21:13:11 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/04/22 17:07:24 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ int	ft_count(int i, va_list args, const char *key)
 	else if (key[i] == 'u')
 		count += ft_print_unsigned_int(va_arg(args, int));
 	else if (key[i] == 'x')
-		count += ft_low_hexa(va_arg(args, unsigned int));
+		count += ft_low_hexa(va_arg(args, unsigned int)) - 1;
 	else if (key[i] == 'X')
-		count += ft_up_hexa(va_arg(args, unsigned int));
+		count += ft_up_hexa(va_arg(args, unsigned int)) - 1;
 	else if (key[i] == 'p')
 		count += ft_print_ptr(va_arg(args, void *));
 	else if (key[i] == '%')
@@ -69,5 +69,5 @@ int	ft_printf(const char *format, ...)
 	va_start(args, format);
 	count = ft_printf_setup(format, args);
 	va_end(args);
-	return (count - 1);
+	return (count);
 }

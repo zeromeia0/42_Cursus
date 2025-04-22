@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 16:27:30 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/04/21 21:04:43 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/04/22 17:15:15 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int	ft_low_hexa(unsigned int num)
 	v->count = 0;
 	ft_strlcpy(v->hexa_index, HEXA_LOWER_STR, 17);
 	v->convert_hexa = num;
+	if (v->convert_hexa == 0)
+		v->buffer2[v->i++] = v->hexa_index[v->convert_hexa % 16];
 	while (v->convert_hexa > 0)
 	{
 		v->buffer2[v->i++] = v->hexa_index[v->convert_hexa % 16];
@@ -44,6 +46,8 @@ int	ft_up_hexa(unsigned int num)
 	v->count = 0;
 	ft_strlcpy(v->hexa_index, HEXA_UPPER_STR, 17);
 	v->convert_hexa = num;
+	if (v->convert_hexa == 0)
+		v->buffer2[v->i++] = v->hexa_index[v->convert_hexa % 16];
 	while (v->convert_hexa > 0)
 	{
 		v->buffer2[v->i++] = v->hexa_index[v->convert_hexa % 16];

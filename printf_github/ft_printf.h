@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 13:51:18 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/04/21 21:03:50 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/04/22 17:03:23 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # define MAX_UNSIGNED 4294967295
 # define HEXA_LOWER_STR "0123456789abcdef"
 # define HEXA_UPPER_STR "0123456789ABCDEF"
+# define NULL_STR "(null)"
 # define NIL_STR "(nil)"
 
 typedef struct s_hexa
