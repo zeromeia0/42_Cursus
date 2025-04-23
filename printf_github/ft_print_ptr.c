@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 16:39:18 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/04/21 21:05:02 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/04/23 16:16:53 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ int	ft_print_ptr(void *ptr)
 {
 	t_hexa	*var;
 
+	if (!ptr)
+		return (write(1, NIL_STR, 5));
 	var = malloc(sizeof(t_hexa));
 	if (!var)
 		return (-1);
-	if (!ptr)
-		return (write(1, NIL_STR, 5));
 	var->i = 0;
 	var->count = 0;
 	ft_strlcpy(var->hexa_index, HEXA_LOWER_STR, 17);
