@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 16:39:18 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/04/23 16:16:53 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/04/23 16:38:05 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int	ft_print_ptr(void *ptr)
 {
 	t_hexa	*var;
+	int		count;
 
 	if (!ptr)
 		return (write(1, NIL_STR, 5));
@@ -33,5 +34,7 @@ int	ft_print_ptr(void *ptr)
 	var->count += write(1, "0x", 2);
 	while (--var->i >= 0)
 		var->count += write(1, &var->buffer2[var->i], 1);
-	return (var->count);
+	count = var->count;
+	free (var);
+	return (count);
 }

@@ -41,9 +41,9 @@ int main(void)
 	ft_printf("My own: %p || %p\n", ptra, malloc(1));
 
 	//undefined behaviour argument
-	printf("Undefined behaviour test\n");
+/* 	printf("Undefined behaviour test\n");
 	printf("\n\nOriginal: Olha que legal uhul: %k lets go %d\n", 0x1a);
-	ft_printf("My own:   Olha que legal uhul: %k lets go %d\n", 0x1a);
+	ft_printf("My own:   Olha que legal uhul: %k lets go %d\n", 0x1a); */
 
 	printf("\n\n\n");
 	// Printando characters: %c

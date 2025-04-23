@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 16:27:30 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/04/22 17:15:15 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/04/23 16:37:32 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 int	ft_low_hexa(unsigned int num)
 {
-	t_hexa	*v;
+	t_hexa	*v; 
+	int		count;
 
 	v = malloc(sizeof(t_hexa));
 	if (!v)
@@ -32,12 +33,15 @@ int	ft_low_hexa(unsigned int num)
 	}
 	while (v->i >= 0)
 		v->count += write(1, &v->buffer2[v->i--], 1);
-	return (v->count);
+	count = v->count;
+	free (v);
+	return (count);
 }
 
 int	ft_up_hexa(unsigned int num)
 {
 	t_hexa	*v;
+	int		count;
 
 	v = malloc(sizeof(t_hexa));
 	if (!v)
@@ -55,5 +59,7 @@ int	ft_up_hexa(unsigned int num)
 	}
 	while (v->i >= 0)
 		v->count += write(1, &v->buffer2[v->i--], 1);
-	return (v->count);
+	count = v->count;
+	free (v);
+	return (count);
 }
