@@ -6,17 +6,18 @@ int main(void)
 {
 	printf("\n\n\n-------------TESTING EDGE CASES-------------\n\n\n");
 
-	char *z = "ola bom dia %K%s %p %% %i %i %X %u\0";
+	char *z = "ola bom dia %K%s %% %i %d %X %u\0";
 	printf("a''''%d''''\n",      printf(z, "a todos", NULL, NULL, 2147483647, -2147483648, -32, -12334567, -1, "ola bom dia a todos"));
 	ft_printf("\n");
 	ft_printf("a''''%d''''\n",ft_printf(z, "a todos", NULL, NULL, 2147483647, -2147483648, -32, -12334567, -1, "ola bom dia a todos"));
 
 	printf("\n\n\n");
 	
-	char *y = "ola bom dia %K%s %p %% %s %i %X %u\0";
+	char *y = "ola bom dia %K%s %% %s %i %X %u\0";
 	printf("a''''%d''''\n",      printf(y, "a todos", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL));
 	ft_printf("\n");
 	ft_printf("a''''%d''''\n",ft_printf(y, "a todos", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL));
+
 
 	printf("\n\n\n");
 
@@ -24,6 +25,8 @@ int main(void)
 	printf("%d %d\n", printf("%c ", 'a'), ft_printf("%c ", 'a'));
 
 	printf("\n\n\n");
+
+	//teste do {insira teu nick}
 
 	// teste ale
 	printf("\nTeste do ale\n");
@@ -34,18 +37,19 @@ int main(void)
 
 
 	// testes mal
-	printf("\n\nteste mal\n");
 	void *ptra = malloc(16);
+	void *tmp1 = malloc(1);
+	void *tmp2 = malloc(1);
 	memset(ptra, 127, 3);
-	printf("Original: %p || %p\n", ptra, malloc(1));
-	ft_printf("My own: %p || %p\n", ptra, malloc(1));
-
-	//undefined behaviour argument
-/* 	printf("Undefined behaviour test\n");
-	printf("\n\nOriginal: Olha que legal uhul: %k lets go %d\n", 0x1a);
-	ft_printf("My own:   Olha que legal uhul: %k lets go %d\n", 0x1a); */
+	printf("teste do mal\n");
+	printf("Original: %p || %p\n", ptra, tmp1);
+	ft_printf("My own: %p || %p\n", ptra, tmp2);
+	free(ptra);
+	free(tmp1);
+	free(tmp2);
 
 	printf("\n\n\n");
+
 	// Printando characters: %c
 	int a = 0;
 	printf("Lidando com %%c\n");
@@ -59,7 +63,7 @@ int main(void)
 	ft_printf("My Own: %c\n", a);
 	ft_printf("My Own: %c\n", a + 73);
 	ft_printf("My Own: %c\n", 200);
-	printf("Original: %c\n\n", -200);
+	ft_printf("My own: %c\n\n", -200);
 
 	// Printando characters: %s
 	char str[] = "Strangers in the night - Frank Sinatra";
@@ -125,12 +129,12 @@ int main(void)
 	printf("Original: %u\n", ciao);
 	printf("Original: %u\n", 0 - 2);
 	printf("Original: %u\n", -7);
-	printf("Original: %u\n", ciao + 2 - (ndec / 2));
+	printf("Original: %u\n\n", ciao + 2 - (ndec / 2));
  
-	ft_printf("My own %u\n", ciao);
-	ft_printf("My own %u\n", 0 - 2);
-	ft_printf("My own %u\n", -7);
-	ft_printf("My own %u\n\n", ciao + 2 - (ndec / 2));
+	ft_printf("My own: %u\n", ciao);
+	ft_printf("My own: %u\n", 0 - 2);
+	ft_printf("My own: %u\n", -7);
+	ft_printf("My own: %u\n\n", ciao + 2 - (ndec / 2));
  
 	// Printando characters: %x
 	unsigned int ben10 = -1000;

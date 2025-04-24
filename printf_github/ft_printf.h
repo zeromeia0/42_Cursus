@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 13:51:18 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/04/22 17:03:23 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/04/24 18:41:41 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ typedef struct s_hexa
 	int				len;
 	int				rem;
 	int				count;
-	char			*result;
 	char			buffer1[20];
 	char			buffer2[16];
 	char			hexa_index[17];
