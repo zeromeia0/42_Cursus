@@ -11,9 +11,7 @@
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
-char *get_next_line(int fd);
-
+/* //MAIN FUNCTION FOR A FILE
 int main(void)
 {
     int fd;
@@ -34,3 +32,20 @@ int main(void)
     close(fd);
     return (0);
 }
+*/
+/* //MAIN FUNCTION FOR THE INPUT TERMINAL
+int main(void)
+{
+    char    *line;
+
+    while (1)
+    {
+        line = get_next_line(0);
+        if (!line)
+            break ;
+		printf("You wrote: %s", line);
+        free(line);
+    }
+    return (0);
+}
+*/
