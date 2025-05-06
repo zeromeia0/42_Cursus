@@ -1,8 +1,4 @@
-Prove apparmor runs on startup
-
 What does SELinux has to do with Debian
-
-Test if UFW runs when launch
 
 Where to see sudo configs
 
