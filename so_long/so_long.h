@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 16:03:36 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/05/19 18:50:55 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/05/19 20:49:52 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,11 @@ typedef struct s_gato
 	int	y;
 }	t_gato;
 
+
 int handle_exit(int keysym, t_mlx_basic_data *data);
-int handle_keypress(int keysym, void *param);
+int keypress_to_walk(int keysym, void *param);
+int keypress_to_walk(int keysym, void *param);
+t_gato	*so_long(void);
+void	gato_init(void);
 
 #endif

@@ -1,31 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_range.c                                         :+:      :+:    :+:   */
+/*   epur.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/19 19:07:21 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/05/19 19:12:13 by vivaz-ca         ###   ########.fr       */
+/*   Created: 2025/05/19 18:54:56 by vivaz-ca          #+#    #+#             */
+/*   Updated: 2025/05/19 19:02:02 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
+#include <unistd.h>
 
-int	*ft_range(int start, int end)
+int is_space(char c)
+{
+	return (c == ' ' || c == '\t');
+}
+int main(int argc, char *argv[])
 {
 	int i = 0;
-	int *range;
-	if (start > end)
-		range = (int *)malloc(sizeof(int) * (start - end) + 1);
-	else
-		range = (int *)malloc(sizeof(int) * (end - start) + 1);
-	while (start != range)
+	if (argc == 2)
 	{
-		range[i++] = start;
-		start += (start > end) ? -1 : 1;
+		while (is_space(argv[1][i]))
+			i++;
+		while (argv[1][i])
+		{
+			while (argv[1][i] && !is_space(argv[1][i]))
+			{
+				write(1, &argv[1][i], 1);
+				i++;
+			}
+			while (is_space(argv[1][i]))
+				i++;
+			if (argv[1][i])
+				write(1, " ", 1);
+		}
 	}
-	range[i] = start;
-	return (range);
+	return (0);
 }

@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_rrange.c                                        :+:      :+:    :+:   */
+/*   ft_range.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/19 19:12:31 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/05/19 19:19:32 by vivaz-ca         ###   ########.fr       */
+/*   Created: 2025/05/15 15:14:38 by vivaz-ca          #+#    #+#             */
+/*   Updated: 2025/05/15 21:38:32 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include <stdlib.h>
+#include <stdio.h>
 
-int	*ft_range(int start, int end)
+int		*ft_range(int start, int end)
 {
-	int i = 0;
-	int *range;
+	int		*range;
+	int		i = 0;
+
 	if (start > end)
 		range = (int *)malloc(sizeof(int) * (start - end) + 1);
 	else
@@ -24,16 +25,20 @@ int	*ft_range(int start, int end)
 	while (start != end)
 	{
 		range[i++] = start;
-		end -= (start > end) ? -1 : 1;
+		start += (start > end) ? -1 : 1;
 	}
-	range[i] = end;
+	range[i] = start;
 	return (range);
 }
 
-int main(void)
+/* int	main(void)
 {
-	int *range = ft_range(0, 3);
-	for (int i = 0; i <= 3; i++)
-		printf("%d", range[i]);
+	int	*range = ft_range(1, 3);
+	int	i = 0;
+	while (i <= 3 - 1)
+	{
+		printf("%d ", range[i]);
+		i++;
+	}
 	return (0);
-}
+} */

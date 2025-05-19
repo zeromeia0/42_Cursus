@@ -1,31 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_range.c                                         :+:      :+:    :+:   */
+/*   ft_list_size.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/19 19:07:21 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/05/19 19:12:13 by vivaz-ca         ###   ########.fr       */
+/*   Created: 2025/05/19 19:02:59 by vivaz-ca          #+#    #+#             */
+/*   Updated: 2025/05/19 19:06:28 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
+typedef struct s_list
+{
+	struct s_list *next;
+	void	*data;
+}	t_list;
 
-int	*ft_range(int start, int end)
+int	ft_list_size(t_list *begin_list)
 {
 	int i = 0;
-	int *range;
-	if (start > end)
-		range = (int *)malloc(sizeof(int) * (start - end) + 1);
-	else
-		range = (int *)malloc(sizeof(int) * (end - start) + 1);
-	while (start != range)
+
+	while (begin_list->next)
 	{
-		range[i++] = start;
-		start += (start > end) ? -1 : 1;
+		i++;
+		begin_list = begin_list->next;
 	}
-	range[i] = start;
-	return (range);
+	return (i);
 }
