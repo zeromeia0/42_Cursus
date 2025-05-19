@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   oceano_video_main.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 22:03:01 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/05/18 22:08:56 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/05/19 11:24:13 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,32 +91,3 @@ int	main(void)
  }
   */
  
-  
- 
- 
- 
- 
- /* 
- OCEANO BASIC MAIN FUNCTION WITH NO CLICKABLES
- int main(void)
- {
-	 void	*mlx_connection; // used to linx to init;
-	 void	*mlx_window;	//kinda obvious you dumbass 
- 
-	 mlx_connection = mlx_init(); // initiate
-	 if (mlx_connection == NULL)
-		 return (1);
-	 mlx_window = mlx_new_window(mlx_connection, 800, 600, "oceano"); // create window 
-	 if (!mlx_window)
-	 {
-		 mlx_destroy_display(mlx_connection);	//destroy display + free because malloc
-		 free(mlx_connection);
-		 return (1);
-	 }
-	 mlx_loop(mlx_connection); //event loop
-	 
-	 mlx_destroy_window(mlx_connection, mlx_window); // free everything at the end
-	 mlx_destroy_display(mlx_connection);
-	 free(mlx_connection);
- }
-  */
