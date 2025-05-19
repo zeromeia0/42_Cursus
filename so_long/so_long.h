@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 16:03:36 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/05/18 22:31:27 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/05/19 14:31:55 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,14 @@ typedef struct s_mlx_data
 	void	*mlx_ptr;
 	void	*win_ptr;
 }	t_mlx_data;
+
+typedef struct s_mlx_xpm
+{
+	void	*path_to_xpm;
+	int		heigh;
+	int		width;
+}	t_mlx_xpm;
+
 
 #endif
 

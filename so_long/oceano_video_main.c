@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   oceano_video_main.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 22:03:01 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/05/19 11:24:13 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/05/19 14:28:20 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long"
+#include "so_long.h"
 
 
 /* 
