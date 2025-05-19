@@ -6,12 +6,14 @@
 #    By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/17 16:39:51 by vivaz-ca          #+#    #+#              #
-#    Updated: 2025/05/19 14:34:25 by vivaz-ca         ###   ########.fr        #
+#    Updated: 2025/05/19 18:22:15 by vivaz-ca         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = so_long
-SRC = main.c
+SRC = main.c \
+	 assets.c
+	
 OBJDIR = objs/
 OBJ = $(SRC:.c=.o)
 OBJS = $(addprefix $(OBJDIR), $(OBJ))

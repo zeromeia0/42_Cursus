@@ -1,9 +1,5 @@
 {
 	"files.associations": {
-		"so_long.h": "c",
-		"keysym.h": "c",
-		"keysymdef.h": "c",
-		"mlx.h": "c",
-		"mlx_int.h": "c"
+		"so_long.h": "c"
 	}
 }
