@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 22:09:00 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/05/19 18:36:15 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/05/19 18:50:10 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,17 @@ void gato_init(void)
 
 int handle_keypress(int keysym, void *param)
 {
-	t_mlx_data *data = (t_mlx_data *)param;
+	t_mlx_basic_data *data = (t_mlx_basic_data *)param;
 	t_gato *gato = so_long();
 
 	handle_exit(keysym, data);
 
-	if (keysym == 115) // s
-		gato->y += 10;
-	else if (keysym == 119) // w
+	if (keysym == 119) // w
 		gato->y -= 10;
 	else if (keysym == 97) // a
 		gato->x -= 10;
+	else if (keysym == 115) // s
+		gato->y += 10;
 	else if (keysym == 100) // d
 		gato->x += 10;
 
@@ -49,7 +49,7 @@ int handle_keypress(int keysym, void *param)
 
 int main(void)
 {
-	t_mlx_data	data;
+	t_mlx_basic_data	data;
 	t_mlx_xpm	xpm;
 
 	gato_init();
@@ -61,12 +61,12 @@ int main(void)
 	data.win_ptr = mlx_new_window(data.mlx_ptr, 800, 600, "So_Long");
 	if (!data.win_ptr)
 		return (1);
-	xpm.path_to_gatinho = mlx_xpm_file_to_image(data.mlx_ptr, "./gato.xpm", &xpm.width, &xpm.heigh);
-	if (!xpm.path_to_gatinho)
+	so_long()->path_to_gato = mlx_xpm_file_to_image(data.mlx_ptr, "./gato.xpm", &xpm.width, &xpm.heigh);
+	if (!so_long()->path_to_gato)
 		return (1);
-	mlx_put_image_to_window(data.mlx_ptr, data.win_ptr, xpm.path_to_gatinho, so_long()->x, so_long()->y);
+	mlx_put_image_to_window(data.mlx_ptr, data.win_ptr, so_long()->path_to_gato, so_long()->x, so_long()->y);
 	mlx_key_hook(data.win_ptr, handle_keypress, &data);
-	so_long()->path_to_gato = xpm.path_to_gatinho;
+	so_long()->path_to_gato = so_long()->path_to_gato;
 	mlx_loop(data.mlx_ptr);
 	return (0);
 }

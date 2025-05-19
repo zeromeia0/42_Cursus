@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 16:03:36 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/05/19 18:18:11 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/05/19 18:50:55 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,15 @@
 # include <stdlib.h>
 # include <stdio.h>
 
-typedef struct s_mlx_data
+typedef struct s_mlx__basic_data
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
-}	t_mlx_data;
+}	t_mlx_basic_data;
 
 typedef struct s_mlx_xpm
 {
 	void	*path_to_tijolinho;
-	void	*path_to_gatinho;
 	int		heigh;
 	int		width;
 }	t_mlx_xpm;
@@ -38,7 +37,7 @@ typedef struct s_gato
 	int	y;
 }	t_gato;
 
-int handle_exit(int keysym, t_mlx_data *data);
+int handle_exit(int keysym, t_mlx_basic_data *data);
 int handle_keypress(int keysym, void *param);
 
 #endif
