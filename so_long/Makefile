@@ -6,13 +6,15 @@
 #    By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/17 16:39:51 by vivaz-ca          #+#    #+#              #
-#    Updated: 2025/05/19 20:45:07 by vivaz-ca         ###   ########.fr        #
+#    Updated: 2025/05/19 21:01:54 by vivaz-ca         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = so_long
 SRC = main.c \
-	 assets.c 
+	 assets.c \
+	 gnl/get_next_line_utils.c \
+	 gnl/get_next_line.c
 	
 OBJDIR = objs/
 OBJ = $(SRC:.c=.o)

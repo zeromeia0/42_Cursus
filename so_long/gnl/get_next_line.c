@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 16:25:28 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/04/26 15:46:03 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/05/19 21:05:23 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,3 +39,17 @@ char	*get_next_line(int fd)
 		return (free(print), NULL);
 	return (print);
 }
+/* int main(void)
+{
+    int fd;
+    char *line;
+
+    fd = open("./maps/first_map.ber", O_RDONLY);
+    while ((line = get_next_line(fd)) != NULL)
+    {
+        printf("%s", line);
+        free(line);
+    }
+    close(fd);
+    return (0);
+} */
