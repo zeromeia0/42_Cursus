@@ -6,11 +6,11 @@
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 15:44:00 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/05/20 17:25:35 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/05/20 19:58:22 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../../z/so_long.h"
 
 int	get_map_width(char **map)
 {

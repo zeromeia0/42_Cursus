@@ -6,11 +6,11 @@
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 19:15:11 by lshonta           #+#    #+#             */
-/*   Updated: 2025/05/20 17:40:09 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/05/20 19:58:29 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../../z/so_long.h"
 
 // void	ft_read_map(t_init_map *data)
 // {
