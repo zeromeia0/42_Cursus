@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 16:03:36 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/05/19 20:49:52 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/05/20 17:40:44 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include <X11/keysym.h>
 # include <stdlib.h>
 # include <stdio.h>
+# include <unistd.h>
+# include <fcntl.h>
 
 typedef struct s_mlx__basic_data
 {
@@ -30,18 +32,47 @@ typedef struct s_mlx_xpm
 	int		width;
 }	t_mlx_xpm;
 
-typedef struct s_gato
+typedef struct s_new_sprite
 {
-	void	*path_to_gato;
-	int	x;
-	int	y;
-}	t_gato;
+	void	*img;
+}	t_new_sprite;
+//reference shit
 
+// typedef struct s_graph
+// {
+// 	void	*wall;
+// 	void	*empty;
+// 	void	*collect;
+// 	void	*exit;
+// 	void	*player;
+// 	void	*winner;
+// }	t_graph;
+
+// typedef struct s_init_map
+// {
+// 	int		hight;
+// 	int		lenght;
+// 	int		x;
+// 	int		y;
+// 	int		player;
+// 	int		escape;
+// 	int		count;
+// 	int		step;
+// 	char	**map;
+// 	void	*wall;
+// 	void	*mlx;
+// 	void	*win;
+// 	char	*fn;
+// 	t_graph	*graph;
+
+// }	t_init_map;
+
+// void	ft_read_map(t_init_map *data);
 
 int handle_exit(int keysym, t_mlx_basic_data *data);
 int keypress_to_walk(int keysym, void *param);
 int keypress_to_walk(int keysym, void *param);
-t_gato	*so_long(void);
+// t_gato	*so_long(void);
 void	gato_init(void);
 
 #endif
