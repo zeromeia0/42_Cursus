@@ -1,27 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gato_utils.c                                       :+:      :+:    :+:   */
+/*   lcm.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/19 18:10:42 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/05/21 08:07:00 by vivaz-ca         ###   ########.fr       */
+/*   Created: 2025/05/21 08:39:14 by vivaz-ca          #+#    #+#             */
+/*   Updated: 2025/05/21 08:42:24 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "gato.h"
-#include "so_long.h"
-
-
-t_gato *so_long(void)
+unsigned int lcm(unsigned int a, unsigned int b)
 {
-	static t_gato gato_instance;
-	return (&gato_instance);
-}
-void gato_init(void)
-{
-	so_long()->x = 0;
-	so_long()->y = 0;
+	unsigned int lcm = 0;
+	if (a == 0 || b == 0)
+		return (lcm);
+	lcm = (a > b) ? a : b;
+	while (1)
+	{
+		if (lcm % a == 0 && lcm % b == 0)
+			return (lcm);
+		lcm++;
+	}
 }
 
+#include <stdio.h>
+#include <stdlib.h>
+int main(int argc, char *argv[])
+{
+	if (argc == 3)
+	{
+		unsigned int m = lcm(atoi(argv[1]), atoi(argv[2]));
+		printf("LCM: %u\n", m);
+	}
+}

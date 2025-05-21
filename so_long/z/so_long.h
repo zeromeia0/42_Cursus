@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 16:03:36 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/05/20 19:58:11 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/05/21 08:24:50 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <fcntl.h>
 # include "../main/map/map.h"
 # include "../gnl/get_next_line.h"
+# include "../main/gato/gato.h"
 
 typedef struct s_mlx__basic_data
 {
@@ -76,5 +77,6 @@ int keypress_to_walk(int keysym, void *param);
 int keypress_to_walk(int keysym, void *param);
 // t_gato	*so_long(void);
 void	gato_init(void);
+t_gato *so_long(void);
 
 #endif
