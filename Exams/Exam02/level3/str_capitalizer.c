@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 21:39:54 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/05/20 21:36:33 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/05/21 13:28:36 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int		main(int argc, char *argv[])
 		while (i < argc)
 		{
 			str_capitalizer(argv[i]);
-			i += 1;
+			i ++;
 		}
 	}
 	write(1, "\n", 1);

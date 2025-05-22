@@ -1,33 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_utils.c                                        :+:      :+:    :+:   */
+/*   reverse_bits.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/20 15:44:00 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/05/22 17:01:44 by vivaz-ca         ###   ########.fr       */
+/*   Created: 2025/05/22 16:09:35 by vivaz-ca          #+#    #+#             */
+/*   Updated: 2025/05/22 16:15:10 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../z/so_long.h"
+#include <stdio.h>
 
-int	get_map_width(char **map)
+unsigned char   reverse_bits(unsigned char octet)
 {
-	int	width;
-
-	width = 0;
-	while (map[0][width] != '\n' && map[0][width])
-		width++;
-	return (width);
-}
-
-int	get_map_height(char **map)
-{
-	int	height;
-
-	height = 0;
-	while (map[height])
-		height++;
-	return (height);
+	octet = ((octet & 0b11110000) >> 4 | (octet & 0b00001111) << 4);
+	octet = ((octet & 0b11001100) >> 2 | (octet & 0b00110011) << 2);
+	octet = ((octet & 0b10101010) >> 1 | (octet & 0b01010101) << 1);
+	return (octet);
 }

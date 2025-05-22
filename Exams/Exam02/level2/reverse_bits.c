@@ -6,18 +6,23 @@
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 19:34:23 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/05/13 19:34:28 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/05/21 13:53:12 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 unsigned char   reverse_bits(unsigned char octet)
 {
-	return  (((octet >> 0) & 1) << 7) | \
-			(((octet >> 1) & 1) << 6) | \
-			(((octet >> 2) & 1) << 5) | \
-			(((octet >> 3) & 1) << 4) | \
-			(((octet >> 4) & 1) << 3) | \
-			(((octet >> 5) & 1) << 2) | \
-			(((octet >> 6) & 1) << 1) | \
-			(((octet >> 7) & 1) << 0);
+	
+	octet = ((octet & 0b11110000) >> 4 | (octet & 0b00001111) << 4);
+	octet = ((octet & 0b11001100) >> 2 | (octet & 0b00110011) << 2);
+	octet = ((octet & 0b10101010) >> 1 | (octet & 0b01010101) << 1);
+	return (octet);
 }
+/* #include <stdio.h>
+
+int main(void)
+{
+	unsigned char printa = 9;
+	printf("%d\n", reverse_bits(printa));
+	return (0);
+} */

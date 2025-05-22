@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_power_of_2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 11:09:16 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/05/16 11:11:19 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/05/21 14:00:51 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 int is_power_of_2(unsigned int n)
 {
-	return ((n & (-n)) == n ? 1 : 0);
+	return ((n &(-n)) == n ? 1 : 0);
 }

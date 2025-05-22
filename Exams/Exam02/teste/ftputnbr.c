@@ -1,33 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_utils.c                                        :+:      :+:    :+:   */
+/*   ftputnbr.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/20 15:44:00 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/05/22 17:01:44 by vivaz-ca         ###   ########.fr       */
+/*   Created: 2025/05/21 13:12:13 by vivaz-ca          #+#    #+#             */
+/*   Updated: 2025/05/21 13:17:42 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../z/so_long.h"
+#include <unistd.h>
 
-int	get_map_width(char **map)
-{
-	int	width;
-
-	width = 0;
-	while (map[0][width] != '\n' && map[0][width])
-		width++;
-	return (width);
+void	ft_putnbr(int nb)
+{	
+	if (nb >= 10)
+		ft_putnbr(nb / 10);
+	write(1, &"0123456789"[nb % 10], 1);
 }
+#include <stdio.h>
 
-int	get_map_height(char **map)
+int main(void)
 {
-	int	height;
-
-	height = 0;
-	while (map[height])
-		height++;
-	return (height);
+	int sla = 4350;
+	ft_putnbr(sla);
+	printf("\n");
+	return (0);	
 }

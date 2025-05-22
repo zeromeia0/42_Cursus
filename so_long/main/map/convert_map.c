@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 17:50:31 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/05/20 20:17:54 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/05/22 17:06:05 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ char	**open_map(const char *filename)
 	return map_info.map;
 }
 
-
 /* TESTANDO UMA CENA
 int	output_map(char **argv)
 {
@@ -67,8 +66,28 @@ int	output_map(char **argv)
 {
 	if (argc > 1)
 		output_map(argv);
-	return (0);	
+	return (0);	typedef struct s_draw_map
 
 	// compile convert_map.c ../../gnl/get_next_line.c ../../gnl/get_next_line_utils.c && ./a.out ../../maps/only_wall.ber
 
 }  */
+
+int	get_map_width(char **map)
+{
+	int	width;
+
+	width = 0;
+	while (map[0][width] != '\n' && map[0][width])
+		width++;
+	return (width);
+}
+
+int	get_map_height(char **map)
+{
+	int	height;
+
+	height = 0;
+	while (map[height])
+		height++;
+	return (height);
+}
