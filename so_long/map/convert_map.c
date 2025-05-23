@@ -6,13 +6,13 @@
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 17:50:31 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/05/23 16:20:41 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/05/23 19:17:03 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../z/so_long.h"
 
-char	**open_map(const char *file)
+/* char	**open_map(const char *file)
 {
 	t_create_map	map_info;
 	
@@ -59,7 +59,7 @@ int	get_map_height(char **map)
 	while (map[get_map_height->map_heigh])
 		get_map_height->map_heigh++;
 	return (get_map_height->map_heigh);
-}
+} */
 
 
 

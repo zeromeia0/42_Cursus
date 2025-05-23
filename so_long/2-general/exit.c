@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 17:34:56 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/05/21 08:25:47 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/05/23 18:58:35 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../z/so_long.h"
+#include "../z/so_long.h"
 
 int handle_exit(int keysym, t_mlx_basic_data *data)
 {
