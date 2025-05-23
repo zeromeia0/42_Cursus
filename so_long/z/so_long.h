@@ -6,22 +6,27 @@
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 16:03:36 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/05/23 16:18:31 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/05/23 21:38:28 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
-# include "../0-minilibx-linux/mlx.h"
+# include "../minilibx-linux/mlx.h"
 # include <X11/keysym.h>
 # include <stdlib.h>
 # include <stdio.h>
 # include <unistd.h>
 # include <fcntl.h>
 # include "../0-gnl/get_next_line.h"
-# include "../2-gato/gato.h"
 
 # define TRANSPARENT 0x00ff
+
+typedef struct s_mlx_xpm
+{
+	int	width;
+	int heigh;
+}	t_mlx_xpm;
 
 typedef struct s_mlx__basic_data
 {
@@ -67,7 +72,10 @@ int keypress_to_walk(int keysym, void *param);
 // t_gato	*so_long(void);
 void	gato_init(void);
 t_gato *so_long(void);
-void	create_map(t_create_map *final_map, t_create_map *texture);
+void	draw_map(t_create_map *final_map, t_create_map *texture);
 char	**open_map(const char *filename);
+// int get_map_line_count(const char *filepath);
+int	get_map_width(char **map);
+int	get_map_height(char **map);
 
 #endif

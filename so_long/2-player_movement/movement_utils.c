@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   movement_utils.c.c                                 :+:      :+:    :+:   */
+/*   movement_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 17:34:36 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/05/21 08:18:52 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/05/23 18:58:25 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../z/so_long.h"
+#include "../z/so_long.h"
 
 int keypress_to_walk(int keysym, void *param)
 {
