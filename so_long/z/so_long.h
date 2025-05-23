@@ -3,74 +3,63 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 16:03:36 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/05/21 08:24:50 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/05/23 16:18:31 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
-# include "../minilibx-linux/mlx.h"
+# include "../0-minilibx-linux/mlx.h"
 # include <X11/keysym.h>
 # include <stdlib.h>
 # include <stdio.h>
 # include <unistd.h>
 # include <fcntl.h>
-# include "../main/map/map.h"
-# include "../gnl/get_next_line.h"
-# include "../main/gato/gato.h"
+# include "../0-gnl/get_next_line.h"
+# include "../2-gato/gato.h"
+
+# define TRANSPARENT 0x00ff
 
 typedef struct s_mlx__basic_data
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
+	void	*game;
 }	t_mlx_basic_data;
 
-typedef struct s_mlx_xpm
-{
-	void	*path_to_tijolinho;
-	int		heigh;
-	int		width;
-}	t_mlx_xpm;
-
-typedef struct s_new_sprite
-{
+typedef struct	s_guide_data {
 	void	*img;
-}	t_new_sprite;
-//reference shit
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}	t_guide_data;
 
-// typedef struct s_graph
-// {
-// 	void	*wall;
-// 	void	*empty;
-// 	void	*collect;
-// 	void	*exit;
-// 	void	*player;
-// 	void	*winner;
-// }	t_graph;
+typedef struct s_gato
+{
+	void	*path_to_gato;
+	int	x;
+	int	y;
+	void	*cat_xpm;
+}	t_gato;
 
-// typedef struct s_init_map
-// {
-// 	int		hight;
-// 	int		lenght;
-// 	int		x;
-// 	int		y;
-// 	int		player;
-// 	int		escape;
-// 	int		count;
-// 	int		step;
-// 	char	**map;
-// 	void	*wall;
-// 	void	*mlx;
-// 	void	*win;
-// 	char	*fn;
-// 	t_graph	*graph;
+typedef struct s_create_map
+{
+	t_mlx_basic_data	mlx_b_data;
+	t_guide_data 		texture;
+	t_gato				acces_gato;
+	int					map_width;
+	int					map_heigh;
+	char				**map;
+	char				*filename;
+	int					line;
+	int					lines;
+	int					fd;
+}	t_create_map;	
 
-// }	t_init_map;
-
-// void	ft_read_map(t_init_map *data);
 
 int handle_exit(int keysym, t_mlx_basic_data *data);
 int keypress_to_walk(int keysym, void *param);
@@ -78,5 +67,7 @@ int keypress_to_walk(int keysym, void *param);
 // t_gato	*so_long(void);
 void	gato_init(void);
 t_gato *so_long(void);
+void	create_map(t_create_map *final_map, t_create_map *texture);
+char	**open_map(const char *filename);
 
 #endif
