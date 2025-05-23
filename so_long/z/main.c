@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 22:09:00 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/05/23 16:21:33 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/05/23 18:40:21 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ int main(int argc, char *argv[])
 	if (!basic_data.mlx_ptr)
 		return (1);
 	basic_data.win_ptr = mlx_new_window(basic_data.mlx_ptr, 800, 600, "So_Long");
+	
+	// mlx_put_image_to_window(basic_data.mlx_ptr, basic_data.win_ptr, mlx_get_data_addr(), )
 	if (!basic_data.win_ptr)
 		return (1);
 	mlx_key_hook(basic_data.win_ptr, keypress_to_walk, &basic_data);
