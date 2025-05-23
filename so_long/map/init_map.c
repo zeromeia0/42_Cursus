@@ -10,23 +10,7 @@
 // /*                                                                            */
 // /* ************************************************************************** */
 
-// #include "../z/so_long.h"
-
-// void	my_mlx_put_pixel(t_guide_data *data, int x, int y, int color)
-// {
-// 	char	*dst;
-
-// 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-// 	*(unsigned int*)dst = color;
-// }
-
-// unsigned int	my_mlx_get_pixel(t_guide_data *data, int x, int y)
-// {
-// 	char	*dst;
-
-// 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-// 	return (*(unsigned int*) dst);
-// }
+#include "../z/so_long.h"
 
 // void	render(t_guide_data *src, t_guide_data *dest, int x, int y)
 // {
@@ -49,24 +33,24 @@
 // 	}
 // }
 
-// void	draw_map(t_create_map *final_map, t_create_map *texture)
-// {
-// 	size_t	x;
-// 	size_t	y;
+void	draw_map(t_create_map *final_map, t_create_map *texture)
+{
+	size_t	x;
+	size_t	y;
 
-// 	x = 0;
-// 	while (x < texture->map_width)
-// 	{
-// 		y = 0;
-// 		while (y < texture->map_heigh)
-// 		{
-// 			if (final_map->map[x][y] == '1')
-// 				render(texture->acces_gato.cat_xpm, texture->mlx_b_data.game, x * 80, y * 80);
-// 			y++;
-// 		}
-// 		x++;
-// 	}
-// }
+	x = 0;
+	while (x < texture->map_width)
+	{
+		y = 0;
+		while (y < texture->map_heigh)
+		{
+			if (final_map->map[x][y] == '1')
+				render(texture->acces_gato.cat_xpm, texture->mlx_b_data.game, x * 80, y * 80);
+			y++;
+		}
+		x++;
+	}
+}
 
 // int	get_map_line_count(const char *filepath)
 // {

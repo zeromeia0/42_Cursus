@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 16:03:36 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/05/23 19:18:37 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/05/23 21:38:28 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ void	gato_init(void);
 t_gato *so_long(void);
 void	draw_map(t_create_map *final_map, t_create_map *texture);
 char	**open_map(const char *filename);
-int get_map_line_count(const char *filepath);
+// int get_map_line_count(const char *filepath);
+int	get_map_width(char **map);
+int	get_map_height(char **map);
 
 #endif
