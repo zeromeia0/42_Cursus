@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 11:24:46 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/05/24 17:04:11 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/05/24 18:14:00 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,12 @@ typedef struct s_sprite_data
 	char		*sprite_address;
 	void		*parede;
 }	t_spriteData;
+
+typedef struct s_gato
+{
+	int	x;
+	int	y;
+}	t_gato;
 
 
 char 	**realloc_map(char **old_map, int old_size, int new_size);
