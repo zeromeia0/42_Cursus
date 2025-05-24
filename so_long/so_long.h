@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 11:24:46 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/05/24 16:56:04 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/05/24 17:04:11 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,9 @@ char	**ft_open_map(char *file);
 void	draw_map(t_mlx_data *data, t_CreateMap *drawMap, char	*type);
 void	*ft_calloc(size_t nmemb, size_t size);
 void	ft_bzero(void *s, size_t n);
+int	get_map_height(char **map);
+int	get_map_width(char **map);
+
 
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 11:24:39 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/05/24 16:56:37 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/05/24 17:05:38 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,9 @@ int	get_map_width(char **map)
 	mapData = ft_calloc(sizeof(t_CreateMap), 1);
 	if (!mapData)
 		return (0);	
-	while (map[mapData->map_width])
+	while (map[0][mapData->map_width])
 		mapData->map_width++;
+	mapData->map_width--;	
 	return(mapData->map_width);
 }
 unsigned int	*get_sprite_pixel(t_spriteData *data, int x, int y)
