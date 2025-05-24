@@ -6,17 +6,29 @@
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 18:11:05 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/05/24 18:17:04 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/05/24 18:39:00 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+
+t_gato *so_long(void)
+{
+static t_gato gato_instance;
+return (&gato_instance);
+}
+void gato_init(void)
+{
+so_long()->x = 0;
+so_long()->y = 0;
+}
+
 int keypress_to_walk(int keysym, void *param)
 {
 	t_mlx_data *data = (t_mlx_data *)param;
 	t_gato *gato = so_long();
-
+	(void)data;
 	if (keysym == 119 || keysym == 65362) // w
 		gato->y -= 10;
 	else if (keysym == 97 || keysym == 65361) // a
@@ -28,4 +40,12 @@ int keypress_to_walk(int keysym, void *param)
 
 	printf("Key pressed: %d | Position -> x: %d, y: %d\n", keysym, gato->x, gato->y);
 	return (0);
+}
+
+int handle_exit(int keysym, void *param)
+{
+	if (keysym == 65307)
+	{
+		
+	}
 }
