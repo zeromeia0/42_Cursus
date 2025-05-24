@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 11:31:58 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/05/24 18:38:20 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/05/24 20:05:10 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,19 @@ int main(int argc, char *argv[])
 			else if (newMap->new_map[newMap->map_height][newMap->map_width] == '0')
 				draw_map(data, newMap, "./textures/carpet.xpm");
 			else if (newMap->new_map[newMap->map_height][newMap->map_width] == 'P')
-				draw_map(data, newMap, "./textures/gato.xpm");
+				{
+					so_long()->x = newMap->map_width;
+					so_long()->y = newMap->map_height;
+				}
 			else if (newMap->new_map[newMap->map_height][newMap->map_width] == 'C')
 				draw_map(data, newMap, "./textures/rato.xpm");
 			newMap->map_width++;
-		}				
+		}
 		newMap->map_height++;
 	}
-	mlx_key_hook(data->win_ptr, keypress_to_walk, &data);
+	data->collision_activate = newMap->new_map;
+	mlx_loop_hook(data->mlx_ptr, loop, data);
+	mlx_key_hook(data->win_ptr, keypress_to_walk, data);
 	mlx_loop(data->mlx_ptr);
 	mlx_destroy_display(data->mlx_ptr);
 }
