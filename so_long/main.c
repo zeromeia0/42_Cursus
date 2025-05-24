@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 11:31:58 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/05/24 16:21:35 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/05/24 16:44:55 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,16 @@ int main(int argc, char *argv[])
 	data->mlx_ptr = mlx_init();
 	data->win_ptr = mlx_new_window(data->mlx_ptr, 600, 800, "So_Long");
 	newMap->new_map = ft_open_map(argv[1]);
-	while (newMap->new_map[newMap->map_width++][newMap->map_height++] != '\0')
+	while (newMap->new_map[newMap->map_height])
 	{
-		if (newMap->new_map[newMap->map_width][newMap->map_height] == '1')
-			draw_map(newMap, "./textures/parede.xpm");
+		newMap->map_height = 0;
+		while (newMap->new_map[newMap->map_width])
+		{
+			if (newMap->new_map[newMap->map_width][newMap->map_height] == '1')
+				draw_map(data, newMap, "./textures/parede.xpm");
+			newMap->map_width++;
+		}				
+		newMap->map_height++;
 	}
 	mlx_loop(data->mlx_ptr);
 	mlx_destroy_display(data->mlx_ptr);

@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 11:24:39 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/05/24 16:25:39 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/05/24 16:47:05 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,18 +90,12 @@ unsigned int	*get_sprite_pixel(t_spriteData *data, int x, int y)
 				/ 8))));
 }
 
-void	draw_map(t_CreateMap *drawMap, char	*type)
+void	draw_map(t_mlx_data *data, t_CreateMap *drawMap, char	*type)
 {
-	t_mlx_data *data;
 	t_spriteData *texture;
-	size_t	x;
-	size_t	y;
-	
-	x = 0;
-	y = 0;
+
 	(void)drawMap;
-	data = malloc(sizeof(t_CreateMap));	
 	texture = malloc(sizeof(t_spriteData));
 	texture->address = mlx_xpm_file_to_image(data->mlx_ptr, type, &texture->width, &texture->height);
-	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, texture->address, 0, 0);
+	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, texture->address, drawMap->map_width * 80, drawMap->map_height * 80);
 }

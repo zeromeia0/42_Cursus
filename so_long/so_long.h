@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 11:24:46 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/05/24 15:49:20 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/05/24 16:37:32 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,6 @@ typedef struct s_sprite_data
 
 char 	**realloc_map(char **old_map, int old_size, int new_size);
 char	**ft_open_map(char *file);
-void	draw_map(t_CreateMap *drawMap, char	*type);
+void	draw_map(t_mlx_data *data, t_CreateMap *drawMap, char	*type);
 
 #endif
