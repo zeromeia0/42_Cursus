@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 11:31:58 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/05/24 17:19:33 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/05/24 17:28:04 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int main(int argc, char *argv[])
 		while (newMap->new_map[newMap->map_height][newMap->map_width])
 		{
 			if (newMap->new_map[newMap->map_height][newMap->map_width] == '1')
-				draw_map(data, newMap, "./textures/parede.xpm");
+				draw_map(data, newMap, "./textures/tijolinho.xpm");
 			else if (newMap->new_map[newMap->map_height][newMap->map_width] == '0')
 				draw_map(data, newMap, "./textures/carpet.xpm");
 			else if (newMap->new_map[newMap->map_height][newMap->map_width] == 'P')
