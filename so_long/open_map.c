@@ -6,39 +6,102 @@
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 11:24:39 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/05/24 12:03:29 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/05/24 16:25:39 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+char **realloc_map(char **old_map, int old_size, int new_size)
+{
+	char **new_map;
+	int i;
+
+	new_map = malloc(sizeof(char *) * (new_size + 1));
+	if (!new_map)
+		return (NULL);
+
+	i = 0;
+	while (i < old_size)
+	{
+		new_map[i] = old_map[i];
+		i++;
+	}
+	new_map[i] = NULL;
+
+	free(old_map);
+	return (new_map);
+}
+
 char	**ft_open_map(char *file)
 {
-	t_create_map *create_map;
-
-	create_map->lines = 0;
-	create_map = malloc(sizeof(t_create_map));
-	if (!create_map)
+	t_CreateMap *CreateMap;
+	
+	CreateMap = malloc(sizeof(t_CreateMap));
+	if (!CreateMap)
 		return (NULL);
-	create_map->map_fd = open(file, O_RDONLY);
-	if (create_map->map_fd < 3)
-		return (write(1, "Map Invalid", 11));
-
-	create_map->new_map = malloc(sizeof(char *));
-	if (!create_map->new_map)
+	CreateMap->lines = 0;
+	CreateMap->map_fd = open(file, O_RDONLY);
+	if (CreateMap->map_fd < 3)
 		return (NULL);
-	while ((create_map->get_gnl_null = get_next_line(create_map->map_fd)))
+	CreateMap->new_map = malloc(sizeof(char *));
+	if (!CreateMap->new_map)
+		return (NULL);
+	while ((CreateMap->get_gnl_null = get_next_line(CreateMap->map_fd)))
 	{
-		create_map->new_map = realloc_map(create_map->new_map, create_map->lines, create_map->lines + 1);
-		if (!create_map->new_map)
+		CreateMap->new_map = realloc_map(CreateMap->new_map, CreateMap->lines, CreateMap->lines + 1);
+		if (!CreateMap->new_map)
 		{
-			free(create_map->get_gnl_null);
-			close(create_map->map_fd);
-			return (write(1, "Deu BO no Malloc", 16));
+			free(CreateMap->get_gnl_null);
+			close(CreateMap->map_fd);
+			return (NULL);
 		}
-		create_map->new_map[create_map->lines++] = create_map->get_gnl_null;
-		create_map->new_map[create_map->lines] = NULL;
+		CreateMap->new_map[CreateMap->lines++] = CreateMap->get_gnl_null;
+		CreateMap->new_map[CreateMap->lines] = NULL;
 	}
-	close (create_map->map_fd);
-	return (create_map->new_map);
+	close (CreateMap->map_fd);
+	return (CreateMap->new_map);
+}
+int	get_map_height(char **map)
+{
+	t_CreateMap *mapData;
+
+	mapData = malloc(sizeof(t_CreateMap));
+	if (!mapData)
+		return (0);	
+	while (map[mapData->map_height])
+		mapData->map_height++;
+	return(mapData->map_height);
+}
+int	get_map_width(char **map)
+{
+	t_CreateMap *mapData;
+
+	mapData = malloc(sizeof(t_CreateMap));
+	if (!mapData)
+		return (0);	
+	while (map[mapData->map_width])
+		mapData->map_width++;
+	return(mapData->map_width);
+}
+unsigned int	*get_sprite_pixel(t_spriteData *data, int x, int y)
+{
+	return ((unsigned int *)(data->address + (y * data->line_len + x * (data->bpp
+				/ 8))));
+}
+
+void	draw_map(t_CreateMap *drawMap, char	*type)
+{
+	t_mlx_data *data;
+	t_spriteData *texture;
+	size_t	x;
+	size_t	y;
+	
+	x = 0;
+	y = 0;
+	(void)drawMap;
+	data = malloc(sizeof(t_CreateMap));	
+	texture = malloc(sizeof(t_spriteData));
+	texture->address = mlx_xpm_file_to_image(data->mlx_ptr, type, &texture->width, &texture->height);
+	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, texture->address, 0, 0);
 }

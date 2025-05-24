@@ -6,7 +6,7 @@
 #    By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/24 11:29:36 by vivaz-ca          #+#    #+#              #
-#    Updated: 2025/05/24 12:03:54 by vivaz-ca         ###   ########.fr        #
+#    Updated: 2025/05/24 15:35:28 by vivaz-ca         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ MAP_DIR = ../maps
 TEXTURE_DIR = ../textures
 
 SRC = \
-	$(SRCDIR)/main.c map_utils.c \
+	$(SRCDIR)/main.c open_map.c \
 	$(GNL_DIR)/get_next_line.c \
 	$(GNL_DIR)/get_next_line_utils.c \
 
