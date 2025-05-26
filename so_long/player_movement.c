@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 18:11:05 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/05/26 19:42:52 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/05/26 19:48:51 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,6 @@ int keypress_to_walk(int keysym, void *param)
 	ft_printf("Key pressed: %d | Position -> x: %d, y: %d\n", keysym, gato->x, gato->y);
 	return (0);
 }
-
-
 
 int	loop(void *param)
 {
