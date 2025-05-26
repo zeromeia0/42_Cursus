@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 11:24:46 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/05/24 19:57:42 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/05/26 17:56:44 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include "./gnl/get_next_line.h"
 # include "minilibx-linux/mlx.h"
 # include <stdbool.h>
+# include "./my_printf/ft_printf.h"
 
 typedef struct s_mlx_data
 {
@@ -55,6 +56,8 @@ typedef struct s_sprite_data
 
 typedef struct s_gato
 {
+	int	prev_x;
+	int	prev_y;
 	int	x;
 	int	y;
 }	t_gato;
@@ -71,6 +74,8 @@ int	get_map_width(char **map);
 int keypress_to_walk(int keysym, void *param);
 int	loop(void *param);
 t_gato *so_long(void);
+int	ft_printf(const char *format, ...);
+void	make_map(t_CreateMap *newMap, t_mlx_data *data);
 
 
 #endif

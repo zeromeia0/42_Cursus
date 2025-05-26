@@ -6,7 +6,7 @@
 #    By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/24 11:29:36 by vivaz-ca          #+#    #+#              #
-#    Updated: 2025/05/24 18:21:53 by vivaz-ca         ###   ########.fr        #
+#    Updated: 2025/05/26 17:46:28 by vivaz-ca         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,11 +17,16 @@ MLXDIR = ../minilibx-linux
 GNL_DIR = ./gnl
 MAP_DIR = ../maps
 TEXTURE_DIR = ../textures
+PRINTF_DIR = ./my_printf
 
 SRC = \
-	$(SRCDIR)/main.c open_map.c utils.c player_movement.c\
+	$(SRCDIR)/main.c open_map.c utils.c player_movement.c create_and_render_map.c\
 	$(GNL_DIR)/get_next_line.c \
 	$(GNL_DIR)/get_next_line_utils.c \
+	$(PRINTF_DIR)/printf_utils.c \
+	$(PRINTF_DIR)/printf_utils2.c \
+	$(PRINTF_DIR)/libft_functions.c \
+	$(PRINTF_DIR)/ft_itoa.c
 
 OBJS = $(SRC:../%.c=$(OBJDIR)/%.o)
 OBJS := $(OBJS:./%.c=$(OBJDIR)/%.o)
@@ -30,7 +35,7 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
 
 MLX_FLAGS = -L . -lmlx -lXext -lX11
-INCLUDES = -I$(MLXDIR) -I$(GNL_DIR) -I. -I$(MAP_DIR)
+INCLUDES = -I$(MLXDIR) -I$(GNL_DIR) -I. -I$(MAP_DIR) -I$(PRINTF_DIR)
 
 all: $(NAME)
 
