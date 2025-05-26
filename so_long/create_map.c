@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 17:36:08 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/05/26 18:00:55 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/05/26 18:53:46 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,3 @@ void	make_map(t_CreateMap *newMap, t_mlx_data *data)
 		newMap->map_height++;
 	}
 }
-
-/* void	cat_to_carpet(t_CreateMap *newMap, t_mlx_data *data, t_gato *gato_position)
-{
-	make_map(newMap, data);
-	
-} */

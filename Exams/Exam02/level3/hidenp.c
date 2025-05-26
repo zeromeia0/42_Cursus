@@ -1,20 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   reverse_bits.c                                     :+:      :+:    :+:   */
+/*   hidenp.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/13 19:34:23 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/05/24 20:58:48 by vivaz-ca         ###   ########.fr       */
+/*   Created: 2025/05/24 21:02:41 by vivaz-ca          #+#    #+#             */
+/*   Updated: 2025/05/24 21:11:09 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-unsigned char   reverse_bits(unsigned char octet)
+#include <unistd.h>
+
+int main(int argc, char *argv[])
 {
-	
-	octet = ((octet & 0b11110000) >> 4 | (octet & 0b00001111) << 4);
-	octet = ((octet & 0b11001100) >> 2 | (octet & 0b00110011) << 2);
-	octet = ((octet & 0b10101010) >> 1 | (octet & 0b01010101) << 1);
-	return (octet);
+	int i = 0, j = 0;
+	if (argc == 3)
+	{
+		while (argv[2][j] && argv[1][i])
+		{
+			if (argv[1][i] == argv[2][j])
+				i++;
+			j++;
+		}
+		if (argv[1][i] == 0)
+			write(1, "1", 1);
+		else
+			write(1, "0", 1);
+	}
+	write(1, "\n", 1);
+	return (0);
 }

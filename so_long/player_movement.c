@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 18:11:05 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/05/26 17:55:51 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/05/26 19:42:52 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,26 +32,35 @@ int handle_exit(int keysym, t_mlx_data *data)
 bool collision(char **map, int x, int y)
 {
 	return (map[y][x] == '1');
-
 }
 int keypress_to_walk(int keysym, void *param)
 {
 	t_mlx_data *data = (t_mlx_data *)param;
 	t_gato *gato = so_long();
+	t_CreateMap map_info;
 
 	handle_exit(keysym, data);
-	
-	if ((keysym == 119 || keysym == 65362) && !collision(data->collision_activate, gato->x, gato->y - 1)) // w
+	int prev_x = gato->x;
+	int prev_y = gato->y;
+	if ((keysym == 119 || keysym == 65362) && !collision(data->collision_activate, gato->x, gato->y - 1))
 		gato->y -= 1;
-	else if ((keysym == 97 || keysym == 65361) && !collision(data->collision_activate, gato->x - 1, gato->y)) // a
+	else if ((keysym == 97 || keysym == 65361) && !collision(data->collision_activate, gato->x - 1, gato->y))
 		gato->x -= 1;
-	else if ((keysym == 115 || keysym == 65364) && !collision(data->collision_activate, gato->x, gato->y + 1)) // s
+	else if ((keysym == 115 || keysym == 65364) && !collision(data->collision_activate, gato->x, gato->y + 1))
 		gato->y += 1;
-	else if ((keysym == 100 || keysym == 65363) && !collision(data->collision_activate, gato->x + 1, gato->y)) // d
+	else if ((keysym == 100 || keysym == 65363) && !collision(data->collision_activate, gato->x + 1, gato->y))
 		gato->x += 1;
+	map_info.map_width = prev_x;
+	map_info.map_height = prev_y;
+	draw_map(data, &map_info, "./textures/carpet.xpm");
+	map_info.map_width = gato->x;
+	map_info.map_height = gato->y;
+	draw_map(data, &map_info, "./textures/gatinho.xpm");
 	ft_printf("Key pressed: %d | Position -> x: %d, y: %d\n", keysym, gato->x, gato->y);
 	return (0);
 }
+
+
 
 int	loop(void *param)
 {
