@@ -1,37 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_range.c                                         :+:      :+:    :+:   */
+/*   lcm.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeslin-ticiane <jeslinticianevaz@gmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/29 08:55:20 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/05/29 09:47:26 by jeslin-tici      ###   ########.fr       */
+/*   Created: 2025/05/29 09:48:35 by jeslin-tici       #+#    #+#             */
+/*   Updated: 2025/05/29 09:56:06 by jeslin-tici      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include <stdio.h>
 
-int *ft_range(int start, int end)
+unsigned int lcm(unsigned int a, unsigned int b)
 {
-	int *range, i = 0;
-	range = (int *)malloc(sizeof(int) * ((start > end) ? (start - end + 1) : (end - start + 1)));
-	if (!range)
-		return (0);
-	while (start != end)
+	unsigned int lcm = 1;
+	lcm += (a > b) ? a : b;
+	while (1)
 	{
-		range[i++] = start;
-		start += (start > end) ? -1 : 1;
+		if (lcm % a == 0 && lcm % b == 0)
+			return (lcm);
+		lcm++;
 	}
-	range[i] = start;
-	return (range);
+	return (lcm);
 }
 
 int main(void)
 {
-	int *range = ft_range(1, 3);
-	for (int i = 0; i <= 2; i++)
-		printf("%d\n", range[i]);
+	printf("%u\n", lcm(3, 4));
 	return (0);
 }
