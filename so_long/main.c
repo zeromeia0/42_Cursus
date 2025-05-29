@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 11:31:58 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/05/26 19:52:10 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/05/28 09:24:37 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ int main(int argc, char *argv[])
 {
 	t_mlx_data *data;
 	t_CreateMap *newMap;
-	t_spriteData *sprite;
+	// t_spriteData *sprite;
 
-	sprite = ft_calloc(sizeof(t_spriteData), 1);
+	// sprite = ft_calloc(sizeof(t_spriteData), 1);
 	newMap = ft_calloc(sizeof(t_CreateMap), 1);
 	if (!newMap)
 		return (0);
