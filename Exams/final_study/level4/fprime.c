@@ -1,25 +1,25 @@
 #include "stdio.h"
 #include "stdlib.h"
 
-int	main(int argc, char **argv)
+int main(int argc, char **argv)
 {
-	int	i;
-	int	num;
-
-	i = 2;
+	int i = 2, num = 0;
 	if (argc == 2)
 	{
 		num = atoi(argv[1]);
 		if (num == 1)
-			printf("1");
-		while (i <= num)
+		{
+			printf("1\n");
+			return (0);
+		}
+		while (i1 < num)
 		{
 			if (num % i == 0)
 			{
 				printf("%d", i);
-				if (num != i)
+				num /= i;
+				if (num > 1)
 					printf("*");
-				num = num / i;
 			}
 			else
 				i++;
@@ -27,4 +27,4 @@ int	main(int argc, char **argv)
 	}
 	printf("\n");
 	return (0);
-}	
+}
