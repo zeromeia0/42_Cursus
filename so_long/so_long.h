@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 11:24:46 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/05/26 17:56:44 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/05/30 15:35:26 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,16 @@ typedef struct s_gato
 	int	y;
 }	t_gato;
 
+typedef struct s_parsing
+{
+	int exit;
+	int collect;
+	int start; 
+	int x;
+	int y;
+}	t_parsing;
+
+
 
 
 char 	**realloc_map(char **old_map, int old_size, int new_size);
@@ -76,6 +86,7 @@ int	loop(void *param);
 t_gato *so_long(void);
 int	ft_printf(const char *format, ...);
 void	make_map(t_CreateMap *newMap, t_mlx_data *data);
+int valid_params(char **map);
 
 
 #endif
