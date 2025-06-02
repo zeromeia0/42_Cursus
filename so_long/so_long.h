@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 11:24:46 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/05/30 15:35:26 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/02 15:12:03 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ typedef struct s_parsing
 	int start; 
 	int x;
 	int y;
+	int fill_y;
+	int	fill_x;
 }	t_parsing;
 
 
@@ -87,6 +89,7 @@ t_gato *so_long(void);
 int	ft_printf(const char *format, ...);
 void	make_map(t_CreateMap *newMap, t_mlx_data *data);
 int valid_params(char **map);
+int flood_fill(char **tab, t_parsing *size, t_parsing begin);	
 
 
 #endif
