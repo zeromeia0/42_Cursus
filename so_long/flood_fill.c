@@ -6,35 +6,37 @@
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 17:26:40 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/02 17:39:04 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/02 21:39:10 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static void fill(char **tab, int width, int height, char target, int row, int col)
+static void fill(char **tab, int width, int height, int row, int col)
 {
 	if (row < 0 || col < 0 || row >= height || col >= width)
 		return;
-	if (tab[row][col] != '0' && tab[row][col] != 'C' && tab[row][col] != 'E')
+	// printf("animal: %c\n", tab[row][col]);
+	if (tab[row][col] != '0' && tab[row][col] != 'C' && tab[row][col] != 'E' && tab[row][col] != 'P')
 		return;
-	tab[row][col] = 'P';
-	fill(tab, width, height, target, row - 1, col);
-	fill(tab, width, height, target, row + 1, col);
-	fill(tab, width, height, target, row, col - 1);
-	fill(tab, width, height, target, row, col + 1);
+	tab[row][col] = 'V';
+
+	fill(tab, width, height, row - 1, col); // up
+	fill(tab, width, height, row + 1, col); // down
+	fill(tab, width, height, row, col - 1); // left
+	fill(tab, width, height, row, col + 1); // right
 }
+
 int flood_fill(char **tab, int width, int height, int start_y, int start_x)
 {
 	int y = 0;
 	int x;
-	char target = tab[start_y][start_x];
 
-	fill(tab, width, height, target, start_y, start_x);
+	fill(tab, width, height, start_y, start_x);
 	while (tab[y])
 	{
 		x = 0;
-		while (tab[y][x] && tab[y][x] != '\n')
+		while (tab[y][x])
 		{
 			if (tab[y][x] == 'C' || tab[y][x] == 'E')
 				return (ft_printf("Nao consegue pegar todos os coletaveis ou saida ta fechada\n"), 0);
@@ -44,6 +46,7 @@ int flood_fill(char **tab, int width, int height, int start_y, int start_x)
 	}
 	return (1);
 }
+
 int valid_path(char **map)
 {
 	int width = get_map_width(map);
@@ -58,4 +61,35 @@ int valid_path(char **map)
 	}
 	free_map(copy);
 	return (1);
+}
+
+char **copy_map(char **map)
+{
+	int i = 0;
+	int width;
+	char **copy;
+
+	while (map[i])
+		i++;
+	copy = malloc(sizeof(char *) * (i + 1));
+	if (!copy)
+		return (NULL);
+
+	i = 0;
+	while (map[i])
+	{
+		width = ft_strlen(map[i]);
+		copy[i] = malloc(sizeof(char) * (width + 1));
+		if (!copy[i])
+		{
+			while (--i >= 0)
+				free(copy[i]);
+			free(copy);
+			return (NULL);
+		}
+		ft_strlcpy(copy[i], map[i], width + 1);
+		i++;
+	}
+	copy[i] = NULL;
+	return (copy);
 }

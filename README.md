@@ -1,8 +1,5 @@
-ON SO LONG
+ SO LONG
 
--Parse Map
-
--Flood Fill
 
 -Update Cat and Mouse Sprites
 
@@ -11,3 +8,11 @@ ON SO LONG
 -Flip cat
 
 -Add steps like it should be
+
+-When parse invalid don't open map
+
+-Cat is making exit disappear
+
+-Gotta free everytihing
+
+-Stops steps if collision

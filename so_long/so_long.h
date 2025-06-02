@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 11:24:46 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/02 15:12:03 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/02 19:38:41 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,10 +86,13 @@ int	get_map_width(char **map);
 int keypress_to_walk(int keysym, void *param);
 int	loop(void *param);
 t_gato *so_long(void);
+char **copy_map(char **map);
 int	ft_printf(const char *format, ...);
 void	make_map(t_CreateMap *newMap, t_mlx_data *data);
 int valid_params(char **map);
-int flood_fill(char **tab, t_parsing *size, t_parsing begin);	
-
+int flood_fill(char **tab, int width, int height, int start_y, int start_x);	
+void free_map(char **map);
+char	*ft_strtrim(char const *s1, char const *set);
+void	*ft_memcpy(void *dest, const void *src, size_t n);
 
 #endif

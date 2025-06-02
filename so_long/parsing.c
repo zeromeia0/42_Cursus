@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 14:52:54 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/02 15:07:20 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/02 19:05:28 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,40 +39,5 @@ int valid_params(char **map)
 	if (parse->exit != 1 || parse->start != 1 || parse->collect < 1)
 		return (ft_printf("Esse mapa ta mal viado\n"), 0);
 	free(parse);
-	return (1);
-}
-
-static void fill(char **tab, t_parsing *size, char target, int row, int col)
-{
-    if (row < 0 || col < 0 || row >= size->fill_y || col >= size->fill_x)
-        return;
-    if (tab[row][col] == 'E' || tab[row][col] != target)
-        return ;
-    tab[row][col] = 'P';
-    fill(tab, size, target, row -1, col); 
-    fill(tab, size, target, row +1, col); 
-    fill(tab, size, target, row, col - 1);
-    fill(tab, size, target, row, col + 1);
-}
-
-int flood_fill(char **tab, t_parsing *size, t_parsing begin)
-{
-	int	x;
-	int	y;
-
-	y = 0;
-    char target = tab[begin.fill_y][begin.fill_x];
-    fill(tab, size, target, begin.fill_y, begin.fill_x);
-	while (tab[y])
-	{
-		x = 0;
-		while (tab[y][x] && tab[y][x] != '\n')
-		{
-			if (tab[y][x] == 'C' || tab[y][x] == 'E')
-				return (ft_printf("Nao consegue pegar todos os coletaveis ou saida ta fechada"), 0);
-			x++;
-		}
-		y++;
-	}
 	return (1);
 }
