@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi_base.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 08:45:42 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/05/29 08:53:26 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/05/29 14:22:36 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int convert(char c, int base)
 {
-	if (c >= '0' && c >= '9')
+	if (c >= '0' && c <= '9')
 		return (c - '0');
 	if (c >= 'a' && c <= 'f')
 		return (c - 'a' + 10);
@@ -41,4 +41,3 @@ int ft_atoi_base(char *str, int str_base)
 	}
 	return (result * sign);
 }
-
