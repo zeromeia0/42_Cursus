@@ -3,20 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 15:22:18 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/02 15:59:00 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/04 15:06:41 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void free_map(char **map)
+void	free_map(char **map)
 {
-	int i = 0;
+	int	i;
+
+	i = 0;
 	if (!map)
-		return;
+		return ;
 	while (map[i])
 		free(map[i++]);
 	free(map);

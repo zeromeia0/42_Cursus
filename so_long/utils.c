@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 16:52:07 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/02 21:46:12 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/04 15:20:50 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 	str[end - bgn] = 0;
 	return (str);
 }
+
 void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
 	unsigned char	*ptr;
@@ -68,9 +69,11 @@ void	ft_bzero(void *s, size_t n)
 		i++;
 	}
 }
+
 void	*ft_calloc(size_t nmemb, size_t size)
 {
 	void	*ptr;
+
 	if (size != 0 && nmemb > (size_t)-1 / size)
 		return (NULL);
 	ptr = malloc(nmemb * size);
@@ -79,15 +82,15 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	ft_bzero(ptr, nmemb * size);
 	return (ptr);
 }
-char **realloc_map(char **old_map, int old_size, int new_size)
+
+char	**realloc_map(char **old_map, int old_size, int new_size)
 {
-	char **new_map;
-	int i;
+	char	**new_map;
+	int		i;
 
 	new_map = ft_calloc(sizeof(char *), (new_size + 1));
 	if (!new_map)
 		return (NULL);
-
 	i = 0;
 	while (i < old_size)
 	{
@@ -95,31 +98,31 @@ char **realloc_map(char **old_map, int old_size, int new_size)
 		i++;
 	}
 	new_map[i] = NULL;
-
 	free(old_map);
 	return (new_map);
 }
 
 int	get_map_height(char **map)
 {
-	t_CreateMap *mapData;
+	t_create_map	*map_data;
 
-	mapData = ft_calloc(sizeof(t_CreateMap), 1);
-	if (!mapData)
-		return (0);	
-	while (map[mapData->map_height])
-		mapData->map_height++;
-	return(mapData->map_height);
+	map_data = ft_calloc(sizeof(t_create_map), 1);
+	if (!map_data)
+		return (0);
+	while (map[map_data->map_height])
+		map_data->map_height++;
+	return (map_data->map_height);
 }
+
 int	get_map_width(char **map)
 {
-	t_CreateMap *mapData;
+	t_create_map	*map_data;
 
-	mapData = ft_calloc(sizeof(t_CreateMap), 1);
-	if (!mapData)
-		return (0);	
-	while (map[0][mapData->map_width])
-		mapData->map_width++;
-	mapData->map_width--;	
-	return(mapData->map_width);
+	map_data = ft_calloc(sizeof(t_create_map), 1);
+	if (!map_data)
+		return (0);
+	while (map[0][map_data->map_width])
+		map_data->map_width++;
+	map_data->map_width--;
+	return (map_data->map_width);
 }

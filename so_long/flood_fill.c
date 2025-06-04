@@ -3,35 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   flood_fill.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 17:26:40 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/02 21:39:10 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/04 15:06:01 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static void fill(char **tab, int width, int height, int row, int col)
+static void	fill(char **tab, int width, int height, int row, int col)
 {
 	if (row < 0 || col < 0 || row >= height || col >= width)
-		return;
-	// printf("animal: %c\n", tab[row][col]);
+		return ;
 	if (tab[row][col] != '0' && tab[row][col] != 'C' && tab[row][col] != 'E' && tab[row][col] != 'P')
-		return;
+		return ;
 	tab[row][col] = 'V';
-
-	fill(tab, width, height, row - 1, col); // up
-	fill(tab, width, height, row + 1, col); // down
-	fill(tab, width, height, row, col - 1); // left
-	fill(tab, width, height, row, col + 1); // right
+	fill(tab, width, height, row - 1, col);
+	fill(tab, width, height, row + 1, col);
+	fill(tab, width, height, row, col - 1);
+	fill(tab, width, height, row, col + 1);
 }
 
-int flood_fill(char **tab, int width, int height, int start_y, int start_x)
+int	flood_fill(char **tab, int width, int height, int start_y, int start_x)
 {
-	int y = 0;
-	int x;
+	int	y;
+	int	x;
 
+	y = 0;
 	fill(tab, width, height, start_y, start_x);
 	while (tab[y])
 	{
@@ -47,11 +46,15 @@ int flood_fill(char **tab, int width, int height, int start_y, int start_x)
 	return (1);
 }
 
-int valid_path(char **map)
+int	valid_path(char **map)
 {
-	int width = get_map_width(map);
-	int height = get_map_height(map);
-	char **copy = copy_map(map);
+	int		width;
+	int		height;
+	char	**copy;
+
+	width = get_map_width(map);
+	height = get_map_height(map);
+	**copy = copy_map(map);
 	if (!copy)
 		return (ft_printf("Error: Falha ao copiar o mapa\n"), 0);
 	if (!flood_fill(copy, width, height, so_long()->y, so_long()->x))
@@ -63,18 +66,18 @@ int valid_path(char **map)
 	return (1);
 }
 
-char **copy_map(char **map)
+char	**copy_map(char **map)
 {
-	int i = 0;
-	int width;
-	char **copy;
+	int		i;
+	int		width;
+	char	**copy;
 
+	i = 0;
 	while (map[i])
 		i++;
 	copy = malloc(sizeof(char *) * (i + 1));
 	if (!copy)
 		return (NULL);
-
 	i = 0;
 	while (map[i])
 	{
