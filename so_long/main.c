@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 11:31:58 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/04 15:40:09 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/04 15:47:31 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int main(int argc, char *argv[])
 	if (!newMap)
 		return (0);
 	if (argc <= 1)
-		return(ft_printf("Coloca o mapa animal"), 0);
+		return(ft_printf("Coloca o mapa animal\n"), 0);
 	data = ft_calloc(sizeof(t_mlx_data), 1);
 	data->mlx_ptr = mlx_init();
 	newMap->new_map = ft_open_map(argv[1]);
