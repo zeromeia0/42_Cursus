@@ -1,38 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_sort_list.c                                     :+:      :+:    :+:   */
+/*   sort_int_tab.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/03 16:27:07 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/03 17:28:00 by vivaz-ca         ###   ########.fr       */
+/*   Created: 2025/06/03 17:58:45 by vivaz-ca          #+#    #+#             */
+/*   Updated: 2025/06/03 18:02:00 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-typedef struct    s_list
-{
-    struct s_list *next;
-    void          *data;
-}                 t_list;
+#include <stdio.h>
 
-
-t_list	*sort_list(t_list* lst, int (*cmp)(int, int))
+void sort_int_tab(int *tab, unsigned int size)
 {
+	unsigned int i = 0, j;
 	int temp;
-	t_list *head = lst;
-	temp = head;
-	while (lst != 0 && lst->next != 0)
+	while (i < size)
 	{
-		if ((*cmp)(lst->data, lst->next->data) == 0)
+		j = i + 1;
+		if (tab[i] > tab[j])
 		{
-			temp = lst->data;
-			lst->data = lst->next->data;
-			lst->next->data = temp;
-			lst = head;
+			temp = tab[i];
+			tab[i] = tab[j];
+			tab[j] = temp;
+			i = 0;
 		}
 		else
-			lst = lst->next;
+			i++;
 	}
-	return (head);
+}
+
+int main(void)
+{
+	int tab[] = {1, 7, 22, 324, -312, 32}, len = 5;
+	sort_int_tab(tab, len);
+	for (int j = 0; j <= len; j++)
+		printf("%d ", tab[j]);
 }
