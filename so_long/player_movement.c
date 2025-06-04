@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 18:11:05 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/04 15:13:48 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/04 15:32:26 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ int	keypress_to_walk(int keysym, void *param)
 	map_info.map_width = gato->x;
 	map_info.map_height = gato->y;
 	draw_map(data, &map_info, "./textures/gatinho.xpm");
-	ft_printf("Steps: %d\n", i++);
+	if (prev_x != gato->x || prev_y != gato->y)
+		ft_printf("Steps: %d\n", i++);
 	handle_exit(keysym, data);
 	return (0);
 }
@@ -73,5 +74,8 @@ int	loop(void *param)
 	data = param;
 	sprite->sprite_address = mlx_xpm_file_to_image(data->mlx_ptr, "./textures/gatinho.xpm", &sprite->width, &sprite->height);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, sprite->sprite_address, so_long()->x * 80, so_long()->y * 80);
+	mlx_destroy_image(data->mlx_ptr, sprite->sprite_address);
+	free(sprite);
 	return (1);
 }
+

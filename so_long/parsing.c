@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 14:52:54 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/04 15:08:57 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/04 15:33:05 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,3 +44,4 @@ int	valid_params(char **map)
 	free(parse);
 	return (1);
 }
+
