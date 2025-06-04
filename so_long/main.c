@@ -6,11 +6,12 @@
 /*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 11:31:58 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/04 15:31:58 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/04 15:40:09 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
 int main(int argc, char *argv[])
 {
 	t_mlx_data *data;
@@ -48,3 +49,4 @@ int main(int argc, char *argv[])
 	free(newMap);
 	free(data);
 }
+

@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 11:24:39 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/04 15:32:42 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/04 15:40:39 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ char	**ft_open_map(char *file)
 	return (result);
 }
 
+
 unsigned int	*get_sprite_pixel(t_sprite_data *data, int x, int y)
 {
 	return ((unsigned int *)(data->address + (y * data->line_len + x * (data->bpp / 8))));
@@ -59,4 +60,5 @@ void	draw_map(t_mlx_data *data, t_create_map *drawMap, char	*type)
 	mlx_destroy_image(data->mlx_ptr, texture->address);
 	free(texture);
 }
+
 
