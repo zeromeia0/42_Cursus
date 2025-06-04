@@ -3,4 +3,4 @@
 
 -Cat is making exit disappear
 
--Gotta free everytihing
+-Cat goes thoguth house OR house only appears at the end
