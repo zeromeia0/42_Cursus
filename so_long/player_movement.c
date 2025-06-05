@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_movement.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 18:11:05 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/04 15:40:29 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/05 14:19:21 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ int	handle_exit(int keysym, t_mlx_data *data)
 
 bool	collision(char **map, int x, int y)
 {
+	if (map[y][x] == 'E')
+		exit(0);
 	return (map[y][x] == '1');
 }
 
@@ -80,3 +82,16 @@ int	loop(void *param)
 }
 
 
+int game_exit(char **map, int x, int y)
+{
+	t_gato *cat_position;
+
+	cat_position = malloc(sizeof(t_gato));
+	if (!cat_position)
+		return (0);
+	x = cat_position->x;
+	y = cat_position->y;
+	if (map[y][x] == 'E')
+		exit(0);
+	return (1);
+}

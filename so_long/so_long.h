@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 11:24:46 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/04 15:16:00 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/05 14:08:14 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,5 +91,6 @@ int		ft_printf(const char *format, ...);
 int		valid_params(char **map);
 int		flood_fill(char **tab, int width, int height, int start_y, int start_x);	
 t_gato	*so_long(void);
+int game_exit(char **map, int x, int y);
 
 #endif
