@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 11:24:46 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/06 10:10:00 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/06 10:19:27 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_mlx_data
 	void	*mlx_ptr;
 	void	*win_ptr;
 	char	**collision_activate;
+	t_parsing *parse;
 }	t_mlx_data;
 
 typedef struct s_create_map

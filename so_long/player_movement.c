@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 18:11:05 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/06 10:09:22 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/06 11:10:15 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,17 @@ int	handle_exit(int keysym, t_mlx_data *data)
 	return (0);
 }
 
-bool	collision(char **map, int x, int y)
+bool	collision(char **map, int x, int y, t_parsing *parse)
 {
+	if (map[y][x] == 'C')
+		parse->collected++;
 	if (map[y][x] == 'E')
-		exit(0);
+	{
+		if (parse->collected == parse->collect)
+			exit(0);
+		else
+			ft_printf("Falta coletar as cenas\n");
+	}
 	return (map[y][x] == '1');
 }
 
@@ -47,13 +54,13 @@ int	keypress_to_walk(int keysym, void *param)
 	int				prev_x = gato->x;
 	int				prev_y = gato->y;
 
-	if ((keysym == 119 || keysym == 65362) && !collision(data->collision_activate, gato->x, gato->y - 1))
+	if ((keysym == 119 || keysym == 65362) && !collision(data->collision_activate, gato->x, gato->y - 1, data->parse))
 		gato->y -= 1;
-	else if ((keysym == 97 || keysym == 65361) && !collision(data->collision_activate, gato->x - 1, gato->y))
+	else if ((keysym == 97 || keysym == 65361) && !collision(data->collision_activate, gato->x - 1, gato->y, data->parse))
 		gato->x -= 1;
-	else if ((keysym == 115 || keysym == 65364) && !collision(data->collision_activate, gato->x, gato->y + 1))
+	else if ((keysym == 115 || keysym == 65364) && !collision(data->collision_activate, gato->x, gato->y + 1, data->parse))
 		gato->y += 1;
-	else if ((keysym == 100 || keysym == 65363) && !collision(data->collision_activate, gato->x + 1, gato->y))
+	else if ((keysym == 100 || keysym == 65363) && !collision(data->collision_activate, gato->x + 1, gato->y, data->parse))
 		gato->x += 1;
 	map_info.map_width = prev_x;
 	map_info.map_height = prev_y;
