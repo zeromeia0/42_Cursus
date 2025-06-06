@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 11:24:46 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/05 14:08:14 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/06 10:10:00 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,18 @@
 # include "minilibx-linux/mlx.h"
 # include <stdbool.h>
 # include "./my_printf/ft_printf.h"
+
+typedef struct s_parsing
+{
+	int	exit;
+	int	collect;
+	int collected;
+	int	start;
+	int	x;
+	int	y;
+	int	fill_y;
+	int	fill_x;
+}	t_parsing;
 
 typedef struct s_mlx_data
 {
@@ -62,16 +74,6 @@ typedef struct s_gato
 	int	y;
 }	t_gato;
 
-typedef struct s_parsing
-{
-	int	exit;
-	int	collect;
-	int	start;
-	int	x;
-	int	y;
-	int	fill_y;
-	int	fill_x;
-}	t_parsing;
 
 void	draw_map(t_mlx_data *data, t_create_map *drawMap, char	*type);
 void	*ft_calloc(size_t nmemb, size_t size);
@@ -91,6 +93,5 @@ int		ft_printf(const char *format, ...);
 int		valid_params(char **map);
 int		flood_fill(char **tab, int width, int height, int start_y, int start_x);	
 t_gato	*so_long(void);
-int game_exit(char **map, int x, int y);
 
 #endif

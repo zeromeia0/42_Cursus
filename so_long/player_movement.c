@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_movement.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 18:11:05 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/05 14:19:21 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/06 10:09:22 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,20 +78,5 @@ int	loop(void *param)
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, sprite->sprite_address, so_long()->x * 80, so_long()->y * 80);
 	mlx_destroy_image(data->mlx_ptr, sprite->sprite_address);
 	free(sprite);
-	return (1);
-}
-
-
-int game_exit(char **map, int x, int y)
-{
-	t_gato *cat_position;
-
-	cat_position = malloc(sizeof(t_gato));
-	if (!cat_position)
-		return (0);
-	x = cat_position->x;
-	y = cat_position->y;
-	if (map[y][x] == 'E')
-		exit(0);
 	return (1);
 }
