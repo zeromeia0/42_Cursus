@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 11:24:46 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/06 10:19:27 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/06 11:33:42 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int		get_map_height(char **map);
 int		keypress_to_walk(int keysym, void *param);
 int		loop(void *param);
 int		ft_printf(const char *format, ...);
-int		valid_params(char **map);
+int valid_params(char **map, t_parsing *parse);
 int		flood_fill(char **tab, int width, int height, int start_y, int start_x);	
 t_gato	*so_long(void);
 

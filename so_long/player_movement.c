@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 18:11:05 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/06 11:10:15 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/06 11:34:00 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,12 @@ bool	collision(char **map, int x, int y, t_parsing *parse)
 			exit(0);
 		else
 			ft_printf("Falta coletar as cenas\n");
+			
 	}
 	return (map[y][x] == '1');
 }
 
-int	keypress_to_walk(int keysym, void *param)
+int	keypress_to_walk(int keysym, void *param/* , t_create_map *mapa */)
 {
 	t_mlx_data		*data = (t_mlx_data *)param;
 	t_gato			*gato = so_long();
@@ -62,8 +63,10 @@ int	keypress_to_walk(int keysym, void *param)
 		gato->y += 1;
 	else if ((keysym == 100 || keysym == 65363) && !collision(data->collision_activate, gato->x + 1, gato->y, data->parse))
 		gato->x += 1;
+	
 	map_info.map_width = prev_x;
 	map_info.map_height = prev_y;
+/* 	if (mapa->new_map[mapa->map_height][mapa->map_width] != 'E') */
 	draw_map(data, &map_info, "./textures/carpet.xpm");
 	map_info.map_width = gato->x;
 	map_info.map_height = gato->y;
