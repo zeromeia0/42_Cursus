@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 14:52:54 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/06 11:16:24 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/09 11:55:00 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 int valid_params(char **map, t_parsing *parse)
 {
     char c;
-
     parse->y = 0;
+
     while (map[parse->y])
     {
         parse->x = 0;
@@ -39,5 +39,4 @@ int valid_params(char **map, t_parsing *parse)
         return (ft_printf("Esse mapa ta mal viado\n"), 0);
     return (1);
 }
-
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_movement.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 18:11:05 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/06 11:34:00 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/09 11:37:25 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,10 @@ int	handle_exit(int keysym, t_mlx_data *data)
 bool	collision(char **map, int x, int y, t_parsing *parse)
 {
 	if (map[y][x] == 'C')
+	{
 		parse->collected++;
+		map[y][x] = '0';
+	}
 	if (map[y][x] == 'E')
 	{
 		if (parse->collected == parse->collect)
@@ -66,13 +69,16 @@ int	keypress_to_walk(int keysym, void *param/* , t_create_map *mapa */)
 	
 	map_info.map_width = prev_x;
 	map_info.map_height = prev_y;
-/* 	if (mapa->new_map[mapa->map_height][mapa->map_width] != 'E') */
-	draw_map(data, &map_info, "./textures/carpet.xpm");
+	if (data->collision_activate[prev_y][prev_x] == 'E')
+		draw_map(data, &map_info, "./textures/house.xpm");
+	else
+		draw_map(data, &map_info, "./textures/carpet.xpm");		
 	map_info.map_width = gato->x;
 	map_info.map_height = gato->y;
 	draw_map(data, &map_info, "./textures/gatinho.xpm");
 	if (prev_x != gato->x || prev_y != gato->y)
 		ft_printf("Steps: %d\n", i++);
+	printf("%d\n%d\n", data->parse->collect, data->parse->collected);
 	handle_exit(keysym, data);
 	return (0);
 }
