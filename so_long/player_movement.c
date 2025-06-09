@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 18:11:05 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/09 11:37:25 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/09 12:39:39 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ int	keypress_to_walk(int keysym, void *param/* , t_create_map *mapa */)
 	draw_map(data, &map_info, "./textures/gatinho.xpm");
 	if (prev_x != gato->x || prev_y != gato->y)
 		ft_printf("Steps: %d\n", i++);
-	printf("%d\n%d\n", data->parse->collect, data->parse->collected);
 	handle_exit(keysym, data);
 	return (0);
 }

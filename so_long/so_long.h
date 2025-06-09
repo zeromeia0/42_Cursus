@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 11:24:46 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/09 12:22:53 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/09 13:09:45 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ int		ft_printf(const char *format, ...);
 int valid_params(char **map, t_parsing *parse);
 int		flood_fill(char **tab, int width, int height, int start_y, int start_x);	
 t_gato	*so_long(void);
+void	super_duper_hiper_free(void (*f)(char **), t_parsing *parse, t_mlx_data *data, t_create_map *new_map);
 int	ft_strncmp(const char *s1, const char *s2, size_t n);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 16:52:07 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/09 12:11:49 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/09 13:19:23 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,31 +102,36 @@ char	**realloc_map(char **old_map, int old_size, int new_size)
 	return (new_map);
 }
 
-int	get_map_height(char **map)
+int get_map_height(char **map)
 {
-	t_create_map	*map_data;
+	t_create_map *map_data;
+	int height;
 
-	map_data = ft_calloc(sizeof(t_create_map), 1);
+	map_data = ft_calloc(1, sizeof(t_create_map));
 	if (!map_data)
 		return (0);
 	while (map[map_data->map_height])
 		map_data->map_height++;
-	return (map_data->map_height);
+	height = map_data->map_height;
+	free(map_data);
+	return (height);
 }
 
-int	get_map_width(char **map)
+int get_map_width(char **map)
 {
-	t_create_map	*map_data;
+	t_create_map *map_data;
+	int width;
 
-	map_data = ft_calloc(sizeof(t_create_map), 1);
+	map_data = ft_calloc(1, sizeof(t_create_map));
 	if (!map_data)
 		return (0);
 	while (map[0][map_data->map_width])
 		map_data->map_width++;
 	map_data->map_width--;
-	return (map_data->map_width);
+	width = map_data->map_width;
+	free(map_data);
+	return (width);
 }
-
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
