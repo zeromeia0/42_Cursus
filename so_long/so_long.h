@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 11:24:46 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/06 11:33:42 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/09 12:11:55 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include "minilibx-linux/mlx.h"
 # include <stdbool.h>
 # include "./my_printf/ft_printf.h"
+#define CHECK_MAP_FILE ".ber"
 
 typedef struct s_parsing
 {
@@ -35,6 +36,7 @@ typedef struct s_parsing
 	int	y;
 	int	fill_y;
 	int	fill_x;
+	char *valid_map_file;
 }	t_parsing;
 
 typedef struct s_mlx_data
@@ -94,5 +96,6 @@ int		ft_printf(const char *format, ...);
 int valid_params(char **map, t_parsing *parse);
 int		flood_fill(char **tab, int width, int height, int start_y, int start_x);	
 t_gato	*so_long(void);
+int	ft_strncmp(const char *s1, const char *s2, size_t n);
 
 #endif
