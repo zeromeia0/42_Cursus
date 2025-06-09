@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 15:22:18 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/09 13:11:47 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/09 15:56:37 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,19 @@ void	free_map(char **map)
 	free(map);
 }
 
-void	super_duper_hiper_free(void (*f)(char **), t_parsing *parse, t_mlx_data *data, t_create_map *new_map)
+void	super_duper_hiper_free(void (*f)(char **), t_general *general)
 {
-	if (new_map && f && new_map->new_map)
-		f(new_map->new_map);
-	if (data && data->mlx_ptr)
+	if (general->general_create_map && f && general->general_create_map->new_map)
+		f(general->general_create_map->new_map);
+	if (general->general_mlx_data && general->general_mlx_data->mlx_ptr)
 	{
-		mlx_destroy_display(data->mlx_ptr);
-		free(data->mlx_ptr);
+		mlx_destroy_window(general->general_mlx_data->mlx_ptr, general->general_mlx_data->win_ptr);
+		mlx_destroy_display(general->general_mlx_data->mlx_ptr);
+		free(general->general_mlx_data->mlx_ptr);
 	}
-	free (parse);
-	free(new_map);
-	free(data);
+	free (general->general_parse);
+	free (general->general_create_map);
+	free (general->general_mlx_data);
+	free(general);
+	
 }

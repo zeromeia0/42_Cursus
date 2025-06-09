@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 18:11:05 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/09 12:39:39 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/09 15:59:16 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,29 +19,30 @@ t_gato	*so_long(void)
 	return (&gato_instance);
 }
 
-int	handle_exit(int keysym, t_mlx_data *data)
+int	handle_exit(int keysym, t_general *data)
 {
 	if (keysym == XK_Escape)
 	{
-		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
-		mlx_destroy_display(data->mlx_ptr);
-		free(data->mlx_ptr);
+		super_duper_hiper_free(free_map, data);
 		exit(0);
 	}
 	return (0);
 }
 
-bool	collision(char **map, int x, int y, t_parsing *parse)
+bool	collision(char **map, int x, int y, t_general *general)
 {
 	if (map[y][x] == 'C')
 	{
-		parse->collected++;
+		general->general_parse->collected++;
 		map[y][x] = '0';
 	}
 	if (map[y][x] == 'E')
 	{
-		if (parse->collected == parse->collect)
+		if (general->general_parse->collected == general->general_parse->collect)
+		{
+			super_duper_hiper_free(free_map, general);
 			exit(0);
+		}
 		else
 			ft_printf("Falta coletar as cenas\n");
 			
@@ -49,36 +50,37 @@ bool	collision(char **map, int x, int y, t_parsing *parse)
 	return (map[y][x] == '1');
 }
 
-int	keypress_to_walk(int keysym, void *param/* , t_create_map *mapa */)
+int	keypress_to_walk(int keysym, void *param)
 {
-	t_mlx_data		*data = (t_mlx_data *)param;
+
+	t_general *general = (t_general *)param;
 	t_gato			*gato = so_long();
 	t_create_map	map_info;
 	static int		i;
 	int				prev_x = gato->x;
 	int				prev_y = gato->y;
 
-	if ((keysym == 119 || keysym == 65362) && !collision(data->collision_activate, gato->x, gato->y - 1, data->parse))
+	if ((keysym == 119 || keysym == 65362) && !collision(general->general_mlx_data->collision_activate, gato->x, gato->y - 1, general))
 		gato->y -= 1;
-	else if ((keysym == 97 || keysym == 65361) && !collision(data->collision_activate, gato->x - 1, gato->y, data->parse))
+	else if ((keysym == 97 || keysym == 65361) && !collision(general->general_mlx_data->collision_activate, gato->x - 1, gato->y, general))
 		gato->x -= 1;
-	else if ((keysym == 115 || keysym == 65364) && !collision(data->collision_activate, gato->x, gato->y + 1, data->parse))
+	else if ((keysym == 115 || keysym == 65364) && !collision(general->general_mlx_data->collision_activate, gato->x, gato->y + 1, general))
 		gato->y += 1;
-	else if ((keysym == 100 || keysym == 65363) && !collision(data->collision_activate, gato->x + 1, gato->y, data->parse))
+	else if ((keysym == 100 || keysym == 65363) && !collision(general->general_mlx_data->collision_activate, gato->x + 1, gato->y, general))
 		gato->x += 1;
 	
 	map_info.map_width = prev_x;
 	map_info.map_height = prev_y;
-	if (data->collision_activate[prev_y][prev_x] == 'E')
-		draw_map(data, &map_info, "./textures/house.xpm");
+	if (general->general_mlx_data->collision_activate[prev_y][prev_x] == 'E')
+		draw_map(general->general_mlx_data, &map_info, "./textures/house.xpm");
 	else
-		draw_map(data, &map_info, "./textures/carpet.xpm");		
+		draw_map(general->general_mlx_data, &map_info, "./textures/carpet.xpm");		
 	map_info.map_width = gato->x;
 	map_info.map_height = gato->y;
-	draw_map(data, &map_info, "./textures/gatinho.xpm");
+	draw_map(general->general_mlx_data, &map_info, "./textures/gatinho.xpm");
 	if (prev_x != gato->x || prev_y != gato->y)
 		ft_printf("Steps: %d\n", i++);
-	handle_exit(keysym, data);
+	handle_exit(keysym, general);
 	return (0);
 }
 
