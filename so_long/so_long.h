@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 11:24:46 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/09 12:11:55 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/09 12:22:53 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct s_parsing
 	int	fill_y;
 	int	fill_x;
 	char *valid_map_file;
+	int width;
 }	t_parsing;
 
 typedef struct s_mlx_data

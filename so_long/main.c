@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 11:31:58 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/09 12:17:11 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/09 12:19:07 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,12 @@ int main(int argc, char *argv[])
     data->parse = parse;
     newMap->new_map = ft_open_map(argv[1]);
 	
-	
 	parse->valid_map_file = argv[1];
 	int len = ft_strlen(parse->valid_map_file);
 	if (len < 4 || ft_strncmp(parse->valid_map_file + (len - 4), ".ber", 4))
     	return (ft_printf("Mapa tem que ser um .ber\n"), 0);
 
-		
+
     if (!valid_params(newMap->new_map, parse))
         return (ft_printf("Mapa inválido\n"), 1);
     data->win_ptr = mlx_new_window(data->mlx_ptr, get_map_width(newMap->new_map) * 80, get_map_height(newMap->new_map) * 80, "So_Long");
