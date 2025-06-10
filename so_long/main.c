@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 11:31:58 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/10 10:51:56 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/10 11:43:34 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,39 +31,34 @@ int main(int argc, char *argv[])
 	general_tudo->general_mlx_data = ft_calloc(1, sizeof(t_mlx_data));
 	if (!general_tudo->general_mlx_data )
 		return (super_duper_hiper_free(free_map, general_tudo), 1);
+
+
+		
+	// TA DANDO B.O AQUI TBM
 	general_tudo->general_mlx_data->mlx_ptr = mlx_init();
 	if (!general_tudo->general_mlx_data->mlx_ptr)
 		return (super_duper_hiper_free(free_map, general_tudo), 1);	
 		
-		
 	general_tudo->general_create_map->new_map = ft_open_map(argv[1]);
 	general_tudo->general_parse->valid_map_file = argv[1];
-	printf("teste1\n");
-
-	
 	len = ft_strlen(general_tudo->general_parse->valid_map_file);
-	printf("teste2\n");
-	if (len < 4 || ft_strncmp(general_tudo->general_parse->valid_map_file + (len - 4), ".ber", 4))
+		if (len < 4 || ft_strncmp(general_tudo->general_parse->valid_map_file + (len - 4), ".ber", 4))
 		return (super_duper_hiper_free(free_map, general_tudo), ft_printf("Mapa tem que ser um .ber\n"), 1);
-	printf("teste3\n");
-	
-	/* POPR QUE CARALHOS ISSO TA DANDO ERRADO */
 	if (!valid_params(general_tudo->general_create_map->new_map, general_tudo->general_parse))
 		return (super_duper_hiper_free(free_map, general_tudo), ft_printf("Mapa inválido\n"), 1);
-		
-	printf("teste4\n");
 
-	
+		
+	// TA DANDO B.O AQUI TBM
 	general_tudo->general_mlx_data->win_ptr = mlx_new_window(general_tudo->general_mlx_data->mlx_ptr, get_map_width(general_tudo->general_create_map->new_map) * 80, get_map_height(general_tudo->general_create_map->new_map) * 80, "So_Long");
 	if (!general_tudo->general_mlx_data->win_ptr)
+	
 		return (super_duper_hiper_free(free_map, general_tudo), ft_printf("Erro ao criar a janela\n"), 1);
 	make_map(general_tudo->general_create_map, general_tudo->general_mlx_data);
 	general_tudo->general_mlx_data->collision_activate = general_tudo->general_create_map->new_map;
 	mlx_loop_hook(general_tudo->general_mlx_data->mlx_ptr, loop, general_tudo->general_mlx_data);
 	mlx_key_hook(general_tudo->general_mlx_data->win_ptr, keypress_to_walk, general_tudo);
 	mlx_loop(general_tudo->general_mlx_data->mlx_ptr);
-	mlx_destroy_window(general_tudo->general_mlx_data->mlx_ptr, general_tudo->general_mlx_data->win_ptr);
-	mlx_destroy_display(general_tudo->general_mlx_data->mlx_ptr);
+	super_duper_hiper_free(free_map, general_tudo);
 	return (0);
 }
 
