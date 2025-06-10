@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_movement.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 18:11:05 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/09 15:59:16 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/10 11:49:41 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ int	keypress_to_walk(int keysym, void *param)
 		gato->y += 1;
 	else if ((keysym == 100 || keysym == 65363) && !collision(general->general_mlx_data->collision_activate, gato->x + 1, gato->y, general))
 		gato->x += 1;
-	
 	map_info.map_width = prev_x;
 	map_info.map_height = prev_y;
 	if (general->general_mlx_data->collision_activate[prev_y][prev_x] == 'E')
