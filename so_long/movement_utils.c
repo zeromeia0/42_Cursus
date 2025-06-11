@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movement_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 08:42:41 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/11 08:47:15 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/11 18:10:02 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,19 @@ void	handle_move(int keysym, t_gato *gato,
 {
 	prev->x = gato->x;
 	prev->y = gato->y;
-	if ((keysym == 119 || keysym == 65362)
+	if ((keysym == XK_w || keysym == XK_Up)
 		&& !collision(general->gen_mlx_data->collision,
 			gato->x, gato->y - 1, general))
 		gato->y -= 1;
-	else if ((keysym == 97 || keysym == 65361)
+	else if ((keysym == XK_a || keysym == XK_Left)
 		&& !collision(general->gen_mlx_data->collision,
 			gato->x - 1, gato->y, general))
 		gato->x -= 1;
-	else if ((keysym == 115 || keysym == 65364)
+	else if ((keysym == XK_s || keysym == XK_Down)
 		&& !collision(general->gen_mlx_data->collision,
 			gato->x, gato->y + 1, general))
 		gato->y += 1;
-	else if ((keysym == 100 || keysym == 65363)
+	else if ((keysym == XK_d || keysym == XK_Right)
 		&& !collision(general->gen_mlx_data->collision,
 			gato->x + 1, gato->y, general))
 		gato->x += 1;

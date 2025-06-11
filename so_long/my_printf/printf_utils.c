@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 17:08:34 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/05/26 17:09:37 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/11 17:36:36 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	ft_print_dec_int_number(int nb)
 	free(str);
 	return (len);
 }
+
 int	ft_low_hexa(unsigned int num)
 {
 	t_hexa	*v;
@@ -85,6 +86,7 @@ int	ft_up_hexa(unsigned int num)
 	free(v);
 	return (count);
 }
+
 int	ft_print_ptr(void *ptr)
 {
 	t_hexa	*var;

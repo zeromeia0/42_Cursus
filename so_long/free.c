@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 15:22:18 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/11 09:01:02 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/11 17:53:19 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,15 @@ void	free_map(char **map)
 	free(map);
 }
 
-void	super_duper_hiper_free(void (*f)(char **), t_general *gen)
+int	super_duper_hiper_free(void)
 {
+	t_general	*gen;
+
+	gen = so_long_tudo();
 	if (!gen)
-		return ;
-	if (f && gen->gen_create_map
-		&& gen->gen_create_map->new_map)
-		f(gen->gen_create_map->new_map);
+		exit(EXIT_FAILURE);
+	if (gen->gen_create_map->new_map)
+		free_map(gen->gen_create_map->new_map);
 	if (gen->gen_mlx_data)
 	{
 		if (gen->gen_mlx_data->win_ptr && gen->gen_mlx_data->mlx_ptr)
@@ -45,15 +47,12 @@ void	super_duper_hiper_free(void (*f)(char **), t_general *gen)
 	free(gen->gen_parse);
 	free(gen->gen_create_map);
 	free(gen->gen_mlx_data);
-	free(gen);
+	exit (EXIT_SUCCESS);
 }
 
-int	handle_exit(int keysym, t_general *data)
+int	handle_exit(int keysym)
 {
 	if (keysym == XK_Escape)
-	{
-		super_duper_hiper_free(free_map, data);
-		exit(0);
-	}
+		super_duper_hiper_free();
 	return (0);
 }

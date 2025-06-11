@@ -3,61 +3,62 @@
 /*                                                        :::      ::::::::   */
 /*   flood_fill.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 17:26:40 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/04 15:24:17 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/11 17:35:32 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static void	fill(char **tab, int width, int height, int row, int col)
+static void	fill(char **tab, t_flood_fill pos, int y, int x)
 {
-	if (row < 0 || col < 0 || row >= height || col >= width)
+	if (y < 0 || x < 0 || y >= pos.height || x >= pos.width)
 		return ;
-	if (tab[row][col] != '0' && tab[row][col] != 'C' && tab[row][col] != 'E' && tab[row][col] != 'P')
+	if (tab[y][x] != '0' && tab[y][x] != 'C'
+		&& tab[y][x] != 'E' && tab[y][x] != 'P')
 		return ;
-	tab[row][col] = 'V';
-	fill(tab, width, height, row - 1, col);
-	fill(tab, width, height, row + 1, col);
-	fill(tab, width, height, row, col - 1);
-	fill(tab, width, height, row, col + 1);
+	tab[y][x] = 'V';
+	fill(tab, pos, y - 1, x);
+	fill(tab, pos, y + 1, x);
+	fill(tab, pos, y, x - 1);
+	fill(tab, pos, y, x + 1);
 }
 
-int	flood_fill(char **tab, int width, int height, int start_y, int start_x)
+int	flood_fill(char **tab, t_flood_fill pos, int y, int x)
 {
-	int	y;
-	int	x;
+	int	i;
+	int	j;
 
-	y = 0;
-	fill(tab, width, height, start_y, start_x);
-	while (tab[y])
+	fill(tab, pos, y, x);
+	i = 0;
+	while (tab[i])
 	{
-		x = 0;
-		while (tab[y][x])
+		j = 0;
+		while (tab[i][j])
 		{
-			if (tab[y][x] == 'C' || tab[y][x] == 'E')
-				return (ft_printf("Nao consegue pegar todos os coletaveis ou saida ta fechada\n"), 0);
-			x++;
+			if (tab[i][j] == 'C' || tab[i][j] == 'E')
+				return (ft_printf("Can't pegar collect ou saida ta fechada\n"),
+					0);
+			j++;
 		}
-		y++;
+		i++;
 	}
 	return (1);
 }
 
 int	valid_path(char **map)
 {
-	int		width;
-	int		height;
-	char	**copy;
+	char			**copy;
+	t_flood_fill	fill;
 
-	width = get_map_width(map);
-	height = get_map_height(map);
+	fill.width = get_map_width(map);
+	fill.height = get_map_height(map);
 	copy = copy_map(map);
 	if (!copy)
 		return (ft_printf("Error: Falha ao copiar o mapa\n"), 0);
-	if (!flood_fill(copy, width, height, so_long()->y, so_long()->x))
+	if (!flood_fill(copy, fill, so_long()->y, so_long()->x))
 	{
 		free_map(copy);
 		return (0);
@@ -72,14 +73,14 @@ char	**copy_map(char **map)
 	int		width;
 	char	**copy;
 
-	i = 0;
+	i = -1;
 	while (map[i])
 		i++;
 	copy = malloc(sizeof(char *) * (i + 1));
 	if (!copy)
 		return (NULL);
-	i = 0;
-	while (map[i])
+	i = -1;
+	while (map[++i])
 	{
 		width = ft_strlen(map[i]);
 		copy[i] = malloc(sizeof(char) * (width + 1));
@@ -87,11 +88,9 @@ char	**copy_map(char **map)
 		{
 			while (--i >= 0)
 				free(copy[i]);
-			free(copy);
-			return (NULL);
+			return (free(copy), NULL);
 		}
 		ft_strlcpy(copy[i], map[i], width + 1);
-		i++;
 	}
 	copy[i] = NULL;
 	return (copy);

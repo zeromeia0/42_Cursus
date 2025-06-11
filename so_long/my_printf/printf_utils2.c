@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 17:09:56 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/05/26 17:28:53 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/11 17:37:13 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	ft_print_str(const char *str)
 	ft_putstr_fd(str);
 	return (count);
 }
+
 unsigned int	ft_print_unsigned_int(int nb)
 {
 	unsigned int	unb;
@@ -39,6 +40,7 @@ unsigned int	ft_print_unsigned_int(int nb)
 	count += write(1, &digit, 1);
 	return (count);
 }
+
 int	ft_count(int i, va_list args, const char *key)
 {
 	int	count;
