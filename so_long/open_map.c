@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 11:24:39 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/05 14:00:16 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/11 06:42:32 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,38 +14,37 @@
 
 char	**ft_open_map(char *file)
 {
-	t_create_map	*create_map;
+	t_create_map	*map;
+	char			**result;
 
-	create_map = ft_calloc(sizeof(t_create_map), 1);
-	if (!create_map)
+	map = ft_calloc(1, sizeof(t_create_map));
+	if (!map)
 		return (NULL);
-	create_map->lines = 0;
-	create_map->map_fd = open(file, O_RDONLY);
-	if (create_map->map_fd < 3)
-		return (NULL);
-	create_map->new_map = ft_calloc(sizeof(char *), 1);
-	if (!create_map->new_map)
-		return (NULL);
-	while ((create_map->get_gnl_null = get_next_line(create_map->map_fd)))
+	map->lines = 0;
+	map->map_fd = open(file, O_RDONLY);
+	if (map->map_fd < 3)
+		return (free(map), NULL);
+	map->new_map = ft_calloc(1, sizeof(char *));
+	if (!map->new_map)
+		return (close(map->map_fd), free(map), NULL);
+	map->get_gnl_null = get_next_line(map->map_fd);
+	while (map->get_gnl_null)
 	{
-		create_map->new_map = realloc_map(create_map->new_map, create_map->lines, create_map->lines + 1);
-		if (!create_map->new_map)
-		{
-			free(create_map->get_gnl_null);
-			close(create_map->map_fd);
-			return (NULL);
-		}
-		create_map->new_map[create_map->lines++] = create_map->get_gnl_null;
+		map->new_map = realloc_map(map->new_map, map->lines, map->lines + 1);
+		if (!map->new_map)
+			return (free(map->get_gnl_null),
+				close(map->map_fd), free(map), NULL);
+		map->new_map[map->lines++] = map->get_gnl_null;
+		map->get_gnl_null = get_next_line(map->map_fd);
 	}
-	close (create_map->map_fd);
-	char **result = create_map->new_map;
-	free(create_map);
-	return (result);
+	result = map->new_map;
+	return (close(map->map_fd), free(map), result);
 }
 
 unsigned int	*get_sprite_pixel(t_sprite_data *data, int x, int y)
 {
-	return ((unsigned int *)(data->address + (y * data->line_len + x * (data->bpp / 8))));
+	return ((unsigned int *)(data->address
+		+ (y * data->line_len + x * (data->bpp / 8))));
 }
 
 void	draw_map(t_mlx_data *data, t_create_map *drawMap, char	*type)
@@ -54,10 +53,15 @@ void	draw_map(t_mlx_data *data, t_create_map *drawMap, char	*type)
 
 	(void)drawMap;
 	texture = ft_calloc(sizeof(t_sprite_data), 1);
-	texture->address = mlx_xpm_file_to_image(data->mlx_ptr, type, &texture->width, &texture->height);
-	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, texture->address, drawMap->map_width * 80, drawMap->map_height * 80);
+	texture->address = mlx_xpm_file_to_image(data->mlx_ptr,
+			type,
+			&texture->width,
+			&texture->height);
+	mlx_put_image_to_window(data->mlx_ptr,
+		data->win_ptr,
+		texture->address,
+		drawMap->map_width * 80,
+		drawMap->map_height * 80);
 	mlx_destroy_image(data->mlx_ptr, texture->address);
 	free(texture);
 }
-
-
