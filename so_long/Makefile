@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+         #
+#    By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/24 11:29:36 by vivaz-ca          #+#    #+#              #
-#    Updated: 2025/06/02 19:18:04 by vivaz-ca         ###   ########.fr        #
+#    Updated: 2025/06/11 08:43:31 by vivaz-ca         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ TEXTURE_DIR = ../textures
 PRINTF_DIR = ./my_printf
 
 SRC = \
-	$(SRCDIR)/main.c open_map.c utils.c player_movement.c create_map.c parsing.c free.c flood_fill.c \
+	$(SRCDIR)/main.c open_map.c utils.c player_movement.c create_map.c parsing.c free.c flood_fill.c movement_utils.c \
 	$(GNL_DIR)/get_next_line.c \
 	$(GNL_DIR)/get_next_line_utils.c \
 	$(PRINTF_DIR)/printf_utils.c \

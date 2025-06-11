@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 11:24:46 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/11 08:10:26 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/11 08:43:52 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,11 @@ typedef struct s_general{
 	t_gato			*gen_gato;
 }	t_general;
 
+typedef struct s_position {
+	int x;
+	int y;
+} t_position;
+
 
 void	draw_map(t_mlx_data *data, t_create_map *drawMap, char	*type);
 void	*ft_calloc(size_t nmemb, size_t size);
@@ -108,5 +113,8 @@ int		flood_fill(char **tab, int width, int height, int start_y, int start_x);
 t_gato	*so_long(void);
 void	super_duper_hiper_free(void (*f)(char **), t_general *general);
 int	ft_strncmp(const char *s1, const char *s2, size_t n);
+void	redraw_map_tiles(t_general *general, t_position prev, t_gato *gato);
+void	handle_move(int keysym, t_gato *gato,
+	t_general *general, t_position *prev);
 
 #endif
