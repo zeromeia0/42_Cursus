@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 11:31:58 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/11 18:30:22 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/11 20:22:41 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	main(int argc, char *argv[])
 			".ber", 4))
 		return (ft_printf("Mapa tem que ser um .ber\n"),
 			super_duper_hiper_free(), 1);
-	if (!valid_params(so_long_tudo()->gen_create_map->new_map, so_long_tudo()->gen_parse))
+	if (!valid_params(so_long_tudo()->gen_create_map->new_map, so_long_tudo()->gen_parse) || !valid_path(so_long_tudo()->gen_create_map->new_map))
 		return (ft_printf("Mapa inválido\n"), super_duper_hiper_free(), 1);
 	so_long_tudo()->gen_mlx_data->win_ptr = mlx_new_window(so_long_tudo()->gen_mlx_data->mlx_ptr,
 			(get_map_width(so_long_tudo()->gen_create_map->new_map) * 80),
