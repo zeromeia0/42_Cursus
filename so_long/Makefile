@@ -6,21 +6,21 @@
 #    By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/24 11:29:36 by vivaz-ca          #+#    #+#              #
-#    Updated: 2025/06/11 08:43:31 by vivaz-ca         ###   ########.fr        #
+#    Updated: 2025/06/11 08:58:45 by vivaz-ca         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = so_long
 SRCDIR = .
 OBJDIR = objs
-MLXDIR = ../minilibx-linux
+MLXDIR = ../.minilibx-linux
 GNL_DIR = ./gnl
 MAP_DIR = ../maps
 TEXTURE_DIR = ../textures
 PRINTF_DIR = ./my_printf
 
 SRC = \
-	$(SRCDIR)/main.c open_map.c utils.c player_movement.c create_map.c parsing.c free.c flood_fill.c movement_utils.c \
+	$(SRCDIR)/main.c utils.c utils2.c player_movement.c create_map.c parsing.c free.c flood_fill.c movement_utils.c \
 	$(GNL_DIR)/get_next_line.c \
 	$(GNL_DIR)/get_next_line_utils.c \
 	$(PRINTF_DIR)/printf_utils.c \

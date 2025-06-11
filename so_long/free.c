@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 15:22:18 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/11 08:09:34 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/11 09:01:02 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,14 @@ void	super_duper_hiper_free(void (*f)(char **), t_general *gen)
 	free(gen->gen_create_map);
 	free(gen->gen_mlx_data);
 	free(gen);
+}
+
+int	handle_exit(int keysym, t_general *data)
+{
+	if (keysym == XK_Escape)
+	{
+		super_duper_hiper_free(free_map, data);
+		exit(0);
+	}
+	return (0);
 }

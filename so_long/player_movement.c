@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 18:11:05 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/11 08:43:20 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/11 09:00:18 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,6 @@ t_gato	*so_long(void)
 	static t_gato	gato_instance;
 
 	return (&gato_instance);
-}
-
-int	handle_exit(int keysym, t_general *data)
-{
-	if (keysym == XK_Escape)
-	{
-		super_duper_hiper_free(free_map, data);
-		exit(0);
-	}
-	return (0);
 }
 
 bool	collision(char **map, int x, int y, t_general *general)
