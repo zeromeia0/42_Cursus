@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 15:22:18 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/10 10:55:13 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/11 08:09:34 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,24 +24,26 @@ void	free_map(char **map)
 	free(map);
 }
 
-void super_duper_hiper_free(void (*f)(char **), t_general *general)
+void	super_duper_hiper_free(void (*f)(char **), t_general *gen)
 {
-    if (!general)
-        return;
-    if (f && general->general_create_map && general->general_create_map->new_map)
-        f(general->general_create_map->new_map);
-    if (general->general_mlx_data)
-    {
-        if (general->general_mlx_data->win_ptr && general->general_mlx_data->mlx_ptr)
-            mlx_destroy_window(general->general_mlx_data->mlx_ptr, general->general_mlx_data->win_ptr);
-        if (general->general_mlx_data->mlx_ptr)
-        {
-            mlx_destroy_display(general->general_mlx_data->mlx_ptr);
-            free(general->general_mlx_data->mlx_ptr);
-        }
-    }
-    free(general->general_parse);
-    free(general->general_create_map);
-    free(general->general_mlx_data);
-    free(general);
+	if (!gen)
+		return ;
+	if (f && gen->gen_create_map
+		&& gen->gen_create_map->new_map)
+		f(gen->gen_create_map->new_map);
+	if (gen->gen_mlx_data)
+	{
+		if (gen->gen_mlx_data->win_ptr && gen->gen_mlx_data->mlx_ptr)
+			mlx_destroy_window(gen->gen_mlx_data->mlx_ptr,
+				gen->gen_mlx_data->win_ptr);
+		if (gen->gen_mlx_data->mlx_ptr)
+		{
+			mlx_destroy_display(gen->gen_mlx_data->mlx_ptr);
+			free(gen->gen_mlx_data->mlx_ptr);
+		}
+	}
+	free(gen->gen_parse);
+	free(gen->gen_create_map);
+	free(gen->gen_mlx_data);
+	free(gen);
 }
