@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 17:26:40 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/11 17:35:32 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/11 20:43:57 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,25 +48,6 @@ int	flood_fill(char **tab, t_flood_fill pos, int y, int x)
 	return (1);
 }
 
-int	valid_path(char **map)
-{
-	char			**copy;
-	t_flood_fill	fill;
-
-	fill.width = get_map_width(map);
-	fill.height = get_map_height(map);
-	copy = copy_map(map);
-	if (!copy)
-		return (ft_printf("Error: Falha ao copiar o mapa\n"), 0);
-	if (!flood_fill(copy, fill, so_long()->y, so_long()->x))
-	{
-		free_map(copy);
-		return (0);
-	}
-	free_map(copy);
-	return (1);
-}
-
 char	**copy_map(char **map)
 {
 	int		i;
@@ -94,4 +75,24 @@ char	**copy_map(char **map)
 	}
 	copy[i] = NULL;
 	return (copy);
+}
+
+int	valid_path(char **map)
+{
+	char			**copy;
+	t_flood_fill	fill;
+
+	
+	fill.width = get_map_width(map);
+	fill.height = get_map_height(map);
+	copy = copy_map(map);
+	if (!copy)
+		return (ft_printf("Error: Falha ao copiar o mapa\n"), 0);
+	if (!flood_fill(copy, fill, so_long()->y, so_long()->x))
+	{
+		free_map(copy);
+		return (0);
+	}
+	free_map(copy);
+	return (1);
 }

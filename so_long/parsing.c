@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 14:52:54 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/11 06:51:32 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/11 20:38:42 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ int	check_shape(char **map, t_parsing *parse)
 {
 	int	current_len;
 
+	if (!map || !map[0])
+		return (ft_printf("O mapa tem que existir\n"), 0);
 	parse->width = ft_strlen(map[0]);
 	if (map[0][parse->width - 1] == '\n')
 		parse->width--;
