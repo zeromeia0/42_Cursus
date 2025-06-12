@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 17:26:40 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/11 20:43:57 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/12 15:28:31 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ char	**copy_map(char **map)
 	int		width;
 	char	**copy;
 
-	i = -1;
+	i = 0;
 	while (map[i])
 		i++;
 	copy = malloc(sizeof(char *) * (i + 1));
@@ -77,18 +77,44 @@ char	**copy_map(char **map)
 	return (copy);
 }
 
+void	find_player_position(char **map, int *x, int *y)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (map[i][j] == 'P')
+			{
+				*x = j;
+				*y = i;
+				return ;
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
 int	valid_path(char **map)
 {
 	char			**copy;
 	t_flood_fill	fill;
+	int				player_x;
+	int				player_y;
 
-	
 	fill.width = get_map_width(map);
 	fill.height = get_map_height(map);
 	copy = copy_map(map);
 	if (!copy)
-		return (ft_printf("Error: Falha ao copiar o mapa\n"), 0);
-	if (!flood_fill(copy, fill, so_long()->y, so_long()->x))
+		return (ft_printf("Error: Falha ao copiar o mapa\n"),
+		super_duper_hiper_free(), 0);
+	find_player_position(copy, &player_x, &player_y);
+	if (!flood_fill(copy, fill, player_y, player_x))
 	{
 		free_map(copy);
 		return (0);

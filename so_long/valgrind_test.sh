@@ -1,2 +1,2 @@
-norminette create_map.c flood_fill.c free.c movement_utils.c parsing.c player_movement.c utils.c utils2.c 
+# norminette create_map.c flood_fill.c free.c movement_utils.c parsing.c player_movement.c utils.c utils2.c 
 valgrind --leak-check=full --track-fds=yes --show-leak-kinds=all --track-origins=yes ./so_long maps/subject_map.ber
