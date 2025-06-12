@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 18:11:05 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/12 17:53:40 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/12 18:08:01 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	keypress_to_walk(int keysym, void *param)
 	general = (t_general *)param;
 	gato = so_long();
 	mlx_hook(general->gen_mlx_data->win_ptr, DestroyNotify,
-		KeyPressMask, super_duper_hiper_free, general);	
+		KeyPressMask, super_duper_hiper_free, general);
 	handle_move(keysym, gato, general, &prev);
 	redraw_map_tiles(general, prev, gato);
 	if (prev.x != gato->x || prev.y != gato->y)
