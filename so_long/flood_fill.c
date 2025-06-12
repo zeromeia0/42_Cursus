@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 17:26:40 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/12 15:28:31 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/12 15:36:25 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ int	valid_path(char **map)
 	copy = copy_map(map);
 	if (!copy)
 		return (ft_printf("Error: Falha ao copiar o mapa\n"),
-		super_duper_hiper_free(), 0);
+			super_duper_hiper_free(), 0);
 	find_player_position(copy, &player_x, &player_y);
 	if (!flood_fill(copy, fill, player_y, player_x))
 	{
