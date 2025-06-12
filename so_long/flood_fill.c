@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 17:26:40 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/12 15:36:25 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/12 17:46:27 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,7 @@ int	flood_fill(char **tab, t_flood_fill pos, int y, int x)
 		while (tab[i][j])
 		{
 			if (tab[i][j] == 'C' || tab[i][j] == 'E')
-				return (ft_printf("Can't pegar collect ou saida ta fechada\n"),
-					0);
+				return (ft_printf(EXIT_COLECT_ERROR), 0);
 			j++;
 		}
 		i++;
@@ -111,7 +110,7 @@ int	valid_path(char **map)
 	fill.height = get_map_height(map);
 	copy = copy_map(map);
 	if (!copy)
-		return (ft_printf("Error: Falha ao copiar o mapa\n"),
+		return (ft_printf(COPY_ERROR),
 			super_duper_hiper_free(), 0);
 	find_player_position(copy, &player_x, &player_y);
 	if (!flood_fill(copy, fill, player_y, player_x))

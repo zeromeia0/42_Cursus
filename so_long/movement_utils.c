@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 08:42:41 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/11 18:10:02 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/12 18:02:39 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,10 @@ void	redraw_map_tiles(t_general *general, t_position prev, t_gato *gato)
 	map_info.map_width = prev.x;
 	map_info.map_height = prev.y;
 	if (general->gen_mlx_data->collision[prev.y][prev.x] == 'E')
-		draw_map(general->gen_mlx_data, &map_info, "./textures/house.xpm");
+		draw_map(general->gen_mlx_data, &map_info, HOUSE);
 	else
-		draw_map(general->gen_mlx_data, &map_info, "./textures/carpet.xpm");
+		draw_map(general->gen_mlx_data, &map_info, CARPET);
 	map_info.map_width = gato->x;
 	map_info.map_height = gato->y;
-	draw_map(general->gen_mlx_data, &map_info, "./textures/gatinho.xpm");
+	draw_map(general->gen_mlx_data, &map_info, GATINHO);
 }

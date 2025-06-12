@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 17:36:08 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/12 15:25:07 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/12 18:04:36 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,18 @@ void	make_map(t_create_map *map, t_mlx_data *data)
 		while (map->new_map[map->map_height][map->map_width])
 		{
 			if (map->new_map[map->map_height][map->map_width] == '1')
-				draw_map(data, map, "./textures/tijolinho.xpm");
+				draw_map(data, map, TIJOLO);
 			else if (map->new_map[map->map_height][map->map_width] == '0')
-				draw_map(data, map, "./textures/carpet.xpm");
+				draw_map(data, map, CARPET);
 			else if (map->new_map[map->map_height][map->map_width] == 'E')
-				draw_map(data, map, "./textures/house.xpm");
+				draw_map(data, map, HOUSE);
 			else if (map->new_map[map->map_height][map->map_width] == 'P')
 			{
 				so_long()->x = map->map_width;
 				so_long()->y = map->map_height;
 			}
 			else if (map->new_map[map->map_height][map->map_width] == 'C')
-				draw_map(data, map, "./textures/rato.xpm");
+				draw_map(data, map, RATO);
 			map->map_width++;
 		}
 		map->map_height++;

@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 11:24:46 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/11 20:32:20 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/12 18:04:27 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,20 @@
 # include ".minilibx-linux/mlx.h"
 # include <stdbool.h>
 # include "./my_printf/ft_printf.h"
+# define HOUSE "./textures/house.xpm"
+# define CARPET "./textures/carpet.xpm"
+# define GATINHO "./textures/gatinho.xpm"
+# define TIJOLO "./textures/tijolinho.xpm"
+# define RATO "./textures/rato.xpm"
+# define EXIT_COLECT_ERROR "Error\nNão foi possível coletar todos os itens ou a saída está inacessível.\n"
+# define COPY_ERROR "Error\nFalha ao copiar o mapa.\n"
+# define POR_MAPA "Error\nMapa ausente ou inválido. Verifique o arquivo informado.\n"
+# define B0 "Error\nOcorreu um problema ao criar o mapa.\n"
+# define MEM_ISSUE "Error\nFalha de alocação de memória.\n"
+# define ERROR_OPEN_MAP "Error\nNão foi possível abrir o arquivo do mapa.\n"
+# define BER "Error\nO mapa deve ter a extensão .ber.\n"
+# define WIN_ERROR "Error\nNão foi possível criar a janela gráfica.\n"
+# define INUTIL "Error\nO programa encontrou vários problemas de configuração.\n"
 
 typedef struct s_parsing
 {
