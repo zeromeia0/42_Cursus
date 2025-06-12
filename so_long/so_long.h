@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 11:24:46 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/12 18:08:29 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/12 18:57:22 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,21 +25,31 @@
 # include ".minilibx-linux/mlx.h"
 # include <stdbool.h>
 # include "./my_printf/ft_printf.h"
+// Defines for sprites
 # define HOUSE "./textures/house.xpm"
 # define CARPET "./textures/carpet.xpm"
 # define GATINHO "./textures/gatinho.xpm"
 # define TIJOLO "./textures/tijolinho.xpm"
 # define RATO "./textures/rato.xpm"
-# define EXIT_COLECT_ERROR "Error\nNão foi possível coletar todos os \
-itens ou a saída está inacessível.\n"
+// Defines for error messages
 # define COPY_ERROR "Error\nFalha ao copiar o mapa.\n"
-# define POR_MAPA "Error\nMapa ausente ou inválido. \
-Verifique o arquivo informado.\n"
 # define B0 "Error\nOcorreu um problema ao criar o mapa.\n"
 # define MEM_ISSUE "Error\nFalha de alocação de memória.\n"
 # define ERROR_OPEN_MAP "Error\nNão foi possível abrir o arquivo do mapa.\n"
 # define BER "Error\nO mapa deve ter a extensão .ber.\n"
 # define WIN_ERROR "Error\nNão foi possível criar a janela gráfica.\n"
+# define MAP_EXIST "Error\nO mapa tem que existir\n"
+# define RECTANGLE "Error\nMapa não é retangular\n"
+# define SIDES_CLOSED "Error\nMapa não está cercado por '1' nas laterais\n"
+# define UPPER_WALL "Error\nParede de cima não está fechada com '1'\n"
+# define LOWER_WALL "Error\nParede de baixo não está fechada com '1'\n"
+# define BAD_MAP "Error\nEsse mapa tá mal cria\n"
+# define INVALID "Error\nMapa inválido\n"
+// Big defines
+# define POR_MAPA "Error\nMapa ausente ou inválido. \
+Verifique o arquivo informado.\n"
+# define EXIT_COLECT_ERROR "Error\nNão foi possível coletar todos os \
+itens ou a saída está inacessível.\n"
 # define INUTIL "Error\nO programa encontrou vários \
 problemas de configuração.\n"
 
@@ -55,7 +65,7 @@ typedef struct s_parsing
 	int		fill_x;
 	char	*valid_map_file;
 	int		width;
-}	t_parsing;
+}	t_parse;
 
 typedef struct s_mlx_data
 {
@@ -99,11 +109,11 @@ typedef struct s_gato
 
 typedef struct s_general
 {
-	t_parsing		*gen_parse;
-	t_create_map	*gen_create_map;
-	t_mlx_data		*gen_mlx_data;
+	t_parse			*g_parse;
+	t_create_map	*g_mk_map;
+	t_mlx_data		*g_data;
 	t_gato			*gen_gato;
-}	t_general;
+}	t_gen;
 
 typedef struct s_position
 {
@@ -117,14 +127,16 @@ typedef struct s_flood_fill
 	int	col;
 	int	height;
 	int	width;
-}	t_flood_fill;
+}	t_fill;
 
-void		draw_map(t_mlx_data *data, t_create_map *drawMap, char	*type);
+void		draw_map(t_mlx_data *data, t_create_map *draw_map, char	*type);
 void		*ft_calloc(size_t nmemb, size_t size);
 void		ft_bzero(void *s, size_t n);
 void		make_map(t_create_map *newMap, t_mlx_data *data);
 void		free_map(char **map);
 void		*ft_memcpy(void *dest, const void *src, size_t n);
+void		handle_move(int keysym, t_gato *gato,
+				t_gen	*general, t_position *prev);
 char		**realloc_map(char **old_map, int old_size, int new_size);
 char		**ft_open_map(char *file);
 char		**copy_map(char **map);
@@ -134,17 +146,15 @@ int			get_map_height(char **map);
 int			keypress_to_walk(int keysym, void *param);
 int			loop(void *param);
 int			ft_printf(const char *format, ...);
-int			valid_params(char **map, t_parsing *parse);
-int			flood_fill(char **tab, t_flood_fill pos, int y, int x);
+int			valid_params(char **map, t_parse *parse);
+int			flood_fill(char **tab, t_fill pos, int y, int x);
 int			handle_exit(int keysym);
-t_gato		*so_long(void);
 int			super_duper_hiper_free(void);
 int			ft_strncmp(const char *s1, const char *s2, size_t n);
-void		redraw_map_tiles(t_general *general, t_position prev, t_gato *gato);
-bool		collision(char **map, int x, int y, t_general *general);
-void		handle_move(int keysym, t_gato *gato,
-				t_general	*general, t_position *prev);
-t_general	*so_long_tudo(void);
 int			valid_path(char **map);
+void		redraw_map_tiles(t_gen *general, t_position prev, t_gato *gato);
+bool		collision(char **map, int x, int y, t_gen *general);
+t_gato		*so_long(void);
+t_gen		*so_long_tudo(void);
 
 #endif

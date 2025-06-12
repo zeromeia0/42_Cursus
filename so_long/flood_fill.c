@@ -6,13 +6,13 @@
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 17:26:40 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/12 17:46:27 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/12 18:44:51 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static void	fill(char **tab, t_flood_fill pos, int y, int x)
+static void	fill(char **tab, t_fill pos, int y, int x)
 {
 	if (y < 0 || x < 0 || y >= pos.height || x >= pos.width)
 		return ;
@@ -26,7 +26,7 @@ static void	fill(char **tab, t_flood_fill pos, int y, int x)
 	fill(tab, pos, y, x + 1);
 }
 
-int	flood_fill(char **tab, t_flood_fill pos, int y, int x)
+int	flood_fill(char **tab, t_fill pos, int y, int x)
 {
 	int	i;
 	int	j;
@@ -102,7 +102,7 @@ void	find_player_position(char **map, int *x, int *y)
 int	valid_path(char **map)
 {
 	char			**copy;
-	t_flood_fill	fill;
+	t_fill			fill;
 	int				player_x;
 	int				player_y;
 

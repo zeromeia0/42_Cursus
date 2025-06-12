@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 15:22:18 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/12 17:51:02 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/12 18:41:02 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,27 +26,27 @@ void	free_map(char **map)
 
 int	super_duper_hiper_free(void)
 {
-	t_general	*gen;
+	t_gen	*gen;
 
 	gen = so_long_tudo();
 	if (!gen)
 		exit(EXIT_FAILURE);
-	if (gen->gen_create_map->new_map)
-		free_map(gen->gen_create_map->new_map);
-	if (gen->gen_mlx_data)
+	if (gen->g_mk_map->new_map)
+		free_map(gen->g_mk_map->new_map);
+	if (gen->g_data)
 	{
-		if (gen->gen_mlx_data->win_ptr && gen->gen_mlx_data->mlx_ptr)
-			mlx_destroy_window(gen->gen_mlx_data->mlx_ptr,
-				gen->gen_mlx_data->win_ptr);
-		if (gen->gen_mlx_data->mlx_ptr)
+		if (gen->g_data->win_ptr && gen->g_data->mlx_ptr)
+			mlx_destroy_window(gen->g_data->mlx_ptr,
+				gen->g_data->win_ptr);
+		if (gen->g_data->mlx_ptr)
 		{
-			mlx_destroy_display(gen->gen_mlx_data->mlx_ptr);
-			free(gen->gen_mlx_data->mlx_ptr);
+			mlx_destroy_display(gen->g_data->mlx_ptr);
+			free(gen->g_data->mlx_ptr);
 		}
 	}
-	free(gen->gen_parse);
-	free(gen->gen_create_map);
-	free(gen->gen_mlx_data);
+	free(gen->g_parse);
+	free(gen->g_mk_map);
+	free(gen->g_data);
 	exit (EXIT_SUCCESS);
 }
 

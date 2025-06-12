@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 18:11:05 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/12 18:08:01 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/12 18:44:58 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,17 @@ t_gato	*so_long(void)
 	return (&gato_instance);
 }
 
-bool	collision(char **map, int x, int y, t_general *general)
+bool	collision(char **map, int x, int y, t_gen *general)
 {
 	if (map[y][x] == 'C')
 	{
-		general->gen_parse->collected++;
+		general->g_parse->collected++;
 		map[y][x] = '0';
 	}
 	if (map[y][x] == 'E')
 	{
-		if (general->gen_parse->collected
-			== general->gen_parse->collect)
+		if (general->g_parse->collected
+			== general->g_parse->collect)
 			super_duper_hiper_free();
 		else
 			ft_printf("Falta coletar as cenas\n");
@@ -39,16 +39,16 @@ bool	collision(char **map, int x, int y, t_general *general)
 
 int	keypress_to_walk(int keysym, void *param)
 {
-	t_general	*general;
+	t_gen		*general;
 	t_gato		*gato;
 	t_position	prev;
 	static int	i;
 
-	general = (t_general *)param;
+	general = (t_gen *)param;
 	gato = so_long();
-	mlx_hook(general->gen_mlx_data->win_ptr, DestroyNotify,
-		KeyPressMask, super_duper_hiper_free, general);
 	handle_move(keysym, gato, general, &prev);
+	mlx_hook(general->g_data->win_ptr, DestroyNotify,
+		KeyPressMask, super_duper_hiper_free, general);
 	redraw_map_tiles(general, prev, gato);
 	if (prev.x != gato->x || prev.y != gato->y)
 		ft_printf("Steps: %d\n", i++);
