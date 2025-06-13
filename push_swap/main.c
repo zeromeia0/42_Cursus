@@ -1,33 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/12 22:06:40 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/13 13:07:27 by vivaz-ca         ###   ########.fr       */
+/*   Created: 2025/06/13 12:53:50 by vivaz-ca          #+#    #+#             */
+/*   Updated: 2025/06/13 13:05:12 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
-# include <unistd.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <string.h>
-# include <limits.h>
-# include <stdbool.h>
-# include "./my_printf/ft_printf.h"
+#include "push_swap.h"
 
-typedef struct s_list
+int main(int argc, char *argv[])
 {
-	void	*data;
-	void	*current;
-	struct s_list	*next;
-}	t_list;
-
-long	ft_atol(char *str);
-long count_digits(long nb);
-
-#endif
+	int i = 1;
+	if (argc == 1)
+		return (ft_printf("Coloca os argumentos\n"), 0);
+	if (argc >= 2)
+	{
+		while (i < argc)
+		{
+			printf("Digits: %ld\t| Argv[%d]: %ld\n", count_digits(ft_atol(argv[i])), i, ft_atol(argv[i]));
+			i++;
+		}
+	}
+	return (0);
+}

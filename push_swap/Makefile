@@ -6,7 +6,7 @@
 #    By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/13 08:56:04 by vivaz-ca          #+#    #+#              #
-#    Updated: 2025/06/13 09:02:02 by vivaz-ca         ###   ########.fr        #
+#    Updated: 2025/06/13 12:59:27 by vivaz-ca         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ OBJDIR = objs
 PRINTF_DIR = ./my_printf
 
 SRC = \
-	$(SRCDIR)/utils.c \
+	$(SRCDIR)/utils.c main.c\
 	$(PRINTF_DIR)/printf_utils.c \
 	$(PRINTF_DIR)/printf_utils2.c \
 	$(PRINTF_DIR)/libft_functions.c \

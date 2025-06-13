@@ -6,11 +6,11 @@
 /*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 22:06:05 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/13 08:58:34 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/13 13:04:29 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../push_swap.h"
+#include "push_swap.h"
 
 static int is_space(char c)
 {
@@ -42,8 +42,17 @@ long	ft_atol(char *str)
 	return (result * sign);
 }
 
-int main(void)
+long count_digits(long nb)
 {
-	printf("salve");
-	return (0);
+	long count;
+	
+	count = 1;
+	if (nb >= 0 && nb <= 9)
+		return (count);
+	while (nb >= 10)
+	{
+		nb /= 10;
+		count++;
+	}
+	return (count);
 }
