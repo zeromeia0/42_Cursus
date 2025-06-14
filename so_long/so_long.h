@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 11:24:46 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/12 18:57:22 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/14 12:31:43 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include <X11/keysym.h>
 # include <X11/X.h>
 # include "./gnl/get_next_line.h"
-# include ".minilibx-linux/mlx.h"
+# include "mlx.h"
 # include <stdbool.h>
 # include "./my_printf/ft_printf.h"
 // Defines for sprites

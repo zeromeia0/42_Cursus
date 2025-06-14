@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+         #
+#    By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/24 11:29:36 by vivaz-ca          #+#    #+#              #
-#    Updated: 2025/06/11 08:58:45 by vivaz-ca         ###   ########.fr        #
+#    Updated: 2025/06/14 12:37:23 by vivaz-ca         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ SRCDIR = .
 OBJDIR = objs
 MLXDIR = ../.minilibx-linux
 GNL_DIR = ./gnl
-MAP_DIR = ../maps
+MAP_DIR = maps
 TEXTURE_DIR = ../textures
 PRINTF_DIR = ./my_printf
 
@@ -51,11 +51,21 @@ $(OBJDIR)/%.o: ./%.c
 	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 clean:
-	rm -rf $(OBJDIR)
+	@rm -rf $(OBJDIR) libmlx.a mlx.h
 
 fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
+
+val:
+	valgrind --leak-check=full --track-fds=yes --show-leak-kinds=all --track-origins=yes ./$(NAME) $(MAP_DIR)/subject_map.ber
+	
+lib:
+	tar -xf minilibx-linux.tgz
+	cd minilibx-linux && ./configure && cp libmlx.a ../ && cp mlx.h ../
+	test -f libmlx.a
+	rm -rf minilibx-linux
+
 
 .PHONY: all clean fclean re

@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 11:31:58 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/12 18:57:28 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/14 12:17:02 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ static void	breaker(t_gen *gen)
 	gen->g_data->collision = gen->g_mk_map->new_map;
 	mlx_loop_hook(gen->g_data->mlx_ptr, loop, gen->g_data);
 	mlx_key_hook(gen->g_data->win_ptr, keypress_to_walk, gen);
+	mlx_hook(gen->g_data->win_ptr, DestroyNotify,
+		KeyPressMask, super_duper_hiper_free, NULL);
 	mlx_loop(gen->g_data->mlx_ptr);
 }
 
