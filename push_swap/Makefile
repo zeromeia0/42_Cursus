@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+         #
+#    By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/13 08:56:04 by vivaz-ca          #+#    #+#              #
-#    Updated: 2025/06/14 13:46:12 by vivaz-ca         ###   ########.fr        #
+#    Updated: 2025/06/15 16:59:22 by vivaz-ca         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ OBJDIR = objs
 PRINTF_DIR = ./my_printf
 
 SRC = \
-	$(SRCDIR)/utils.c main.c parsing.c \
+	$(SRCDIR)/utils.c main.c parsing.c operations.c\
 	$(PRINTF_DIR)/printf_utils.c \
 	$(PRINTF_DIR)/printf_utils2.c \
 	$(PRINTF_DIR)/libft_functions.c \
@@ -39,7 +39,7 @@ $(OBJDIR)/%.o: %.c
 	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 clean:
-	rm -rf $(OBJDIR)
+	rm -rf $(OBJDIR) ./a.out
 
 fclean: clean
 	rm -f $(NAME)
