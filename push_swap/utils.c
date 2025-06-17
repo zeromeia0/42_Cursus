@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 22:06:05 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/14 17:12:30 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/17 14:25:34 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ int	receive_values(int argc, char **argv, long **stack_a)
 	while (i < argc - 1)
 	{
 		(*stack_a)[i] = ft_atol(argv[i + 1]);
-		printf("Stack[%d]: %ld\n", i, (*stack_a)[i]);
+		// printf("Stack[%d]: %ld\n", i, (*stack_a)[i]);
 		i++;
 	}
 	return (0);
@@ -120,4 +120,23 @@ void	print_stuff(int argc, char *argv[], t_base_value *print)
 	}
 	get_most_digits(argc, argv, &print->max_digits);
 	printf("Max digits: %ld\n", print->max_digits);
+}
+
+int	minimum_len(long *stk)
+{
+	if (!stk)
+		return (0);
+	if (stk[0] && stk[1])
+		return (2);
+	if (stk[0])
+		return (1);
+	return (0);
+}
+
+void	print_stack(const char *name, long *stack, int size)
+{
+	printf("%s: ", name);
+	for (int i = 0; i < size; i++)
+		printf("%ld ", stack[i]);
+	printf("\n");
 }

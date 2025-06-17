@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 22:06:40 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/14 17:00:27 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/17 15:31:59 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ typedef struct s_stack
 {
 	long		*stack_a;
 	long		*stack_b;
+	long		stack_a_length;
+	long		stack_b_length;
 }				t_stack;
 
 typedef struct s_base_values
@@ -34,13 +36,23 @@ typedef struct s_base_values
 }				t_base_value;
 
 int				find_repetitive(int argc, char *argv[]);
-int				parsing(int argc, char *argv[]);
+int				parsing(int argc, char *argv[], long *stk_a, long *stk_b);
 int				ft_strcmp(char *s1, char *s2);
 int				receive_values(int argc, char **argv, long **stack_a);
+int				minimum_len(long *stk);
+int 			check_stat(long *stk_x);
 void			get_most_digits(int argc, char *argv[], long *max_digits);
 void			print_stuff(int argc, char *argv[], t_base_value *print);
 long			ft_atol(char *str);
 long			count_digits(long nb);
 t_base_value	*value(void);
+
+void	push_elements(long *src, long *dest, t_stack *stack, int from_a_to_b);
+int	single_swap(long *stk_x, int (f)(long *));
+void double_swap(t_stack *stack);
+void	reverse_rotate(long *stk_x, t_stack *stack, int which_stack);
+void single_rotate(long *stk_x, t_stack *stack, int which_stack);
+void double_rotate(t_stack *stack);
+void double_reverse_rotate(t_stack *stack);
 
 #endif
