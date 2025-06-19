@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 10:43:20 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/19 17:23:35 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/19 17:45:39 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ int	index_it(t_base_value *value)
 		value->stack->stack_a[i] = copied[i];
 		i++;
 	}
+	for (int i = 0; i < value->stack->stack_a_length; i++)
+		printf("%ld ", value->stack->stack_a[i]);
 	printf("\n");
 	free(sorted);
 	free(copied);

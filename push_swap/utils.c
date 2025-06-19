@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 22:06:05 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/19 15:55:36 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/19 17:46:39 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,6 @@ int get_most_digits(int argc, t_base_value *value, long *max_digits)
 	return (int)(*max_digits);
 }
 
-
 int	ft_strcmp(char *s1, char *s2)
 {
 	int	i;
@@ -104,23 +103,6 @@ int	ft_strcmp(char *s1, char *s2)
 		i++;
 	}
 	return (s1[i] - s2[i]);
-}
-
-int	receive_values(int argc, char **argv, long **stack_a)
-{
-	int	i;
-
-	i = 0;
-	*stack_a = malloc(sizeof(long) * (argc - 1));
-	if (!*stack_a)
-		return (1);
-	while (i < argc - 1)
-	{
-		(*stack_a)[i] = ft_atol(argv[i + 1]);
-		// printf("Stack[%d]: %ld\n", i, (*stack_a)[i]);
-		i++;
-	}
-	return (0);
 }
 
 void	print_stuff(int argc, char *argv[], t_base_value *print)
