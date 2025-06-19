@@ -35,7 +35,7 @@ int	find_repetitive(int argc, char *argv[])
 	}
 	return (1);
 }
-int check_stat(long *stk_x)
+int	check_stat(long *stk_x)
 {
 	if (!stk_x || stk_x[1] == '\0')
 		return (printf("Error\nStack invalid\n"), 0);

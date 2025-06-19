@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 22:06:05 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/19 11:02:12 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/19 14:12:04 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,27 @@ long	ft_atol(char *str)
 	return (result * sign);
 }
 
-long	count_digits(long nb)
+
+long	count_digits_loser(long nb)
 {
 	long	count;
 
 	count = 1;
-	if (nb >= 0 && nb <= 9)
+	if (nb <= 9)
+		return (count);
+	while (nb >= 10)
+	{
+		nb /= 10;
+		count++;
+	}
+	return (count);
+}
+long count_digits(long nb)
+{
+	long count;
+
+	count = 1;
+	if (nb <= 9)
 		return (count);
 	while (nb >= 10)
 	{
@@ -61,19 +76,21 @@ long	count_digits(long nb)
 	return (count);
 }
 
-void	get_most_digits(int argc, char *argv[], long *max_digits)
+void get_most_digits(int argc, t_base_value *value, long *max_digits)
 {
-	int	i;
+	int i;
 
-	i = 1;
-	*max_digits = count_digits(ft_atol(argv[i]));
-	while (i < argc)
+	i = 0;
+	*max_digits = count_digits(value->stack->stack_a[i]);
+	while (++i < argc - 1)
 	{
-		if (*max_digits < count_digits(ft_atol(argv[i + 1])))
-			*max_digits = count_digits(ft_atol(argv[i + 1]));
-		i++;
+		long digits = count_digits(value->stack->stack_a[i]);
+		if (*max_digits < digits)
+			*max_digits = digits;
 	}
+	printf("\nMax digits: %ld\n", *max_digits);
 }
+
 
 int	ft_strcmp(char *s1, char *s2)
 {
@@ -108,18 +125,27 @@ int	receive_values(int argc, char **argv, long **stack_a)
 
 void	print_stuff(int argc, char *argv[], t_base_value *print)
 {
-	int i = 1;
+	int	i;
+
+	i = 1;
+	(void)print;
 	if (argc >= 2)
 	{
 		while (i < argc)
 		{
 			printf("Digits: %ld\t| Argv[%d]: %ld\n",
-				count_digits(ft_atol(argv[i])), i, ft_atol(argv[i]));
+				count_digits_loser(ft_atol(argv[i])), i, ft_atol(argv[i]));
 			i++;
 		}
 	}
-	get_most_digits(argc, argv, &print->max_digits);
-	printf("Max digits: %ld\n", print->max_digits);
+}
+
+void	print_stack(const char *name, long *stack, int size)
+{
+	printf("%s: ", name);
+	for (int i = 0; i < size; i++)
+		printf("%ld ", stack[i]);
+	printf("\n");
 }
 
 int	minimum_len(long *stk)
@@ -131,12 +157,4 @@ int	minimum_len(long *stk)
 	if (stk[0])
 		return (1);
 	return (0);
-}
-
-void	print_stack(const char *name, long *stack, int size)
-{
-	printf("%s: ", name);
-	for (int i = 0; i < size; i++)
-		printf("%ld ", stack[i]);
-	printf("\n");
 }

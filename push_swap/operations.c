@@ -14,16 +14,16 @@
 
 void	push_elements(long *src, long *dest, t_stack *stack, int which)
 {
-	int	i;
+	int		i;
+	long	*src_size;
+	long	*dest_size;
 
 	if (which && stack->stack_a_length == 0)
 		return ;
 	if (!which && stack->stack_b_length == 0)
 		return ;
-
-	long *src_size = which ? &stack->stack_a_length : &stack->stack_b_length;
-	long *dest_size = which ? &stack->stack_b_length : &stack->stack_a_length;
-
+	src_size = which ? &stack->stack_a_length : &stack->stack_b_length;
+	dest_size = which ? &stack->stack_b_length : &stack->stack_a_length;
 	i = *dest_size;
 	while (i > 0)
 	{
@@ -32,7 +32,6 @@ void	push_elements(long *src, long *dest, t_stack *stack, int which)
 	}
 	dest[0] = src[0];
 	(*dest_size)++;
-
 	i = 0;
 	while (i < *src_size - 1)
 	{
@@ -42,7 +41,7 @@ void	push_elements(long *src, long *dest, t_stack *stack, int which)
 	(*src_size)--;
 }
 
-int	single_swap(long *stk_x, int (f)(long *))
+int	single_swap(long *stk_x, int(f)(long *))
 {
 	long	temp;
 
@@ -54,7 +53,7 @@ int	single_swap(long *stk_x, int (f)(long *))
 	return (1);
 }
 
-void double_swap(t_stack *stack)
+void	double_swap(t_stack *stack)
 {
 	if (stack->stack_a_length < 2)
 	{
@@ -70,15 +69,15 @@ void double_swap(t_stack *stack)
 	single_swap(stack->stack_b, minimum_len);
 }
 
-void single_rotate(long *stk_x, t_stack *stack, int which)
+void	single_rotate(long *stk_x, t_stack *stack, int which)
 {
 	long	i;
 	long	temp;
-	long	len = which == 0 ? stack->stack_a_length : stack->stack_b_length;
+	long	len;
 
+	len = which == 0 ? stack->stack_a_length : stack->stack_b_length;
 	if (len < 2)
 		return ;
-
 	temp = stk_x[0];
 	i = 0;
 	while (i < len - 1)
@@ -89,7 +88,7 @@ void single_rotate(long *stk_x, t_stack *stack, int which)
 	stk_x[len - 1] = temp;
 }
 
-void double_rotate(t_stack *stack)
+void	double_rotate(t_stack *stack)
 {
 	if (stack->stack_a_length < 2)
 	{
@@ -114,7 +113,6 @@ void	reverse_rotate(long *stk_x, t_stack *stack, int which)
 	len = (which == 0) ? stack->stack_a_length : stack->stack_b_length;
 	if (len < 2)
 		return ;
-
 	temp = stk_x[len - 1];
 	i = len - 1;
 	while (i > 0)
@@ -125,7 +123,7 @@ void	reverse_rotate(long *stk_x, t_stack *stack, int which)
 	stk_x[0] = temp;
 }
 
-void double_reverse_rotate(t_stack *stack)
+void	double_reverse_rotate(t_stack *stack)
 {
 	reverse_rotate(stack->stack_a, stack, 0);
 	reverse_rotate(stack->stack_b, stack, 1);
