@@ -6,20 +6,40 @@
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 12:36:29 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/19 14:16:18 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/19 17:24:44 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void get_last_digit(int argc, char *argv[], t_base_value *value)
+long to_binary_long(long num)
 {
-	(void)argv;
-	index_it(value);
-	print_stack("Stack_a: ", value->stack->stack_a, value->stack->stack_a_length);
-	get_most_digits(argc, value, &value->max_digits);
-	
+	long result = 0;
+	long place = 1;
+
+	while (num > 0)
+	{
+		result += (num % 2) * place;
+		num /= 2;
+		place *= 10;
+	}
+	return result;
 }
+long	*get_binary_array(long *input, int length)
+{
+	int i = 0;
+	long *binary_array = malloc(sizeof(long) * (length));
+	if (!binary_array)
+		return (0);
+	while (i < length)
+	{
+		binary_array[i] = to_binary_long(input[i]);
+		printf("%ld ", binary_array[i]);
+		i++;
+	}
+	return (binary_array);
+}
+
 
 
 int	main(int argc, char **argv)
@@ -44,7 +64,9 @@ int	main(int argc, char **argv)
 	}
 	if (!parsing(argc, argv, stack.stack_a, stack.stack_a))
 		return (0);
-		
-	get_last_digit(argc, argv, value);
+	
+	index_it(value);
+	get_binary_array(value->stack->stack_a, value->stack->stack_a_length);
+	
 	return (0);
 }

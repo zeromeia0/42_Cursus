@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 22:06:05 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/19 14:12:04 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/19 15:55:36 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ long count_digits(long nb)
 	return (count);
 }
 
-void get_most_digits(int argc, t_base_value *value, long *max_digits)
+int get_most_digits(int argc, t_base_value *value, long *max_digits)
 {
 	int i;
 
@@ -88,7 +88,7 @@ void get_most_digits(int argc, t_base_value *value, long *max_digits)
 		if (*max_digits < digits)
 			*max_digits = digits;
 	}
-	printf("\nMax digits: %ld\n", *max_digits);
+	return (int)(*max_digits);
 }
 
 
