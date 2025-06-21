@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 10:46:18 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/21 14:58:30 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/21 16:24:16 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,10 @@ void	push_elements(long *src, long *dest, t_stack *stack, int which)
 		i++;
 	}
 	(*src_size)--;
+	if (which == 1)
+		printf("pb\n");
+	else
+		printf("pa\n");
 }
 
 int	single_swap(long *stk_x, int(f)(long *))
@@ -67,6 +71,7 @@ void	double_swap(t_stack *stack)
 	}
 	single_swap(stack->stack_a, minimum_len);
 	single_swap(stack->stack_b, minimum_len);
+	printf("ss\n");
 }
 
 void single_rotate(long *stk_x, t_stack *stack, int which)
@@ -87,6 +92,10 @@ void single_rotate(long *stk_x, t_stack *stack, int which)
         i++;
     }
     stk_x[len - 1] = temp;
+	if (which == 1)
+		printf("ra\n");
+	else
+		printf("rb\n");
 }
 
 void	double_rotate(t_stack *stack)
@@ -103,6 +112,7 @@ void	double_rotate(t_stack *stack)
 	}
 	single_rotate(stack->stack_a, stack, 0);
 	single_rotate(stack->stack_b, stack, 1);
+	printf("rr\n");
 }
 
 void	reverse_rotate(long *stk_x, t_stack *stack, int which)
@@ -122,10 +132,15 @@ void	reverse_rotate(long *stk_x, t_stack *stack, int which)
 		i--;
 	}
 	stk_x[0] = temp;
+	if (which == 1)
+		printf("rra\n");
+	else
+		printf("rrb\n");
 }
 
 void	double_reverse_rotate(t_stack *stack)
 {
 	reverse_rotate(stack->stack_a, stack, 0);
 	reverse_rotate(stack->stack_b, stack, 1);
+	printf("rrr\n");
 }
