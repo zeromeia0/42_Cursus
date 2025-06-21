@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 13:28:39 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/17 14:15:22 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/21 16:46:07 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,27 @@ int	check_stat(long *stk_x)
 		return (printf("Error\nStack invalid\n"), 0);
 	return (1);
 }
+
+int already_sorted(t_base_value *value)
+{
+	int i = 0;
+	static int warn;
+	long *sorted;
+	
+	sorted = quick_sort(value);
+	while (i < value->stack->stack_a_length)
+	{
+		if (sorted[i] != value->stack->stack_a[i])
+			warn++;
+		i++;
+	}
+	if (warn == 0)
+		return (0);
+	return (1);
+}
+
 // IF INPUT = FRASE RETURN MALL
-int	parsing(int argc, char *argv[], long *stk_a, long *stk_b)
+int	parsing(int argc, char *argv[], t_base_value *value)
 {
 	if (argc < 1)
 		return (1);
@@ -50,8 +69,9 @@ int	parsing(int argc, char *argv[], long *stk_a, long *stk_b)
 		return (ft_printf("Erro\nColoca os argumentos\n"), 0);
 	if (!find_repetitive(argc, argv))
 		return (0);
-	if (!check_stat(stk_a))
+	if (!check_stat(value->stack->stack_a))
 		return (printf("Stack a nao pode tar vazio ou ser so um valor\n"), 0);
-	(void)stk_b;
+	if (!already_sorted(value))
+		return (printf("Numeros ja estao em ordem\n"), 0);
 	return (1);
 }

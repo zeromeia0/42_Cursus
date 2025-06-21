@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 12:36:29 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/21 16:22:00 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/21 16:44:20 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,11 @@
 
 void	radix_sort(t_base_value *value)
 {
-	int bit = 0;
-	int count;
-	int i;
+	int	bit;
+	int	count;
+	int	i;
 
+	bit = 0;
 	while (bit < value->max_digits)
 	{
 		i = 0;
@@ -25,40 +26,24 @@ void	radix_sort(t_base_value *value)
 		while (i < count)
 		{
 			if (((value->stack->stack_a[0] >> bit) & 1) == 0)
-				push_elements(value->stack->stack_a, value->stack->stack_b, value->stack, 1);
+				push_elements(value->stack->stack_a, value->stack->stack_b,
+					value->stack, 1);
 			else
 				single_rotate(value->stack->stack_a, value->stack, 1);
 			i++;
 		}
-
 		while (value->stack->stack_b_length > 0)
-			push_elements(value->stack->stack_b, value->stack->stack_a, value->stack, 0);
-
+			push_elements(value->stack->stack_b, value->stack->stack_a,
+				value->stack, 0);
 		bit++;
 	}
 }
 
-void lsd_zero(t_base_value *value)
+int	main(int argc, char *argv[])
 {
-    int i = 0;
-    long count = value->stack->stack_a_length;
-    
-    while (i < count)
-    {
-        if ((value->stack->stack_a[0] & 1) == 0)
-            push_elements(value->stack->stack_a, value->stack->stack_b, value->stack, 1);
-        else
-            single_rotate(value->stack->stack_a, value->stack, 1);
-        i++;
-    }
-}
-
-int main(int argc, char *argv[])
-{
-	
-	t_base_value	*value;
-	t_stack			stack;
-	int				i;
+	t_base_value *value;
+	t_stack stack;
+	int i;
 
 	i = 0;
 	value = malloc(sizeof(t_base_value));
@@ -69,19 +54,27 @@ int main(int argc, char *argv[])
 	if (!stack.stack_a || !stack.stack_b)
 		return (printf("Malloc failed\n"), 1);
 	value->stack = &stack;
+
 	while (i < argc - 1)
 	{
 		stack.stack_a[i] = atol(argv[i + 1]);
 		i++;
 	}
-	if (!parsing(argc, argv, stack.stack_a, stack.stack_a))
+	if (!parsing(argc, argv, value))
 		return (0);
-		
+
 	index_it(value);
-	printf("\n=======\nPushing to b if binary is zero\n=======\n");
-	print_stack("stack_a:\n", value->stack->stack_a, value->stack->stack_a_length);
-	lsd_zero(value);
-	print_stack("stack_a:\n", value->stack->stack_a, value->stack->stack_a_length);
-	print_stack("stack_b:\n", value->stack->stack_b, value->stack->stack_b_length);
+
+	long max = stack.stack_a_length - 1;
+	int max_digits = 0;
+	while ((max >> max_digits) != 0)
+		max_digits++;
+	value->max_digits = max_digits;
+
+	radix_sort(value);
+
+	print_stack("stack_a:\n", value->stack->stack_a,
+		value->stack->stack_a_length);
+
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 22:06:40 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/19 17:24:15 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/21 16:44:05 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef struct s_base_values
 }				t_base_value;
 
 int				find_repetitive(int argc, char *argv[]);
-int				parsing(int argc, char *argv[], long *stk_a, long *stk_b);
+int	parsing(int argc, char *argv[], t_base_value *value);
 int				ft_strcmp(char *s1, char *s2);
 int				receive_values(int argc, char **argv, long **stack_a);
 int				minimum_len(long *stk);
@@ -60,6 +60,7 @@ void			print_stack(const char *name, long *stack, int size);
 long	*copy_array(t_base_value *value);
 long to_binary_long(long num);
 long	*get_binary_array(long *input, int length);
+long	*quick_sort(t_base_value *value);
 t_base_value	*value(void);
 
 #endif

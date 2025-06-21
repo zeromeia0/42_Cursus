@@ -46,7 +46,6 @@ long	ft_atol(char *str)
 	return (result * sign);
 }
 
-
 long	count_digits_loser(long nb)
 {
 	long	count;
@@ -61,9 +60,9 @@ long	count_digits_loser(long nb)
 	}
 	return (count);
 }
-long count_digits(long nb)
+long	count_digits(long nb)
 {
-	long count;
+	long	count;
 
 	count = 1;
 	if (nb <= 9)
@@ -76,15 +75,16 @@ long count_digits(long nb)
 	return (count);
 }
 
-int get_most_digits(int argc, t_base_value *value, long *max_digits)
+int	get_most_digits(int argc, t_base_value *value, long *max_digits)
 {
-	int i;
+	int		i;
+	long	digits;
 
 	i = 0;
 	*max_digits = count_digits(value->stack->stack_a[i]);
 	while (++i < argc - 1)
 	{
-		long digits = count_digits(value->stack->stack_a[i]);
+		digits = count_digits(value->stack->stack_a[i]);
 		if (*max_digits < digits)
 			*max_digits = digits;
 	}

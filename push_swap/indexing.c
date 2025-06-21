@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 10:43:20 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/19 17:45:39 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/21 16:37:26 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,11 @@ int	index_it(t_base_value *value)
 {
 	long	*sorted;
 	long	*copied;
-	int		i, j;
 
+	int i, j;
 	sorted = quick_sort(value);
 	copied = copy_array(value);
 	i = 0;
-	
 	if (!sorted || !copied)
 		return (free(sorted), free(copied), 0);
 	while (i < value->stack->stack_a_length)

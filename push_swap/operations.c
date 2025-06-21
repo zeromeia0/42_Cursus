@@ -74,24 +74,23 @@ void	double_swap(t_stack *stack)
 	printf("ss\n");
 }
 
-void single_rotate(long *stk_x, t_stack *stack, int which)
+void	single_rotate(long *stk_x, t_stack *stack, int which)
 {
-    long i;
-    long temp;
-    long len;
+	long	i;
+	long	temp;
+	long	len;
 
-    len = which == 1 ? stack->stack_a_length : stack->stack_b_length; // FIXED
-    if (len < 2)
-        return;
-    
-    temp = stk_x[0];
-    i = 0;
-    while (i < len - 1)
-    {
-        stk_x[i] = stk_x[i + 1];
-        i++;
-    }
-    stk_x[len - 1] = temp;
+	len = which == 1 ? stack->stack_a_length : stack->stack_b_length; // FIXED
+	if (len < 2)
+		return ;
+	temp = stk_x[0];
+	i = 0;
+	while (i < len - 1)
+	{
+		stk_x[i] = stk_x[i + 1];
+		i++;
+	}
+	stk_x[len - 1] = temp;
 	if (which == 1)
 		printf("ra\n");
 	else

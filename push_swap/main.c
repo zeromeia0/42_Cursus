@@ -1,14 +1,15 @@
-// /* ************************************************************************** */
-// /*                                                                            */
-// /*                                                        :::      ::::::::   */
-// /*   main.c                                             :+:      :+:    :+:   */
-// /*                                                    +:+ +:+         +:+     */
-// /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
-// /*                                                +#+#+#+#+#+   +#+           */
-// /*   Created: 2025/06/13 12:53:50 by vivaz-ca          #+#    #+#             */
-// /*   Updated: 2025/06/21 14:57:04 by vivaz-ca         ###   ########.fr       */
-// /*                                                                            */
-// /* ************************************************************************** */
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/21 16:28:37 by vivaz-ca          #+#    #+#             */
+/*   Updated: 2025/06/21 16:28:40 by vivaz-ca         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 
 // #include "push_swap.h"
 
@@ -34,7 +35,7 @@
 // 	}
 // 	if (!parsing(argc, argv, stack.stack_a, stack.stack_a))
 // 		return (0);
-		
+
 // 	index_it(value);
 
 // 	// Push 5 elements from A to B
@@ -54,8 +55,7 @@
 // 	if (stack.stack_a_length == 0)
 // 	printf("(empty)");
 // 	printf("\n");
-	
-	
+
 // 	printf("Stack B (%ld): ", stack.stack_b_length);
 // 	for (i = 0; i < stack.stack_b_length; i++)
 // 	printf("[%ld] ", stack.stack_b[i]);
@@ -72,7 +72,7 @@
 // 	if (stack.stack_a_length == 0)
 // 	printf("(empty)");
 // 	printf("\n");
-	
+
 // 	printf("Stack B (%ld): ", stack.stack_b_length);
 // 	for (i = 0; i < stack.stack_b_length; i++)
 // 	printf("[%ld] ", stack.stack_b[i]);
