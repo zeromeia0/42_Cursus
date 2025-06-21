@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 22:06:40 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/21 16:44:05 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/21 18:03:56 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,24 +31,24 @@ typedef struct s_stack
 
 typedef struct s_base_values
 {
-	char	*binary_number;
 	long		max_digits;
 	long		received_number;
 	t_stack		*stack;
 }				t_base_value;
 
 int				find_repetitive(int argc, char *argv[]);
-int	parsing(int argc, char *argv[], t_base_value *value);
+int				parsing(int argc, char *argv[], t_base_value *value);
 int				ft_strcmp(char *s1, char *s2);
 int				receive_values(int argc, char **argv, long **stack_a);
 int				minimum_len(long *stk);
 int				check_stat(long *stk_x);
 int				single_swap(long *stk_x, int(f)(long *));
 int				index_it(t_base_value *value);
-int get_most_digits(int argc, t_base_value *value, long *max_digits);
+int				get_most_digits(int argc, t_base_value *value,
+					long *max_digits);
 void			print_stuff(int argc, char *argv[], t_base_value *print);
 long			ft_atol(char *str);
-long count_digits(long nb);
+long			count_digits(long nb);
 
 void			push_elements(long *src, long *dest, t_stack *stack, int which);
 void			double_swap(t_stack *stack);
@@ -57,10 +57,11 @@ void			double_rotate(t_stack *stack);
 void			reverse_rotate(long *stk_x, t_stack *stack, int which);
 void			double_reverse_rotate(t_stack *stack);
 void			print_stack(const char *name, long *stack, int size);
-long	*copy_array(t_base_value *value);
-long to_binary_long(long num);
-long	*get_binary_array(long *input, int length);
-long	*quick_sort(t_base_value *value);
+long			*copy_array(t_base_value *value);
+long			to_binary_long(long num);
+long			*get_binary_array(long *input, int length);
+long			*quick_sort(t_base_value *value);
+void			radix_sort(t_base_value *value);
 t_base_value	*value(void);
 
 #endif

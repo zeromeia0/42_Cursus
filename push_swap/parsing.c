@@ -42,12 +42,13 @@ int	check_stat(long *stk_x)
 	return (1);
 }
 
-int already_sorted(t_base_value *value)
+int	already_sorted(t_base_value *value)
 {
-	int i = 0;
-	static int warn;
-	long *sorted;
-	
+	int			i;
+	static int	warn;
+	long		*sorted;
+
+	i = 0;
 	sorted = quick_sort(value);
 	while (i < value->stack->stack_a_length)
 	{
