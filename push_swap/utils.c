@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 22:06:05 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/19 17:46:39 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/21 14:59:32 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ void	print_stack(const char *name, long *stack, int size)
 {
 	printf("%s: ", name);
 	for (int i = 0; i < size; i++)
-		printf("%ld ", stack[i]);
+		printf("[%ld] ", stack[i]);
 	printf("\n");
 }
 
