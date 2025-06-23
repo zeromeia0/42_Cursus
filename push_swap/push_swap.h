@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 22:06:40 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/23 21:07:53 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/23 22:11:50 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void			print_stack(const char *name, long *stack, int size);
 long			*copy_array(t_base_value *value);
 long			*quick_sort(t_base_value *value);
 void			radix_sort(t_base_value *value);
+void	super_duper_hiper_free(void);
 t_base_value	*value(void);
 
 #endif
