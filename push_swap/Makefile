@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+         #
+#    By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/13 08:56:04 by vivaz-ca          #+#    #+#              #
-#    Updated: 2025/06/19 13:41:17 by vivaz-ca         ###   ########.fr        #
+#    Updated: 2025/06/23 20:59:36 by vivaz-ca         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ OBJDIR = objs
 PRINTF_DIR = ./my_printf
 
 SRC = \
-	$(SRCDIR)/utils.c main.c parsing.c operations.c indexing.c radix.c\
+	$(SRCDIR)/utils.c main.c parsing.c operations.c indexing.c radix.c goated_split.c\
 	$(PRINTF_DIR)/printf_utils.c \
 	$(PRINTF_DIR)/printf_utils2.c \
 	$(PRINTF_DIR)/libft_functions.c \

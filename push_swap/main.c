@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 16:28:37 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/21 20:30:46 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/23 19:02:30 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ int	main(int argc, char *argv[])
 
 	radix_sort(value);
 
-	print_stack("stack_a:\n", value->stack->stack_a,
-		value->stack->stack_a_length);
+	// print_stack("stack_a:\n", value->stack->stack_a,
+	// 	value->stack->stack_a_length);
 
 	return (0);
 }

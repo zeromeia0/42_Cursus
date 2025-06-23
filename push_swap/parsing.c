@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 13:28:39 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/21 19:56:26 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/23 21:09:00 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	find_repetitive(int argc, char *argv[])
 		while (j < argc)
 		{
 			if (ft_strcmp(argv[i], argv[j]) == 0)
-				return (ft_printf("Erro\nTem numeros repetidos\n"), 0);
+				return (ft_printf("Error\n"), 0);
 			j++;
 		}
 		i++;
@@ -38,7 +38,7 @@ int	find_repetitive(int argc, char *argv[])
 int	check_stat(long *stk_x)
 {
 	if (!stk_x || stk_x[1] == '\0')
-		return (printf("Error\nStack invalid\n"), 0);
+		return (printf("Error\n"), 0);
 	return (1);
 }
 
@@ -71,8 +71,8 @@ int	parsing(int argc, char *argv[], t_base_value *value)
 	if (!find_repetitive(argc, argv))
 		return (0);
 	if (!check_stat(value->stack->stack_a))
-		return (printf("Stack a nao pode tar vazio ou ser so um valor\n"), 0);
+		return (0);
 	if (!already_sorted(value))
-		return (printf("Numeros ja estao em ordem\n"), 0);
+		return (0);
 	return (1);
 }

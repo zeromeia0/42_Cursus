@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 22:06:40 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/21 18:03:56 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/23 21:07:53 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
-# define TWO_BIG "Erro\nNumero maior que INT_MAX ou menor que INT_MIN\n"
+# define TWO_BIG "Error\n"
 
 typedef struct s_stack
 {
@@ -39,7 +39,6 @@ typedef struct s_base_values
 int				find_repetitive(int argc, char *argv[]);
 int				parsing(int argc, char *argv[], t_base_value *value);
 int				ft_strcmp(char *s1, char *s2);
-int				receive_values(int argc, char **argv, long **stack_a);
 int				minimum_len(long *stk);
 int				check_stat(long *stk_x);
 int				single_swap(long *stk_x, int(f)(long *));
@@ -58,8 +57,6 @@ void			reverse_rotate(long *stk_x, t_stack *stack, int which);
 void			double_reverse_rotate(t_stack *stack);
 void			print_stack(const char *name, long *stack, int size);
 long			*copy_array(t_base_value *value);
-long			to_binary_long(long num);
-long			*get_binary_array(long *input, int length);
 long			*quick_sort(t_base_value *value);
 void			radix_sort(t_base_value *value);
 t_base_value	*value(void);
