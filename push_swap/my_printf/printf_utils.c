@@ -110,6 +110,6 @@ int	ft_print_ptr(void *ptr)
 	while (--var->i >= 0)
 		var->count += write(1, &var->buffer2[var->i], 1);
 	count = var->count;
-	free (var);
+	free(var);
 	return (count);
 }

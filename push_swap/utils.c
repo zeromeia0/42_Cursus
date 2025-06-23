@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 22:06:05 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/21 14:59:32 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/23 21:24:37 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ void	print_stuff(int argc, char *argv[], t_base_value *print)
 	{
 		while (i < argc)
 		{
-			printf("Digits: %ld\t| Argv[%d]: %ld\n",
+			ft_printf("Digits: %ld\t| Argv[%d]: %ld\n",
 				count_digits_loser(ft_atol(argv[i])), i, ft_atol(argv[i]));
 			i++;
 		}
@@ -124,10 +124,10 @@ void	print_stuff(int argc, char *argv[], t_base_value *print)
 
 void	print_stack(const char *name, long *stack, int size)
 {
-	printf("%s: ", name);
+	ft_printf("%s: ", name);
 	for (int i = 0; i < size; i++)
-		printf("[%ld] ", stack[i]);
-	printf("\n");
+		ft_printf("[%ld] ", stack[i]);
+	ft_printf("\n");
 }
 
 int	minimum_len(long *stk)

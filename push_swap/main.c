@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 16:28:37 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/23 19:02:30 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/23 21:27:05 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	main(int argc, char *argv[])
 	stack.stack_a = malloc(sizeof(long) * (argc - 1));
 	stack.stack_b = malloc(sizeof(long) * (argc - 1));
 	if (!stack.stack_a || !stack.stack_b)
-		return (printf("Malloc failed\n"), 1);
+		return (ft_printf("Malloc failed\n"), 1);
 	value->stack = &stack;
 
 	while (i < argc - 1)
@@ -46,8 +46,8 @@ int	main(int argc, char *argv[])
 
 	radix_sort(value);
 
-	// print_stack("stack_a:\n", value->stack->stack_a,
-	// 	value->stack->stack_a_length);
+	print_stack("stack_a:\n", value->stack->stack_a,
+		value->stack->stack_a_length);
 
 	return (0);
 }

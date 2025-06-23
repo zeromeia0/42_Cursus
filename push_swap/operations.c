@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   operations.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 10:46:18 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/21 16:24:16 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/23 21:24:37 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ void	push_elements(long *src, long *dest, t_stack *stack, int which)
 	}
 	(*src_size)--;
 	if (which == 1)
-		printf("pb\n");
+		ft_printf("pb\n");
 	else
-		printf("pa\n");
+		ft_printf("pa\n");
 }
 
 int	single_swap(long *stk_x, int(f)(long *))
@@ -50,7 +50,7 @@ int	single_swap(long *stk_x, int(f)(long *))
 	long	temp;
 
 	if (!stk_x || (f)(stk_x) < 2)
-		return (printf("Error\nArray nao tem tamanho\n"), 0);
+		return (ft_printf("Error\nArray nao tem tamanho\n"), 0);
 	temp = stk_x[0];
 	stk_x[0] = stk_x[1];
 	stk_x[1] = temp;
@@ -61,17 +61,17 @@ void	double_swap(t_stack *stack)
 {
 	if (stack->stack_a_length < 2)
 	{
-		printf("Stack_a ta vazio\n");
+		ft_printf("Stack_a ta vazio\n");
 		return ;
 	}
 	if (stack->stack_b_length < 2)
 	{
-		printf("Stack_b ta vazio\n");
+		ft_printf("Stack_b ta vazio\n");
 		return ;
 	}
 	single_swap(stack->stack_a, minimum_len);
 	single_swap(stack->stack_b, minimum_len);
-	printf("ss\n");
+	ft_printf("ss\n");
 }
 
 void	single_rotate(long *stk_x, t_stack *stack, int which)
@@ -92,26 +92,26 @@ void	single_rotate(long *stk_x, t_stack *stack, int which)
 	}
 	stk_x[len - 1] = temp;
 	if (which == 1)
-		printf("ra\n");
+		ft_printf("ra\n");
 	else
-		printf("rb\n");
+		ft_printf("rb\n");
 }
 
 void	double_rotate(t_stack *stack)
 {
 	if (stack->stack_a_length < 2)
 	{
-		printf("Stack_a ta vazio\n");
+		ft_printf("Stack_a ta vazio\n");
 		return ;
 	}
 	if (stack->stack_b_length < 2)
 	{
-		printf("Stack_b ta vazio\n");
+		ft_printf("Stack_b ta vazio\n");
 		return ;
 	}
 	single_rotate(stack->stack_a, stack, 0);
 	single_rotate(stack->stack_b, stack, 1);
-	printf("rr\n");
+	ft_printf("rr\n");
 }
 
 void	reverse_rotate(long *stk_x, t_stack *stack, int which)
@@ -132,14 +132,14 @@ void	reverse_rotate(long *stk_x, t_stack *stack, int which)
 	}
 	stk_x[0] = temp;
 	if (which == 1)
-		printf("rra\n");
+		ft_printf("rra\n");
 	else
-		printf("rrb\n");
+		ft_printf("rrb\n");
 }
 
 void	double_reverse_rotate(t_stack *stack)
 {
 	reverse_rotate(stack->stack_a, stack, 0);
 	reverse_rotate(stack->stack_b, stack, 1);
-	printf("rrr\n");
+	ft_printf("rrr\n");
 }

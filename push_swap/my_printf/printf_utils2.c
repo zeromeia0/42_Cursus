@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   printf_utils2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 17:09:56 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/11 17:37:13 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/23 21:23:26 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,16 @@ int	ft_printf_setup(const char *key, va_list args)
 	{
 		if (key[i] == '%')
 		{
-			count += ft_count(i + 1, args, key);
-			i++;
+			if (key[i + 1] == 'l' && key[i + 2] == 'd')
+			{
+				count += ft_print_long(va_arg(args, long));
+				i += 2;
+			}
+			else
+			{
+				count += ft_count(i + 1, args, key);
+				i++;
+			}
 		}
 		else
 			count += write(1, &key[i], 1);

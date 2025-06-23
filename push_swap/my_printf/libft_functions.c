@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 15:16:08 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/13 09:00:05 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/23 21:28:23 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ size_t	ft_strlen(const char *str)
 		i++;
 	return (i);
 }
+
 void	ft_putchar_fd(int a, int fd)
 {
 	unsigned char	c;

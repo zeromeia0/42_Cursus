@@ -3,23 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 13:51:18 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/04/24 18:41:41 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/23 21:19:58 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
+# include <limits.h>
 # include <stdarg.h>
-# include <stdio.h>
 # include <stddef.h>
+# include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
-# include <limits.h>
 
 # define MAX_UNSIGNED 4294967295
 # define HEXA_LOWER_STR "0123456789abcdef"
@@ -40,21 +40,23 @@ typedef struct s_hexa
 	unsigned int	convert_hexa;
 	unsigned int	num_to_unsigned;
 	unsigned long	address;
-}	t_hexa;
+}					t_hexa;
 
-char			*ft_itoa(int n);
-size_t			ft_strlen(const char *str);
-void			ft_putchar_fd(int a, int fd);
-void			ft_putstr_fd(const char *str);
-size_t			ft_strlcpy(char *dst, const char *src, size_t dsize);
-char			*ft_strdup(const char *s);
-int				ft_print_dec_int_number(int nb);
-int				ft_print_char(int c);
-int				ft_low_hexa(unsigned int num);
-int				ft_up_hexa(unsigned int num);
-int				ft_print_ptr(void *ptr);
-int				ft_print_str(const char *str);
-unsigned int	ft_print_unsigned_int(int nb);
-int				ft_printf(const char *format, ...);
+char				*ft_itoa(int n);
+size_t				ft_strlen(const char *str);
+void				ft_putchar_fd(int a, int fd);
+void				ft_putstr_fd(const char *str);
+size_t				ft_strlcpy(char *dst, const char *src, size_t dsize);
+char				*ft_strdup(const char *s);
+int					ft_print_dec_int_number(int nb);
+int					ft_print_char(int c);
+int					ft_low_hexa(unsigned int num);
+int					ft_up_hexa(unsigned int num);
+int					ft_print_ptr(void *ptr);
+int					ft_print_str(const char *str);
+unsigned int		ft_print_unsigned_int(int nb);
+int					ft_printf(const char *format, ...);
+char				*ft_long_itoa(long n);
+long				ft_print_long(long number);
 
 #endif

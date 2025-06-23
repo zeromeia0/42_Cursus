@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 10:43:20 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/23 19:05:14 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/23 21:24:37 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,8 @@ int	index_it(t_base_value *value)
 		i++;
 	}
 	// for (int i = 0; i < value->stack->stack_a_length; i++)
-	// 	printf("%ld ", value->stack->stack_a[i]);
-	printf("\n");
+	// 	ft_printf("%ld ", value->stack->stack_a[i]);
+	ft_printf("\n");
 	free(sorted);
 	free(copied);
 	return (1);

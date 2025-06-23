@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 13:28:39 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/23 21:09:00 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/23 21:24:37 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	find_repetitive(int argc, char *argv[])
 int	check_stat(long *stk_x)
 {
 	if (!stk_x || stk_x[1] == '\0')
-		return (printf("Error\n"), 0);
+		return (ft_printf("Error\n"), 0);
 	return (1);
 }
 
