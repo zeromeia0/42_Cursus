@@ -6,7 +6,7 @@
 #    By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/13 08:56:04 by vivaz-ca          #+#    #+#              #
-#    Updated: 2025/06/23 21:34:50 by vivaz-ca         ###   ########.fr        #
+#    Updated: 2025/06/23 22:21:35 by vivaz-ca         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,5 +46,19 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
+
+val:
+	@echo "======= TESTE 1 =======\npush_swap 1\n"
+	@valgrind --leak-check=full --show-leak-kinds=all ./push_swap 1
+
+	@echo "\n======= TESTE 2 =======\npush_swap 1 2\n"
+	@valgrind --leak-check=full --show-leak-kinds=all ./push_swap 1 2
+
+	@echo "\n======= TESTE 3 =======\npush_swap 1 2 5 4\n"
+	@valgrind --leak-check=full --show-leak-kinds=all ./push_swap 1 2 5 4
+
+	@echo "\n======= TESTE 4 =======\npush_swap 1 2 3\n"
+	@valgrind --leak-check=full --show-leak-kinds=all ./push_swap 1 2 3
+	
 
 .PHONY: all clean fclean re

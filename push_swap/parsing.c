@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 13:28:39 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/23 21:52:13 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/23 22:20:27 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,23 +42,24 @@ int	check_stat(long *stk_x)
 	return (1);
 }
 
-int already_sorted(t_base_value *value)
+int	already_sorted(t_base_value *value)
 {
-    long *sorted = quick_sort(value);
-    if (!sorted)
-        return 0;
+	int			i;
+	static int	warn;
+	long		*sorted;
+	i = 0;
+	sorted = quick_sort(value);
+	while (i < value->stack->stack_a_length)
 
-    for (int i = 0; i < value->stack->stack_a_length - 1; i++)
-    {
-        if (sorted[i] > sorted[i + 1])
-        {
-            free(sorted); // ✅ FREE BEFORE RETURN
-            return 0;
-        }
-    }
-
-    free(sorted); // ✅ FREE BEFORE RETURN
-    return 1;
+	{
+		if (sorted[i] != value->stack->stack_a[i])
+			warn++;
+		i++;
+	}
+	if (warn == 0)
+		return (0);
+	free(sorted);
+	return (1);
 }
 
 
