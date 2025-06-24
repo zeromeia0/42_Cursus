@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   indexing.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 10:43:20 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/23 22:05:33 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/24 17:20:11 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ long	*copy_array(t_base_value *value)
 	i = 0;
 	copy = malloc(sizeof(long) * value->stack->stack_a_length);
 	if (!copy)
-		return (super_duper_hiper_free(), NULL);
+		return (super_duper_hiper_free(1), NULL);
 	while (i < value->stack->stack_a_length)
 	{
 		copy[i] = value->stack->stack_a[i];
@@ -38,7 +38,7 @@ long	*quick_sort(t_base_value *value)
 	sorted = copy_array(value);
 	i = 0;
 	if (!sorted)
-		return (super_duper_hiper_free(), NULL);
+		return (free(sorted), super_duper_hiper_free(1), NULL);
 	while (i < value->stack->stack_a_length - 1)
 	{
 		if (sorted[i] > sorted[i + 1])
@@ -62,7 +62,7 @@ int index_it(t_base_value *value)
     sorted = quick_sort(value);
     copied = copy_array(value);
     if (!sorted || !copied)
-        return (free(sorted), free(copied), super_duper_hiper_free(), 0);
+        return (free(sorted), free(copied), super_duper_hiper_free(1), 0);
     i = 0;
     while (i < value->stack->stack_a_length)
     {

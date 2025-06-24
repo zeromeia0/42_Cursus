@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 22:06:40 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/23 22:11:50 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/24 17:19:22 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int				find_repetitive(int argc, char *argv[]);
 int				parsing(int argc, char *argv[], t_base_value *value);
 int				ft_strcmp(char *s1, char *s2);
 int				minimum_len(long *stk);
-int				check_stat(long *stk_x);
+int	check_stat(t_base_value *value);
 int				single_swap(long *stk_x, int(f)(long *));
 int				index_it(t_base_value *value);
 int				get_most_digits(int argc, t_base_value *value,
@@ -59,7 +59,8 @@ void			print_stack(const char *name, long *stack, int size);
 long			*copy_array(t_base_value *value);
 long			*quick_sort(t_base_value *value);
 void			radix_sort(t_base_value *value);
-void	super_duper_hiper_free(void);
+void	super_duper_hiper_free(int chama);
 t_base_value	*value(void);
+char	*ft_substr(char const *s, unsigned int start, size_t len);
 
 #endif

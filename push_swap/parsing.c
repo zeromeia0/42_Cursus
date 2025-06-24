@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 13:28:39 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/23 22:20:27 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/24 17:19:55 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ int	find_repetitive(int argc, char *argv[])
 	}
 	return (1);
 }
-int	check_stat(long *stk_x)
+int	check_stat(t_base_value *value)
 {
-	if (!stk_x || stk_x[1] == '\0')
+	if (!value->stack || value->stack->stack_a_length <= 2)
 		return (ft_printf("Error\n"), 0);
 	return (1);
 }
@@ -57,7 +57,7 @@ int	already_sorted(t_base_value *value)
 		i++;
 	}
 	if (warn == 0)
-		return (0);
+		return (free(sorted), 0);
 	free(sorted);
 	return (1);
 }
@@ -71,10 +71,10 @@ int	parsing(int argc, char *argv[], t_base_value *value)
 	if (argc == 1)
 		return (0);
 	if (!find_repetitive(argc, argv))
-		return (super_duper_hiper_free(), 0);
-	if (!check_stat(value->stack->stack_a))
-		return (super_duper_hiper_free(), 0);
+		return (super_duper_hiper_free(1), 0);
+	if (!check_stat(value))
+		return (super_duper_hiper_free(1), 0);
 	if (!already_sorted(value))
-		return (super_duper_hiper_free(), 0);
+		return (super_duper_hiper_free(1), 0);
 	return (1);
 }

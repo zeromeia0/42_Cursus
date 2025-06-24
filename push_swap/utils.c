@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 22:06:05 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/23 21:24:37 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/24 16:52:54 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,4 +139,31 @@ int	minimum_len(long *stk)
 	if (stk[0])
 		return (1);
 	return (0);
+}
+
+char	*ft_substr(char const *s, unsigned int start, size_t len)
+{
+	char			*str;
+	unsigned int	i;
+	unsigned int	j;
+
+	if (!s)
+		return (NULL);
+	if (start > ft_strlen(s))
+		return (ft_strdup(""));
+	if (ft_strlen(s + start) < len)
+		len = ft_strlen(s + start);
+	str = (char *)malloc(sizeof(char) * (len + 1));
+	if (!str)
+		return (NULL);
+	i = start;
+	j = 0;
+	while (s[i] && j < len)
+	{
+		str[j] = s[i];
+		j++;
+		i++;
+	}
+	str[j] = '\0';
+	return (str);
 }

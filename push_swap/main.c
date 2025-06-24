@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 16:28:37 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/23 22:09:50 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/24 17:19:37 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int main(int argc, char *argv[])
 {
-	t_base_value *valor = value(); // get static singleton
+	t_base_value *valor = value();
 
 	valor->stack = malloc(sizeof(t_stack));
 	if (!valor->stack)
@@ -40,6 +40,7 @@ int main(int argc, char *argv[])
 		max_digits++;
 	valor->max_digits = max_digits;
 	radix_sort(valor);
-	return (super_duper_hiper_free(), 0);
+	print_stack("stack_a:", valor->stack->stack_a, valor->stack->stack_a_length);
+	return (super_duper_hiper_free(0), 0);
 }
 

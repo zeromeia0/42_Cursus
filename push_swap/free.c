@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 21:34:52 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/23 22:11:09 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/24 17:24:18 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	super_duper_hiper_free(void)
+void	super_duper_hiper_free(int chama)
 {
 	t_base_value *valor;
-
+	(void)chama;
 	valor = value();
 	if (!valor)
 		return;
@@ -35,7 +35,6 @@ void	super_duper_hiper_free(void)
 		free(valor->stack);
 		valor->stack = NULL;
 	}
-
-	free(valor);
+	exit(0);
+	// exit(chama);
 }
-
