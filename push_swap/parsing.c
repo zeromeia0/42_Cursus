@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 13:28:39 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/25 14:46:55 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/25 14:53:34 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	find_repetitive(int argc, char *argv[])
 		{
 			num_j = ft_atol(argv[j]);
 			if (num_i == num_j)
-				return (ft_printf("Error\n"), 0);
+				return (ft_printf("Error\nAnimal"), 0);
 			j++;
 		}
 		i++;
@@ -108,7 +108,7 @@ int	sentence(int argc, char **argv, t_base_value *value)
 	for (int j = 0; j < i; j++)
 		{
 			if (!nonum(value->splited[j]))
-				return (ft_printf("Error\n"), super_duper_hiper_free(1), exit(1), 0);
+				return (ft_printf("Error\nBurro"), super_duper_hiper_free(1), exit(1), 0);
 			value->stack->stack_a[j] = ft_atol(value->splited[j]);
 		}
 	index_it(value);

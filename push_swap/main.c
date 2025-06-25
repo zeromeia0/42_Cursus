@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 16:28:37 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/25 14:44:45 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/25 14:54:17 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,8 @@ int main(int argc, char *argv[])
 			valor->stack->stack_b = malloc(sizeof(long) * (argc - 1));
 			if (!valor->stack->stack_b)
 				return (free(valor->stack->stack_a), free(valor->stack), 1);
-		
 			for (int i = 0; i < argc - 1; i++)
-			{
 				valor->stack->stack_a[i] = ft_atol(argv[i + 1]);
-				if (!nonum(argv[i]))
-					return (ft_printf("Error\n"), super_duper_hiper_free(1), 1);
-			}
 			index_it(valor);
 		
 			if (!parsing(argc, argv, valor))
