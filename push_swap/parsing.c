@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 13:28:39 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/25 14:17:37 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/25 14:46:55 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,17 +64,26 @@ int	already_sorted(t_base_value *value)
 	return (1);
 }
 
-int nonum(char **argv)
+int nonum(const char *str)
 {
 	int i = 0;
-	while (argv[1][i] != '\0')
+
+	// Allow optional '+' or '-'
+	if (str[i] == '-' || str[i] == '+')
+		i++;
+
+	// Must have at least one digit
+	if (!str[i])
+		return (0);
+	while (str[i])
 	{
-		if (argv[1][i] < '0' && argv[1][i] > '9')
-			return (ft_printf("Non numeric\n"), 0);
+		if (str[i] < '0' || str[i] > '9')
+			return (0);
 		i++;
 	}
-	return (0);
+	return (1);
 }
+
 
 int	sentence(int argc, char **argv, t_base_value *value)
 {
@@ -97,7 +106,11 @@ int	sentence(int argc, char **argv, t_base_value *value)
 	if (!value->stack->stack_a || !value->stack->stack_b)
 		return (free(value->stack->stack_a), free(value->stack->stack_b), free(value->stack), 0);
 	for (int j = 0; j < i; j++)
-		value->stack->stack_a[j] = ft_atol(value->splited[j]);
+		{
+			if (!nonum(value->splited[j]))
+				return (ft_printf("Error\n"), super_duper_hiper_free(1), exit(1), 0);
+			value->stack->stack_a[j] = ft_atol(value->splited[j]);
+		}
 	index_it(value);
 	if (i == 5)
 	{
