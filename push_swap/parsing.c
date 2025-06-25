@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 13:28:39 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/24 17:19:55 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/24 20:41:34 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,20 @@ int	find_repetitive(int argc, char *argv[])
 {
 	int		i;
 	int		j;
-	long	num;
+	long	num_i;
+	long	num_j;
 
 	i = 1;
 	while (i < argc)
 	{
-		num = ft_atol(argv[i]);
-		if (num > INT_MAX || num < INT_MIN)
+		num_i = ft_atol(argv[i]);
+		if (num_i > INT_MAX || num_i < INT_MIN)
 			return (ft_printf(TWO_BIG), 0);
 		j = i + 1;
 		while (j < argc)
 		{
-			if (ft_strcmp(argv[i], argv[j]) == 0)
+			num_j = ft_atol(argv[j]);
+			if (num_i == num_j)
 				return (ft_printf("Error\n"), 0);
 			j++;
 		}
@@ -35,10 +37,11 @@ int	find_repetitive(int argc, char *argv[])
 	}
 	return (1);
 }
+
 int	check_stat(t_base_value *value)
 {
-	if (!value->stack || value->stack->stack_a_length <= 2)
-		return (ft_printf("Error\n"), 0);
+	if (!value->stack || value->stack->stack_a_length < 1)
+		return (0);
 	return (1);
 }
 
@@ -50,7 +53,6 @@ int	already_sorted(t_base_value *value)
 	i = 0;
 	sorted = quick_sort(value);
 	while (i < value->stack->stack_a_length)
-
 	{
 		if (sorted[i] != value->stack->stack_a[i])
 			warn++;
@@ -59,6 +61,32 @@ int	already_sorted(t_base_value *value)
 	if (warn == 0)
 		return (free(sorted), 0);
 	free(sorted);
+	return (1);
+}
+
+int	sentence(int argc, char **argv, t_base_value *value)
+{
+	int i = 0;
+
+	(void)argc;
+	if (!ft_strchr(argv[1], ' '))
+		return (ft_printf("Error\nAnimal\n"), 0);
+	if (argv[1][2] == '\0')
+		return (0);
+	value->splited = ft_split(argv[1], ' ');
+	if (!value->splited)
+		return (0);
+	while (value->splited[i])
+		i++;
+	value->stack->stack_a_length = i;
+	value->stack->stack_b_length = 0;
+	value->stack->stack_a = malloc(sizeof(long) * i);
+	value->stack->stack_b = malloc(sizeof(long) * i);
+	if (!value->stack->stack_a || !value->stack->stack_b)
+		return (free(value->stack->stack_a), free(value->stack->stack_b), free(value->stack), 0);
+	for (int j = 0; j < i; j++)
+		value->stack->stack_a[j] = ft_atol(value->splited[j]);
+	index_it(value);
 	return (1);
 }
 

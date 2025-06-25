@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 22:06:40 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/24 17:19:22 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/24 20:15:53 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
+# include <strings.h>
 # define TWO_BIG "Error\n"
 
 typedef struct s_stack
@@ -33,6 +34,7 @@ typedef struct s_base_values
 {
 	long		max_digits;
 	long		received_number;
+	char		**splited;
 	t_stack		*stack;
 }				t_base_value;
 
@@ -62,5 +64,8 @@ void			radix_sort(t_base_value *value);
 void	super_duper_hiper_free(int chama);
 t_base_value	*value(void);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
+char	**ft_split(const char *s, char c);
+int	sentence(int argc, char **argv, t_base_value *value);
+char	*ft_strchr(const char *s, int c);
 
 #endif

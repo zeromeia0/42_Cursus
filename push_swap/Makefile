@@ -6,7 +6,7 @@
 #    By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/13 08:56:04 by vivaz-ca          #+#    #+#              #
-#    Updated: 2025/06/24 17:22:50 by vivaz-ca         ###   ########.fr        #
+#    Updated: 2025/06/24 20:43:14 by vivaz-ca         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,25 +40,48 @@ $(OBJDIR)/%.o: %.c
 	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 clean:
-	rm -rf $(OBJDIR) ./a.out
+	@rm -rf $(OBJDIR) ./a.out
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
 
 re: fclean all
 
-val:
+la: fclean
+
+cem: re
+	@echo "Testando com 100 numeros: \n"
+	@./push_swap $$(shuf -i 1-100 -n 100)
+
+quin: re
+	@echo "Testando com 500 numeros: \n"
+	./push_swap $$(shuf -i 1-500 -n 500)
+
+strval: re
 	@echo "======= TESTE 1 =======\npush_swap 1\n"
-	@valgrind --leak-check=full --show-leak-kinds=all -s ./push_swap 1
+	-@valgrind --leak-check=full --show-leak-kinds=all -s ./push_swap "1"
 
 	@echo "\n======= TESTE 2 =======\npush_swap 1 2\n"
-	@valgrind --leak-check=full --show-leak-kinds=all -s ./push_swap 1 2
+	-@valgrind --leak-check=full --show-leak-kinds=all -s ./push_swap "1 2"
 
 	@echo "\n======= TESTE 3 =======\npush_swap 1 2 5 4\n"
-	@valgrind --leak-check=full --show-leak-kinds=all -s ./push_swap 1 2 5 4
+	-@valgrind --leak-check=full --show-leak-kinds=all -s ./push_swap "1 2 5 4"
 
 	@echo "\n======= TESTE 4 =======\npush_swap 1 2 3\n"
-	@valgrind --leak-check=full --show-leak-kinds=all -s ./push_swap 1 2 3
+	-@valgrind --leak-check=full --show-leak-kinds=all -s ./push_swap "1 2 3"
+
+nbrval: re
+	@echo "======= TESTE 1 =======\npush_swap 1\n"
+	-@valgrind --leak-check=full --show-leak-kinds=all -s ./push_swap 1
+
+	@echo "\n======= TESTE 2 =======\npush_swap 1 2\n"
+	-@valgrind --leak-check=full --show-leak-kinds=all -s ./push_swap 1 2
+
+	@echo "\n======= TESTE 3 =======\npush_swap 1 2 5 4\n"
+	-@valgrind --leak-check=full --show-leak-kinds=all -s ./push_swap 1 2 5 4
+
+	@echo "\n======= TESTE 4 =======\npush_swap 1 2 3\n"
+	-@valgrind --leak-check=full --show-leak-kinds=all -s ./push_swap 1 2 3
 	
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re val 
