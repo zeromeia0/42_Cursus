@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+         #
+#    By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/13 08:56:04 by vivaz-ca          #+#    #+#              #
-#    Updated: 2025/06/24 20:43:14 by vivaz-ca         ###   ########.fr        #
+#    Updated: 2025/06/25 12:57:35 by vivaz-ca         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,13 +49,25 @@ re: fclean all
 
 la: fclean
 
+sentence: re
+	@echo "Testand frase com 9 23 17 52 -9 -9 12332"
+	@./push_swap "9 23 17 52 -9 -9 12332"
+	
 cem: re
 	@echo "Testando com 100 numeros: \n"
 	@./push_swap $$(shuf -i 1-100 -n 100)
+	
+vcem: re
+	@echo "Testando com 100 numeros: \n"
+	-@valgrind --leak-check=full --show-leak-kinds=all -s ./push_swap $$(shuf -i 1-100 -n 100)
 
 quin: re
 	@echo "Testando com 500 numeros: \n"
 	./push_swap $$(shuf -i 1-500 -n 500)
+
+vquin: re
+	@echo "Testando com 500 numeros: \n"
+	-@valgrind --leak-check=full --show-leak-kinds=all -s ./push_swap $$(shuf -i 1-500 -n 500)
 
 strval: re
 	@echo "======= TESTE 1 =======\npush_swap 1\n"

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 13:28:39 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/24 20:41:34 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/25 13:23:50 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,8 @@ int	sentence(int argc, char **argv, t_base_value *value)
 
 	(void)argc;
 	if (!ft_strchr(argv[1], ' '))
-		return (ft_printf("Error\nAnimal\n"), 0);
-	if (argv[1][2] == '\0')
+		return (0);
+	if (argv[1][2] == '\0' || argv[1][1] == '\0')
 		return (0);
 	value->splited = ft_split(argv[1], ' ');
 	if (!value->splited)
