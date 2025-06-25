@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 13:28:39 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/25 13:23:50 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/25 14:17:37 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,18 @@ int	already_sorted(t_base_value *value)
 	return (1);
 }
 
+int nonum(char **argv)
+{
+	int i = 0;
+	while (argv[1][i] != '\0')
+	{
+		if (argv[1][i] < '0' && argv[1][i] > '9')
+			return (ft_printf("Non numeric\n"), 0);
+		i++;
+	}
+	return (0);
+}
+
 int	sentence(int argc, char **argv, t_base_value *value)
 {
 	int i = 0;
@@ -87,11 +99,16 @@ int	sentence(int argc, char **argv, t_base_value *value)
 	for (int j = 0; j < i; j++)
 		value->stack->stack_a[j] = ft_atol(value->splited[j]);
 	index_it(value);
+	if (i == 5)
+	{
+		sort_five(value);
+		print_stack("stack_a: ", value->stack->stack_a, value->stack->stack_a_length);
+		super_duper_hiper_free(1); // Free right after
+		exit(0); // Stop program after sorting
+	}
 	return (1);
 }
 
-
-// IF INPUT = FRASE RETURN MALL
 int	parsing(int argc, char *argv[], t_base_value *value)
 {
 	if (argc < 1)

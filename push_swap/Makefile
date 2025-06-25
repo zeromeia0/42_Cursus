@@ -6,7 +6,7 @@
 #    By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/13 08:56:04 by vivaz-ca          #+#    #+#              #
-#    Updated: 2025/06/25 12:57:35 by vivaz-ca         ###   ########.fr        #
+#    Updated: 2025/06/25 14:27:17 by vivaz-ca         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,8 +50,8 @@ re: fclean all
 la: fclean
 
 sentence: re
-	@echo "Testand frase com 9 23 17 52 -9 -9 12332"
-	@./push_swap "9 23 17 52 -9 -9 12332"
+	@echo "Testand frase com 9 23 17 52 -9"
+	@./push_swap "9 23 17 52 -9"
 	
 cem: re
 	@echo "Testando com 100 numeros: \n"

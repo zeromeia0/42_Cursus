@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 22:06:05 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/24 19:45:35 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/25 14:08:12 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ void	print_stuff(int argc, char *argv[], t_base_value *print)
 
 void	print_stack(const char *name, long *stack, int size)
 {
-	ft_printf("%s: ", name);
+	ft_printf("%s", name);
 	for (int i = 0; i < size; i++)
 		ft_printf("[%ld] ", stack[i]);
 	ft_printf("\n");
@@ -143,26 +143,26 @@ int	minimum_len(long *stk)
 	return (0);
 }
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_substr(char const *value, unsigned int start, size_t len)
 {
 	char			*str;
 	unsigned int	i;
 	unsigned int	j;
 
-	if (!s)
+	if (!value)
 		return (NULL);
-	if (start > ft_strlen(s))
+	if (start > ft_strlen(value))
 		return (ft_strdup(""));
-	if (ft_strlen(s + start) < len)
-		len = ft_strlen(s + start);
+	if (ft_strlen(value + start) < len)
+		len = ft_strlen(value + start);
 	str = (char *)malloc(sizeof(char) * (len + 1));
 	if (!str)
 		return (NULL);
 	i = start;
 	j = 0;
-	while (s[i] && j < len)
+	while (value[i] && j < len)
 	{
-		str[j] = s[i];
+		str[j] = value[i];
 		j++;
 		i++;
 	}
@@ -170,14 +170,66 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	return (str);
 }
 
-char	*ft_strchr(const char *s, int c)
+char	*ft_strchr(const char *value, int c)
 {
 	int i = 0;
-	while (s[i])
+	while (value[i])
 	{
-		if (s[i] == c)
-			return ((char *)&s[i]);
+		if (value[i] == c)
+			return ((char *)&value[i]);
 		i++;
 	}
 	return (NULL);
+}
+
+int five_elements(int argc, char *argv[], t_base_value *value)
+{
+	(void)argc;
+	(void)argv;
+	value->stack->stack_a_length = 5;
+	value->stack->stack_b_length = 0;
+	value->stack->stack_a = malloc(sizeof(long) * 5);
+	value->stack->stack_b = malloc(sizeof(long) * 5);
+	if (!value->stack->stack_a || !value->stack->stack_b)
+		return (free(value->stack->stack_a), free(value->stack->stack_b), free(value->stack), 0);
+	for (int j = 0; j < 5; j++)
+		value->stack->stack_a[j] = ft_atol(value->splited[j]);
+	index_it(value);
+	return (1);
+}
+
+int find_smallest_index(long *arr, int size)
+{
+	int i = 0;
+	int min_i = 0;
+	while (i < size)
+	{
+		if (arr[i] < arr[min_i])
+			min_i = i;
+		i++;
+	}
+	return min_i;
+}
+
+void sort_five(t_base_value *value)
+{
+	while (value->stack->stack_a_length > 3)
+	{
+		int min_index = find_smallest_index(value->stack->stack_a, value->stack->stack_a_length);
+		if (min_index == 0)
+			push_elements(value->stack->stack_a, value->stack->stack_b, value->stack, 1);
+		else if (min_index == 1)
+			single_swap(value->stack->stack_a, minimum_len), printf("sa\n"), push_elements(value->stack->stack_a, value->stack->stack_b, value->stack, 1);
+		else if (min_index == 2)
+			single_rotate(value->stack->stack_a, value->stack, 1), single_rotate(value->stack->stack_a, value->stack, 1), push_elements(value->stack->stack_a, value->stack->stack_b, value->stack, 1);
+		else if (min_index == 3)
+			reverse_rotate(value->stack->stack_a, value->stack, 1), reverse_rotate(value->stack->stack_a, value->stack, 1), push_elements(value->stack->stack_a, value->stack->stack_b, value->stack, 1);
+		else
+			reverse_rotate(value->stack->stack_a, value->stack, 1),  push_elements(value->stack->stack_a, value->stack->stack_b, value->stack, 1);
+	}
+	if (value->stack->stack_b[0] < value->stack->stack_b[1])
+		single_swap(value->stack->stack_b, minimum_len), printf("sb\n");
+
+	push_elements(value->stack->stack_b, value->stack->stack_a, value->stack, 0);
+	push_elements(value->stack->stack_b, value->stack->stack_a, value->stack, 0);
 }
