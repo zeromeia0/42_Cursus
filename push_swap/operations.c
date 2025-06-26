@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 10:46:18 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/23 21:24:37 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/26 08:28:10 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,12 @@ void	push_elements(long *src, long *dest, t_stack *stack, int which)
 		ft_printf("pa\n");
 }
 
-int	single_swap(long *stk_x, int(f)(long *))
+int	single_swap(long *stk_x, long len)
 {
 	long	temp;
 
-	if (!stk_x || (f)(stk_x) < 2)
-		return (ft_printf("Error\nArray nao tem tamanho\n"), 0);
+	if (!stk_x || len < 2)
+		return (ft_printf("Error\nSwap"), 0);
 	temp = stk_x[0];
 	stk_x[0] = stk_x[1];
 	stk_x[1] = temp;
@@ -69,8 +69,8 @@ void	double_swap(t_stack *stack)
 		ft_printf("Stack_b ta vazio\n");
 		return ;
 	}
-	single_swap(stack->stack_a, minimum_len);
-	single_swap(stack->stack_b, minimum_len);
+	single_swap(stack->stack_a, stack->stack_a_length);
+	single_swap(stack->stack_b, stack->stack_b_length);
 	ft_printf("ss\n");
 }
 

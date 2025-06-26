@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 16:28:37 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/25 14:54:17 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/26 08:44:54 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ int main(int argc, char *argv[])
 			for (int i = 0; i < argc - 1; i++)
 				valor->stack->stack_a[i] = ft_atol(argv[i + 1]);
 			index_it(valor);
-		
 			if (!parsing(argc, argv, valor))
 				return (0);
 		}
@@ -53,8 +52,13 @@ int main(int argc, char *argv[])
 	while ((max >> max_digits) != 0)
 		max_digits++;
 	valor->max_digits = max_digits;
-	radix_sort(valor);
-	print_stack("stack_a: ", valor->stack->stack_a, valor->stack->stack_a_length);
+	if (argc == 4)
+		sort_three(valor);
+	else if (argc == 6)
+		sort_five(valor);
+	else
+		radix_sort(valor);
+	print_stack("stack: ", valor->stack->stack_a, valor->stack->stack_a_length);
 	return (super_duper_hiper_free(0), 0);
 }
 

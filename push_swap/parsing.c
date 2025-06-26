@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 13:28:39 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/25 14:53:34 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/26 08:20:48 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	find_repetitive(int argc, char *argv[])
 		{
 			num_j = ft_atol(argv[j]);
 			if (num_i == num_j)
-				return (ft_printf("Error\nAnimal"), 0);
+				return (ft_printf("Error\n"), 0);
 			j++;
 		}
 		i++;
@@ -64,15 +64,11 @@ int	already_sorted(t_base_value *value)
 	return (1);
 }
 
-int nonum(const char *str)
+int str_nonum(const char *str)
 {
 	int i = 0;
-
-	// Allow optional '+' or '-'
 	if (str[i] == '-' || str[i] == '+')
 		i++;
-
-	// Must have at least one digit
 	if (!str[i])
 		return (0);
 	while (str[i])
@@ -84,12 +80,33 @@ int nonum(const char *str)
 	return (1);
 }
 
+int nbr_nonum(int argc, char *argv[])
+{
+	int i;
+	int	j;
+
+	i = 1;
+	while (i < argc)
+	{
+		j = 0;
+		while (argv[i][j])
+		{
+			if (!((argv[i][j] >= '0' && argv[i][j] <= '9') || argv[i][j] == ' ' || argv[i][j] == '+' || argv[i][j] == '-'))
+				return(ft_printf("Error\n"), 0);
+			j++;
+		}
+		i++;
+	}
+	return (1);
+}
+
 
 int	sentence(int argc, char **argv, t_base_value *value)
 {
 	int i = 0;
 
-	(void)argc;
+	if (!nbr_nonum(argc, argv))
+		return (0);
 	if (!ft_strchr(argv[1], ' '))
 		return (0);
 	if (argv[1][2] == '\0' || argv[1][1] == '\0')
@@ -107,8 +124,8 @@ int	sentence(int argc, char **argv, t_base_value *value)
 		return (free(value->stack->stack_a), free(value->stack->stack_b), free(value->stack), 0);
 	for (int j = 0; j < i; j++)
 		{
-			if (!nonum(value->splited[j]))
-				return (ft_printf("Error\nBurro"), super_duper_hiper_free(1), exit(1), 0);
+			if (!str_nonum(value->splited[j]))
+				return (ft_printf("Error\n"), super_duper_hiper_free(1), exit(1), 0);
 			value->stack->stack_a[j] = ft_atol(value->splited[j]);
 		}
 	index_it(value);
@@ -119,6 +136,12 @@ int	sentence(int argc, char **argv, t_base_value *value)
 		super_duper_hiper_free(1); // Free right after
 		exit(0); // Stop program after sorting
 	}
+	if (i == 3)
+	{
+		sort_three(value);
+		super_duper_hiper_free(1); // Free right after
+		exit(0); // Stop program after sorting
+	}
 	return (1);
 }
 
@@ -126,6 +149,8 @@ int	parsing(int argc, char *argv[], t_base_value *value)
 {
 	if (argc < 1)
 		return (1);
+	if (!nbr_nonum(argc, argv))
+		return (super_duper_hiper_free(1), 0);
 	if (argc == 1)
 		return (0);
 	if (!find_repetitive(argc, argv))
@@ -134,5 +159,6 @@ int	parsing(int argc, char *argv[], t_base_value *value)
 		return (super_duper_hiper_free(1), 0);
 	if (!already_sorted(value))
 		return (super_duper_hiper_free(1), 0);
+	
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 22:06:05 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/25 14:08:12 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/26 08:47:31 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -216,20 +216,62 @@ void sort_five(t_base_value *value)
 	while (value->stack->stack_a_length > 3)
 	{
 		int min_index = find_smallest_index(value->stack->stack_a, value->stack->stack_a_length);
-		if (min_index == 0)
-			push_elements(value->stack->stack_a, value->stack->stack_b, value->stack, 1);
-		else if (min_index == 1)
-			single_swap(value->stack->stack_a, minimum_len), printf("sa\n"), push_elements(value->stack->stack_a, value->stack->stack_b, value->stack, 1);
-		else if (min_index == 2)
-			single_rotate(value->stack->stack_a, value->stack, 1), single_rotate(value->stack->stack_a, value->stack, 1), push_elements(value->stack->stack_a, value->stack->stack_b, value->stack, 1);
-		else if (min_index == 3)
-			reverse_rotate(value->stack->stack_a, value->stack, 1), reverse_rotate(value->stack->stack_a, value->stack, 1), push_elements(value->stack->stack_a, value->stack->stack_b, value->stack, 1);
+		int len = value->stack->stack_a_length;
+		if (min_index <= len / 2)
+		{
+			while (min_index-- > 0)
+			{
+				single_rotate(value->stack->stack_a, value->stack, 1);
+				ft_printf("ra\n");
+			}
+		}
 		else
-			reverse_rotate(value->stack->stack_a, value->stack, 1),  push_elements(value->stack->stack_a, value->stack->stack_b, value->stack, 1);
+		{
+			while (min_index++ < len)
+			{
+				reverse_rotate(value->stack->stack_a, value->stack, 1);
+				ft_printf("rra\n");
+			}
+		}
+		push_elements(value->stack->stack_a, value->stack->stack_b, value->stack, 1); // pb
+		ft_printf("pb\n");
 	}
-	if (value->stack->stack_b[0] < value->stack->stack_b[1])
-		single_swap(value->stack->stack_b, minimum_len), printf("sb\n");
+	sort_three(value); // Sort the remaining 3 in A
+	if (value->stack->stack_b_length == 2 &&
+		value->stack->stack_b[0] < value->stack->stack_b[1])
+	{
+		single_swap(value->stack->stack_b, value->stack->stack_b_length);
+		ft_printf("sb\n");
+	}
+	push_elements(value->stack->stack_b, value->stack->stack_a, value->stack, 0); // pa
+	ft_printf("pa\n");
+	push_elements(value->stack->stack_b, value->stack->stack_a, value->stack, 0); // pa
+	ft_printf("pa\n");
+}
 
-	push_elements(value->stack->stack_b, value->stack->stack_a, value->stack, 0);
-	push_elements(value->stack->stack_b, value->stack->stack_a, value->stack, 0);
+
+void sort_three(t_base_value *value)
+{
+	long *a = value->stack->stack_a;
+	int len = value->stack->stack_a_length;
+
+	if (len != 3)
+		return;
+
+	if (a[0] > a[1] && a[1] < a[2] && a[0] < a[2])
+		single_swap(a, len), ft_printf("sa\n");
+	else if (a[0] > a[1] && a[1] > a[2])
+	{
+		single_swap(a, len), ft_printf("sa\n");
+		reverse_rotate(a, value->stack, 1); ft_printf("rra\n");
+	}
+	else if (a[0] > a[1] && a[1] < a[2] && a[0] > a[2])
+		single_rotate(a, value->stack, 1), ft_printf("ra\n");
+	else if (a[0] < a[1] && a[1] > a[2] && a[0] < a[2])
+	{
+		single_swap(a, len), ft_printf("sa\n");
+		single_rotate(a, value->stack, 1); ft_printf("ra\n");
+	}
+	else if (a[0] < a[1] && a[1] > a[2] && a[0] > a[2])
+		reverse_rotate(a, value->stack, 1), ft_printf("rra\n");
 }

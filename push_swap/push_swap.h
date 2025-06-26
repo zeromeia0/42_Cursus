@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 22:06:40 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/25 14:43:26 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/26 08:27:19 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int				parsing(int argc, char *argv[], t_base_value *value);
 int				ft_strcmp(char *s1, char *s2);
 int				minimum_len(long *stk);
 int	check_stat(t_base_value *value);
-int				single_swap(long *stk_x, int(f)(long *));
+int	single_swap(long *stk_x, long len);
 int				index_it(t_base_value *value);
 int				get_most_digits(int argc, t_base_value *value,
 					long *max_digits);
@@ -68,6 +68,8 @@ char	**ft_split(const char *s, char c);
 int	sentence(int argc, char **argv, t_base_value *value);
 char	*ft_strchr(const char *s, int c);
 void sort_five(t_base_value *value);
-int nonum(const char *str);
+int str_nonum(const char *str);
+int nbr_nonum(int argc, char *argv[]);
+void sort_three(t_base_value *value);
 
 #endif
