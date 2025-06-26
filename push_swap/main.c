@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 16:28:37 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/26 08:44:54 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/26 08:48:04 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int main(int argc, char *argv[])
 		sort_five(valor);
 	else
 		radix_sort(valor);
-	print_stack("stack: ", valor->stack->stack_a, valor->stack->stack_a_length);
+	// print_stack("stack: ", valor->stack->stack_a, valor->stack->stack_a_length);
 	return (super_duper_hiper_free(0), 0);
 }
 
