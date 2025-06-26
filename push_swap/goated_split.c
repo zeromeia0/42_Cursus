@@ -27,8 +27,9 @@ static int	count_words(const char *s, char c)
 
 static char	**split_recursive(const char *s, char c, char **arr, int i)
 {
-	int len = 0;
+	int	len;
 
+	len = 0;
 	while (*s == c)
 		s++;
 	if (!*s)

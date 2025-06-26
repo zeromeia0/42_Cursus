@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+         #
+#    By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/13 08:56:04 by vivaz-ca          #+#    #+#              #
-#    Updated: 2025/06/25 14:27:17 by vivaz-ca         ###   ########.fr        #
+#    Updated: 2025/06/26 14:58:24 by vivaz-ca         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,6 +52,19 @@ la: fclean
 sentence: re
 	@echo "Testand frase com 9 23 17 52 -9"
 	@./push_swap "9 23 17 52 -9"
+
+proof: re
+	@echo "Testando com o checker"
+	@ARG="$$(shuf -i 1-100 -n 100 | tr '\n' ' ')"; \
+	./push_swap $$ARG | ./checker_linux $$ARG
+
+count_one: re
+	@ARG="$$(shuf -i 1-100 -n 100 | tr '\n' ' ')"; \
+	./push_swap $$ARG | wc -l
+
+count_two: re
+	@ARG="$$(shuf -i 1-900 -n 500 | tr '\n' ' ')"; \
+	./push_swap $$ARG | wc -l
 	
 cem: re
 	@echo "Testando com 100 numeros: \n"
@@ -63,7 +76,7 @@ vcem: re
 
 quin: re
 	@echo "Testando com 500 numeros: \n"
-	./push_swap $$(shuf -i 1-500 -n 500)
+	@./push_swap $$(shuf -i 1-500 -n 500)
 
 vquin: re
 	@echo "Testando com 500 numeros: \n"

@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 21:34:52 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/24 17:24:18 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/26 15:16:45 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 void	super_duper_hiper_free(int chama)
 {
-	t_base_value *valor;
+	t_base_value	*valor;
+
 	(void)chama;
 	valor = value();
 	if (!valor)
-		return;
-
+		return ;
 	if (valor->stack)
 	{
 		if (valor->stack->stack_a)
@@ -32,9 +32,10 @@ void	super_duper_hiper_free(int chama)
 			free(valor->stack->stack_b);
 			valor->stack->stack_b = NULL;
 		}
+		if (valor->splited)
+			free_split(valor->splited);
 		free(valor->stack);
 		valor->stack = NULL;
 	}
 	exit(0);
-	// exit(chama);
 }

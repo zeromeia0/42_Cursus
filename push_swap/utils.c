@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 22:06:05 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/26 12:31:08 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/26 15:16:02 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,28 +211,45 @@ int find_smallest_index(long *arr, int size)
 	return min_i;
 }
 
-void sort_five(t_base_value *value)
+void	sort_five(t_base_value *value)
 {
-    while (value->stack->stack_a_length > 3)
-    {
-        int min_index = find_smallest_index(value->stack->stack_a, value->stack->stack_a_length);
-        int len = value->stack->stack_a_length;
-        
-        if (min_index <= len / 2)
-        {
-            while (min_index-- > 0)
-                single_rotate(value->stack->stack_a, value->stack, 0);
-        }
-        else
-        {
-            while (min_index++ < len)
-                reverse_rotate(value->stack->stack_a, value->stack, 0);
-        }
-        push_elements(value->stack->stack_a, value->stack->stack_b, value->stack, 1); // pb
-    }
-    sort_three(value);
-    while (value->stack->stack_b_length > 0)
-        push_elements(value->stack->stack_b, value->stack->stack_a, value->stack, 0); // pa
+	int	min_index;
+	int	len;
+
+	while (value->stack->stack_a_length > 3)
+	{
+		min_index = find_smallest_index(value->stack->stack_a, value->stack->stack_a_length);
+		len = value->stack->stack_a_length;
+		if (min_index <= len / 2)
+		{
+			while (min_index-- > 0)
+				single_rotate(value->stack->stack_a, value->stack, 1); // 🔁 USE 1 instead of 0
+		}
+		else
+		{
+			while (min_index++ < len)
+				reverse_rotate(value->stack->stack_a, value->stack, 0); // rra works fine
+		}
+		push_elements(value->stack->stack_a, value->stack->stack_b, value->stack, 1); // pb
+	}
+	sort_three(value);
+	if (value->stack->stack_b[0] < value->stack->stack_b[1])
+		single_swap(value->stack->stack_b, value->stack->stack_b_length, 1); // sb
+	push_elements(value->stack->stack_b, value->stack->stack_a, value->stack, 0); // pa
+	push_elements(value->stack->stack_b, value->stack->stack_a, value->stack, 0); // pa
+	super_duper_hiper_free(1);
+}
+
+void	free_split(char **arr)
+{
+	int	i = 0;
+
+	if (!arr)
+		return ;
+	while (arr[i])
+		free(arr[i++]);
+	free(arr);
+	arr = NULL;
 }
 
 void sort_three(t_base_value *value)
@@ -258,4 +275,5 @@ void sort_three(t_base_value *value)
         single_rotate(a, value->stack, 1);
         single_rotate(a, value->stack, 1);
     }
+	super_duper_hiper_free(1);
 }

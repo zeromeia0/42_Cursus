@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 16:28:37 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/26 12:14:51 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/26 15:04:29 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
         if (!sentence(argc, argv, valor))
             return (free(valor->stack), 1);
         if (!parsing(valor->stack->stack_a_length, valor->splited, valor))
-            return (0);
+            return (free_split(valor->splited), 1);
     }
     else if (argc > 2)
     {
@@ -58,15 +58,15 @@ int main(int argc, char *argv[])
         valor->max_digits = max_digits;
         
         if (valor->stack->stack_a_length == 3)
-            {sort_three(valor);}
+            sort_three(valor);
         else if (valor->stack->stack_a_length == 5)
             sort_five(valor);
         else
             radix_sort(valor);
         
-        print_stack("stack_a: ", valor->stack->stack_a, valor->stack->stack_a_length);
-    }
-    
+		}
+		
+    // print_stack("stack_a: ", valor->stack->stack_a, valor->stack->stack_a_length);
     super_duper_hiper_free(0);
     return (0);
 }

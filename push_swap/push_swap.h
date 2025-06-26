@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 22:06:40 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/26 12:27:48 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/26 15:02:32 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,6 @@ void sort_five(t_base_value *value);
 int str_nonum(const char *str);
 int nbr_nonum(int argc, char *argv[]);
 void sort_three(t_base_value *value);
+void	free_split(char **arr);
 
 #endif

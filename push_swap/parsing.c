@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 13:28:39 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/26 08:20:48 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/26 15:09:01 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,29 +121,42 @@ int	sentence(int argc, char **argv, t_base_value *value)
 	value->stack->stack_a = malloc(sizeof(long) * i);
 	value->stack->stack_b = malloc(sizeof(long) * i);
 	if (!value->stack->stack_a || !value->stack->stack_b)
-		return (free(value->stack->stack_a), free(value->stack->stack_b), free(value->stack), 0);
+	{
+		free_split(value->splited);
+		free(value->stack->stack_a);
+		free(value->stack->stack_b);
+		free(value->stack);
+		return (0);
+	}
 	for (int j = 0; j < i; j++)
+	{
+		if (!str_nonum(value->splited[j]))
 		{
-			if (!str_nonum(value->splited[j]))
-				return (ft_printf("Error\n"), super_duper_hiper_free(1), exit(1), 0);
-			value->stack->stack_a[j] = ft_atol(value->splited[j]);
+			ft_printf("Error\n");
+			free_split(value->splited);
+			super_duper_hiper_free(1);
+			exit(1);
 		}
+		value->stack->stack_a[j] = ft_atol(value->splited[j]);
+	}
 	index_it(value);
 	if (i == 5)
 	{
 		sort_five(value);
-		print_stack("stack_a: ", value->stack->stack_a, value->stack->stack_a_length);
-		super_duper_hiper_free(1); // Free right after
-		exit(0); // Stop program after sorting
+		free_split(value->splited);
+		super_duper_hiper_free(1);
+		exit(0);
 	}
 	if (i == 3)
 	{
 		sort_three(value);
-		super_duper_hiper_free(1); // Free right after
-		exit(0); // Stop program after sorting
+		free_split(value->splited);
+		super_duper_hiper_free(1);
+		exit(0);
 	}
 	return (1);
 }
+
 
 int	parsing(int argc, char *argv[], t_base_value *value)
 {
