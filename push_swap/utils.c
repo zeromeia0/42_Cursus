@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 22:06:05 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/26 08:47:31 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/26 12:31:08 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,65 +213,49 @@ int find_smallest_index(long *arr, int size)
 
 void sort_five(t_base_value *value)
 {
-	while (value->stack->stack_a_length > 3)
-	{
-		int min_index = find_smallest_index(value->stack->stack_a, value->stack->stack_a_length);
-		int len = value->stack->stack_a_length;
-		if (min_index <= len / 2)
-		{
-			while (min_index-- > 0)
-			{
-				single_rotate(value->stack->stack_a, value->stack, 1);
-				ft_printf("ra\n");
-			}
-		}
-		else
-		{
-			while (min_index++ < len)
-			{
-				reverse_rotate(value->stack->stack_a, value->stack, 1);
-				ft_printf("rra\n");
-			}
-		}
-		push_elements(value->stack->stack_a, value->stack->stack_b, value->stack, 1); // pb
-		ft_printf("pb\n");
-	}
-	sort_three(value); // Sort the remaining 3 in A
-	if (value->stack->stack_b_length == 2 &&
-		value->stack->stack_b[0] < value->stack->stack_b[1])
-	{
-		single_swap(value->stack->stack_b, value->stack->stack_b_length);
-		ft_printf("sb\n");
-	}
-	push_elements(value->stack->stack_b, value->stack->stack_a, value->stack, 0); // pa
-	ft_printf("pa\n");
-	push_elements(value->stack->stack_b, value->stack->stack_a, value->stack, 0); // pa
-	ft_printf("pa\n");
+    while (value->stack->stack_a_length > 3)
+    {
+        int min_index = find_smallest_index(value->stack->stack_a, value->stack->stack_a_length);
+        int len = value->stack->stack_a_length;
+        
+        if (min_index <= len / 2)
+        {
+            while (min_index-- > 0)
+                single_rotate(value->stack->stack_a, value->stack, 0);
+        }
+        else
+        {
+            while (min_index++ < len)
+                reverse_rotate(value->stack->stack_a, value->stack, 0);
+        }
+        push_elements(value->stack->stack_a, value->stack->stack_b, value->stack, 1); // pb
+    }
+    sort_three(value);
+    while (value->stack->stack_b_length > 0)
+        push_elements(value->stack->stack_b, value->stack->stack_a, value->stack, 0); // pa
 }
-
 
 void sort_three(t_base_value *value)
 {
-	long *a = value->stack->stack_a;
-	int len = value->stack->stack_a_length;
+    long *a = value->stack->stack_a;
 
-	if (len != 3)
-		return;
-
-	if (a[0] > a[1] && a[1] < a[2] && a[0] < a[2])
-		single_swap(a, len), ft_printf("sa\n");
-	else if (a[0] > a[1] && a[1] > a[2])
-	{
-		single_swap(a, len), ft_printf("sa\n");
-		reverse_rotate(a, value->stack, 1); ft_printf("rra\n");
+    if (a[0] > a[1] && a[1] < a[2] && a[0] < a[2])  // Case: 2 1 3
+        single_swap(a, 3, 0);
+    else if (a[0] > a[1] && a[1] > a[2])  // Case: 3 2 1
+    {
+        single_swap(a, 3, 0);
+        reverse_rotate(a, value->stack, 0);
+    }
+    else if (a[0] > a[1] && a[1] < a[2] && a[0] > a[2])  // Case: 3 1 2
+       single_rotate(a, value->stack, 1);
+    else if (a[0] < a[1] && a[1] > a[2] && a[0] < a[2])  // Case: 1 3 2
+    {
+		reverse_rotate(a, value->stack, 0);
+		single_swap(a, 3, 0);
 	}
-	else if (a[0] > a[1] && a[1] < a[2] && a[0] > a[2])
-		single_rotate(a, value->stack, 1), ft_printf("ra\n");
-	else if (a[0] < a[1] && a[1] > a[2] && a[0] < a[2])
-	{
-		single_swap(a, len), ft_printf("sa\n");
-		single_rotate(a, value->stack, 1); ft_printf("ra\n");
-	}
-	else if (a[0] < a[1] && a[1] > a[2] && a[0] > a[2])
-		reverse_rotate(a, value->stack, 1), ft_printf("rra\n");
+    else if (a[0] < a[1] && a[1] > a[2] && a[0] > a[2])  // Case: 2 3 1
+    {
+        single_rotate(a, value->stack, 1);
+        single_rotate(a, value->stack, 1);
+    }
 }

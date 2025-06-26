@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 22:06:40 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/26 08:27:19 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/26 12:27:48 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int				parsing(int argc, char *argv[], t_base_value *value);
 int				ft_strcmp(char *s1, char *s2);
 int				minimum_len(long *stk);
 int	check_stat(t_base_value *value);
-int	single_swap(long *stk_x, long len);
+int	single_swap(long *stk_x, long len, int which);
 int				index_it(t_base_value *value);
 int				get_most_digits(int argc, t_base_value *value,
 					long *max_digits);
