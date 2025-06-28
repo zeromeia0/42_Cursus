@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 21:34:52 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/26 15:16:45 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/28 14:22:45 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,27 @@ void	super_duper_hiper_free(int chama)
 			free(valor->stack->stack_b);
 			valor->stack->stack_b = NULL;
 		}
-		if (valor->splited)
-			free_split(valor->splited);
 		free(valor->stack);
 		valor->stack = NULL;
 	}
+	if (valor->splited)
+		free_split(valor->splited);
 	exit(0);
+}
+
+
+void	free_split(char **arr)
+{
+	int	i;
+	
+	if (!arr)
+		return ;
+	i = 0;
+	while (arr[i])
+	{
+		free(arr[i]);
+		arr[i] = NULL;
+		i++;
+	}
+	free(arr);
 }

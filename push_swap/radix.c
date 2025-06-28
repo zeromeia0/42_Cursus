@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 12:36:29 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/28 13:48:02 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/28 14:31:14 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,6 @@ void	sort_five(t_base_value *value)
 
 	push_elements(value->stack->stack_b, value->stack->stack_a, value->stack, 0); // pa
 	push_elements(value->stack->stack_b, value->stack->stack_a, value->stack, 0); // pa
-	print_stack("stack: ", value->stack->stack_a, value->stack->stack_a_length);
+	// print_stack("stack: ", value->stack->stack_a, value->stack->stack_a_length);
 	super_duper_hiper_free(1);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 13:28:39 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/26 15:09:01 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/28 14:12:51 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,19 +121,12 @@ int	sentence(int argc, char **argv, t_base_value *value)
 	value->stack->stack_a = malloc(sizeof(long) * i);
 	value->stack->stack_b = malloc(sizeof(long) * i);
 	if (!value->stack->stack_a || !value->stack->stack_b)
-	{
-		free_split(value->splited);
-		free(value->stack->stack_a);
-		free(value->stack->stack_b);
-		free(value->stack);
-		return (0);
-	}
+		return (super_duper_hiper_free(1), 0);
 	for (int j = 0; j < i; j++)
 	{
 		if (!str_nonum(value->splited[j]))
 		{
 			ft_printf("Error\n");
-			free_split(value->splited);
 			super_duper_hiper_free(1);
 			exit(1);
 		}
@@ -143,14 +136,11 @@ int	sentence(int argc, char **argv, t_base_value *value)
 	if (i == 5)
 	{
 		sort_five(value);
-		free_split(value->splited);
-		super_duper_hiper_free(1);
 		exit(0);
 	}
 	if (i == 3)
 	{
 		sort_three(value);
-		free_split(value->splited);
 		super_duper_hiper_free(1);
 		exit(0);
 	}
