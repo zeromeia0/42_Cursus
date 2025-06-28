@@ -6,18 +6,21 @@
 /*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 16:28:37 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/28 14:31:09 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/28 15:46:53 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int main(int argc, char *argv[])
+int	main(int argc, char *argv[])
 {
-	t_base_value *valor = value();
+	t_base_value	*valor;
+	long			max;
+	int				max_digits;
+
+	valor = value();
 	if (argc < 2)
 		return (0);
-	
 	valor->stack = malloc(sizeof(t_stack));
 	if (!valor->stack)
 		return (1);
@@ -32,7 +35,6 @@ int main(int argc, char *argv[])
 	{
 		valor->stack->stack_a_length = argc - 1;
 		valor->stack->stack_b_length = 0;
-	
 		valor->stack->stack_a = malloc(sizeof(long) * (argc - 1));
 		if (!valor->stack->stack_a)
 			return (free(valor->stack), 1);
@@ -45,22 +47,21 @@ int main(int argc, char *argv[])
 			return (0);
 		if (!parsing(argc, argv, valor))
 			return (0);
-		long max = valor->stack->stack_a_length - 1;
-		int max_digits = 0;
+		max = valor->stack->stack_a_length - 1;
+		max_digits = 0;
 		while ((max >> max_digits) != 0)
 			max_digits++;
 		valor->max_digits = max_digits;
 		if (valor->stack->stack_a_length == 3)
-			{
-				sort_three(valor);
-				return (super_duper_hiper_free(0), 0);
-			}
+		{
+			sort_three(valor);
+			return (super_duper_hiper_free(0), 0);
+		}
 		else if (valor->stack->stack_a_length == 5)
 			sort_five(valor);
 		else
 			radix_sort(valor);
-		}
-	// print_stack("Final stack: ", valor->stack->stack_a, valor->stack->stack_a_length);
+	}
 	super_duper_hiper_free(0);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 10:46:18 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/28 15:17:09 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/28 15:42:25 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	single_swap(long *stk_x, long len, int which)
 	long	temp;
 
 	if (!stk_x || len < 1)
-		return (write(2, "Error\n", 6), 0);
+		return (ERRADO, 0);
 	temp = stk_x[0];
 	stk_x[0] = stk_x[1];
 	stk_x[1] = temp;

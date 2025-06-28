@@ -6,7 +6,7 @@
 #    By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/13 08:56:04 by vivaz-ca          #+#    #+#              #
-#    Updated: 2025/06/28 15:20:08 by vivaz-ca         ###   ########.fr        #
+#    Updated: 2025/06/28 15:39:13 by vivaz-ca         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ OBJDIR = objs
 PRINTF_DIR = ./my_printf
 
 SRC = \
-	$(SRCDIR)/utils.c main.c parsing.c operations.c indexing.c radix.c goated_split.c free.c double_operations.c sentence.c\
+	$(SRCDIR)/utils.c main.c parsing.c operations.c indexing.c radix.c goated_split.c free.c double_operations.c sentence.c utils2.c digits.c\
 	$(PRINTF_DIR)/printf_utils.c \
 	$(PRINTF_DIR)/printf_utils2.c \
 	$(PRINTF_DIR)/printf_utils3.c \
@@ -51,7 +51,6 @@ la: fclean
 
 norm:
 	@norminette | grep "c: Error"
-	@norminette | grep "h: Error"
 	@echo "\nAmount of errors: " && norminette | grep "Error" | wc -l
 	
 sentence: re
