@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 22:06:40 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/28 15:44:04 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/28 15:53:02 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 # include <strings.h>
 # include <unistd.h>
 # define TWO_BIG "Error\n"
-# define ERRADO write(2, "Error\n", 6)
 
 typedef struct s_stack
 {
@@ -81,5 +80,6 @@ int				find_smallest_index(long *arr, int size);
 void			perform_push(long *src, long *dest, long *src_size,
 					long *dest_size);
 long			count_digits_loser(long nb);
+int				calculate_max_digits(long max);
 
 #endif

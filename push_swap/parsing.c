@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 13:28:39 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/28 15:42:48 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/28 15:52:57 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@ int	find_repetitive(int argc, char *argv[])
 	{
 		num_i = ft_atol(argv[i]);
 		if (num_i > INT_MAX || num_i < INT_MIN)
-			return (ERRADO, 0);
+			return (write(2, "Error\n", 6), 0);
 		j = i + 1;
 		while (j < argc)
 		{
 			num_j = ft_atol(argv[j]);
 			if (num_i == num_j)
-				return (ERRADO, 0);
+				return (write(2, "Error\n", 6), 0);
 			j++;
 		}
 		i++;

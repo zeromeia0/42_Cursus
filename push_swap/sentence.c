@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 15:17:59 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/28 15:44:56 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/28 15:52:57 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	nbr_nonum(int argc, char *argv[])
 		{
 			if (!((argv[i][j] >= '0' && argv[i][j] <= '9') || argv[i][j] == ' '
 					|| argv[i][j] == '+' || argv[i][j] == '-'))
-				return (ERRADO, 0);
+				return (write(2, "Error\n", 6), 0);
 			j++;
 		}
 		i++;

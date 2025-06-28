@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 12:36:29 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/28 14:45:18 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/28 15:51:29 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,4 +91,14 @@ void	sort_five(t_base_value *v)
 	push_elements(v->stack->stack_b, v->stack->stack_a, v->stack, 0);
 	push_elements(v->stack->stack_b, v->stack->stack_a, v->stack, 0);
 	super_duper_hiper_free(1);
+}
+
+int	calculate_max_digits(long max)
+{
+	int	max_digits;
+
+	max_digits = 0;
+	while ((max >> max_digits) != 0)
+		max_digits++;
+	return (max_digits);
 }
