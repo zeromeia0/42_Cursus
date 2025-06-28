@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 22:06:40 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/28 13:34:58 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/28 14:57:02 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,10 @@ typedef struct s_stack
 
 typedef struct s_base_values
 {
+	int			min_in;
+	int			lena;
+	int			i;
+	int			j;
 	long		max_digits;
 	long		received_number;
 	char		**splited;

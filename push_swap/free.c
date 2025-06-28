@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 21:34:52 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/28 14:22:45 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/28 14:59:42 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,10 @@ void	super_duper_hiper_free(int chama)
 	exit(0);
 }
 
-
 void	free_split(char **arr)
 {
 	int	i;
-	
+
 	if (!arr)
 		return ;
 	i = 0;

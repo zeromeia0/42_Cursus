@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   operations.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 10:46:18 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/26 14:49:36 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/28 15:02:55 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	single_swap(long *stk_x, long len, int which)
 	long	temp;
 
 	if (!stk_x || len < 1)
-		return (ft_printf("Error\n"), 0);
+		return (write(2, "Error\n", 6), 0);
 	temp = stk_x[0];
 	stk_x[0] = stk_x[1];
 	stk_x[1] = temp;
@@ -86,7 +86,10 @@ void	single_rotate(long *stk_x, t_stack *stack, int which)
 
 	len = which == 1 ? stack->stack_a_length : stack->stack_b_length;
 	if (len < 1)
-		{printf("len pequena"); return ;}
+	{
+		printf("len pequena");
+		return ;
+	}
 	temp = stk_x[0];
 	i = 0;
 	while (i < len - 1)

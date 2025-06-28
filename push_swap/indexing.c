@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 10:43:20 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/25 13:03:24 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/28 14:59:19 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,39 +53,32 @@ long	*quick_sort(t_base_value *value)
 	}
 	return (sorted);
 }
-int index_it(t_base_value *value)
+
+int	index_it(t_base_value *value)
 {
-    long *sorted;
-    long *copied;
-    int i, j;
+	long	*sorted;
+	long	*copied;
 
-    sorted = quick_sort(value);
-    copied = copy_array(value);
-    if (!sorted || !copied)
-        return (free(sorted), free(copied), super_duper_hiper_free(1), 0);
-    i = 0;
-    while (i < value->stack->stack_a_length)
-    {
-        j = 0;
-        while (j < value->stack->stack_a_length)
-        {
-            if (copied[i] == sorted[j])
-            {
-                copied[i] = j;
-                break;
-            }
-            j++;
-        }
-        i++;
-    }
-    i = 0;
-    while (i < value->stack->stack_a_length)
-    {
-        value->stack->stack_a[i] = copied[i];
-        i++;
-    }
-    free(sorted);
-    free(copied);
-    return (1);
+	sorted = quick_sort(value);
+	copied = copy_array(value);
+	if (!sorted || !copied)
+		return (free(sorted), free(copied), super_duper_hiper_free(1), 0);
+	value->i = -1;
+	while (++value->i < value->stack->stack_a_length)
+	{
+		value->j = 0;
+		while (value->j < value->stack->stack_a_length)
+		{
+			if (copied[value->i] == sorted[value->j])
+			{
+				copied[value->i] = value->j;
+				break ;
+			}
+			value->j++;
+		}
+	}
+	value->i = -1;
+	while (++value->i < value->stack->stack_a_length)
+		value->stack->stack_a[value->i] = copied[value->i];
+	return (free(sorted), free(copied), 1);
 }
-

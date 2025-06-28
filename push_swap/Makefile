@@ -6,7 +6,7 @@
 #    By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/13 08:56:04 by vivaz-ca          #+#    #+#              #
-#    Updated: 2025/06/28 13:52:16 by vivaz-ca         ###   ########.fr        #
+#    Updated: 2025/06/28 14:39:50 by vivaz-ca         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,6 +49,10 @@ re: fclean all
 
 la: fclean
 
+norm: re
+	@norminette  | grep "c: Error"
+	@echo "\nAmount of errors: " && norminette | grep "Error" | wc -l
+	
 sentence: re
 	@echo "Testand frase com 9 23 17 52 -9"
 	@./push_swap "9 23 17 52 -9"
