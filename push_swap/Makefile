@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+         #
+#    By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/13 08:56:04 by vivaz-ca          #+#    #+#              #
-#    Updated: 2025/06/26 14:58:24 by vivaz-ca         ###   ########.fr        #
+#    Updated: 2025/06/28 13:52:16 by vivaz-ca         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -94,19 +94,25 @@ strval: re
 
 	@echo "\n======= TESTE 4 =======\npush_swap 1 2 3\n"
 	-@valgrind --leak-check=full --show-leak-kinds=all -s ./push_swap "1 2 3"
+	
+	@echo "\n======= TESTE 5 =======\npush_swap 9 1 33 -3 12\n"
+	-@valgrind --leak-check=full --show-leak-kinds=all -s ./push_swap "9 1 33 -3 12"
 
 nbrval: re
 	@echo "======= TESTE 1 =======\npush_swap 1\n"
 	-@valgrind --leak-check=full --show-leak-kinds=all -s ./push_swap 1
 
-	@echo "\n======= TESTE 2 =======\npush_swap 1 2\n"
-	-@valgrind --leak-check=full --show-leak-kinds=all -s ./push_swap 1 2
+	@echo "\n======= TESTE 2 =======\npush_swap 1 2 3\n"
+	-@valgrind --leak-check=full --show-leak-kinds=all -s ./push_swap 1 2 3
 
 	@echo "\n======= TESTE 3 =======\npush_swap 1 2 5 4\n"
 	-@valgrind --leak-check=full --show-leak-kinds=all -s ./push_swap 1 2 5 4
 
-	@echo "\n======= TESTE 4 =======\npush_swap 1 2 3\n"
-	-@valgrind --leak-check=full --show-leak-kinds=all -s ./push_swap 1 2 3
+	@echo "\n======= TESTE 4 =======\npush_swap 1 3 2\n"
+	-@valgrind --leak-check=full --show-leak-kinds=all -s ./push_swap 1 3 2 
+
+	@echo "\n======= TESTE 5 =======\npush_swap 9 1 33 -3 12\n"
+	-@valgrind --leak-check=full --show-leak-kinds=all -s ./push_swap 9 1 33 -3 12
 	
 
 .PHONY: all clean fclean re val 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   radix.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 12:36:29 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/26 17:16:09 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/28 13:48:02 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ void sort_three(t_base_value *value)
         single_rotate(a, value->stack, 1);
     }
 	// print_stack("Final stack: ", value->stack->stack_a, value->stack->stack_a_length);
-	super_duper_hiper_free(1);
 }
 
 void	sort_five(t_base_value *value)
@@ -78,20 +77,24 @@ void	sort_five(t_base_value *value)
 		if (min_index <= len / 2)
 		{
 			while (min_index-- > 0)
-				single_rotate(value->stack->stack_a, value->stack, 1); // 🔁 USE 1 instead of 0
+				single_rotate(value->stack->stack_a, value->stack, 1); // ra
 		}
 		else
 		{
 			while (min_index++ < len)
-				reverse_rotate(value->stack->stack_a, value->stack, 0); // rra works fine
+				reverse_rotate(value->stack->stack_a, value->stack, 0); // rra
 		}
 		push_elements(value->stack->stack_a, value->stack->stack_b, value->stack, 1); // pb
 	}
-	sort_three(value);
-	if (value->stack->stack_b[0] < value->stack->stack_b[1])
-		single_swap(value->stack->stack_b, value->stack->stack_b_length, 1); // sb
-	push_elements(value->stack->stack_b, value->stack->stack_a, value->stack, 0); // pa
-	push_elements(value->stack->stack_b, value->stack->stack_a, value->stack, 0); // pa
 
+	sort_three(value);
+
+	// Sort stack_b before pushing back
+	if (value->stack->stack_b_length == 2 && value->stack->stack_b[0] < value->stack->stack_b[1])
+		single_swap(value->stack->stack_b, value->stack->stack_b_length, 1); // sb
+
+	push_elements(value->stack->stack_b, value->stack->stack_a, value->stack, 0); // pa
+	push_elements(value->stack->stack_b, value->stack->stack_a, value->stack, 0); // pa
+	print_stack("stack: ", value->stack->stack_a, value->stack->stack_a_length);
 	super_duper_hiper_free(1);
 }
