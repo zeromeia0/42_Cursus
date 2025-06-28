@@ -6,7 +6,7 @@
 #    By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/13 08:56:04 by vivaz-ca          #+#    #+#              #
-#    Updated: 2025/06/28 14:39:50 by vivaz-ca         ###   ########.fr        #
+#    Updated: 2025/06/28 15:10:40 by vivaz-ca         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ OBJDIR = objs
 PRINTF_DIR = ./my_printf
 
 SRC = \
-	$(SRCDIR)/utils.c main.c parsing.c operations.c indexing.c radix.c goated_split.c free.c\
+	$(SRCDIR)/utils.c main.c parsing.c operations.c indexing.c radix.c goated_split.c free.c double_operations.c\
 	$(PRINTF_DIR)/printf_utils.c \
 	$(PRINTF_DIR)/printf_utils2.c \
 	$(PRINTF_DIR)/printf_utils3.c \
