@@ -6,24 +6,16 @@
 /*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 10:46:18 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/28 15:10:25 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/28 15:17:09 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	push_elements(long *src, long *dest, t_stack *stack, int which)
+void	perform_push(long *src, long *dest, long *src_size, long *dest_size)
 {
-	int		i;
-	long	*src_size;
-	long	*dest_size;
+	int	i;
 
-	if (which && stack->stack_a_length == 0)
-		return ;
-	if (!which && stack->stack_b_length == 0)
-		return ;
-	src_size = which ? &stack->stack_a_length : &stack->stack_b_length;
-	dest_size = which ? &stack->stack_b_length : &stack->stack_a_length;
 	i = *dest_size;
 	while (i > 0)
 	{
@@ -39,6 +31,28 @@ void	push_elements(long *src, long *dest, t_stack *stack, int which)
 		i++;
 	}
 	(*src_size)--;
+}
+
+void	push_elements(long *src, long *dest, t_stack *stack, int which)
+{
+	long	*src_size;
+	long	*dest_size;
+
+	if (which == 1)
+	{
+		if (stack->stack_a_length == 0)
+			return ;
+		src_size = &stack->stack_a_length;
+		dest_size = &stack->stack_b_length;
+	}
+	else
+	{
+		if (stack->stack_b_length == 0)
+			return ;
+		src_size = &stack->stack_b_length;
+		dest_size = &stack->stack_a_length;
+	}
+	perform_push(src, dest, src_size, dest_size);
 	if (which == 1)
 		ft_printf("pb\n");
 	else

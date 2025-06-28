@@ -6,7 +6,7 @@
 /*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 22:06:40 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/28 14:57:02 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/06/28 15:16:39 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,5 +77,6 @@ int nbr_nonum(int argc, char *argv[]);
 void sort_three(t_base_value *value);
 void	free_split(char **arr);
 int find_smallest_index(long *arr, int size);
+void	perform_push(long *src, long *dest, long *src_size, long *dest_size);
 
 #endif
