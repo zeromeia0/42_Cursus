@@ -6,11 +6,11 @@
 #    By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/30 16:31:31 by vivaz-ca          #+#    #+#              #
-#    Updated: 2025/06/30 16:33:49 by vivaz-ca         ###   ########.fr        #
+#    Updated: 2025/06/30 16:35:43 by vivaz-ca         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = sla
+NAME = mini
 SRCDIR = .
 OBJDIR = objs
 
