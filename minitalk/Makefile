@@ -6,30 +6,36 @@
 #    By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/30 16:31:31 by vivaz-ca          #+#    #+#              #
-#    Updated: 2025/07/01 19:07:37 by vivaz-ca         ###   ########.fr        #
+#    Updated: 2025/07/08 16:47:19 by vivaz-ca         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = server
+SERVER = server
+CLIENT = client
+
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
+SERVER_SRC = server.c utils.c
+CLIENT_SRC = client.c utils.c
+SERVER_OBJS = $(SERVER_SRC:.c=.o)
+CLIENT_OBJS = $(CLIENT_SRC:.c=.o)
 
-SRC = server.c utils.c
-OBJS = $(SRC:.c=.o)
+all: $(SERVER) $(CLIENT)
 
-all: $(NAME)
+$(SERVER): $(SERVER_OBJS)
+	$(CC) $(CFLAGS) $(SERVER_OBJS) -o $(SERVER)
 
-$(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
+$(CLIENT): $(CLIENT_OBJS)
+	$(CC) $(CFLAGS) $(CLIENT_OBJS) -o $(CLIENT)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJS)
+	rm -f *.o
 
 fclean: clean
-	rm -f $(NAME)
+	rm -f $(SERVER) $(CLIENT)
 
 re: fclean all
 
@@ -38,3 +44,4 @@ norm:
 	@echo "\nAmount of errors: " && norminette | grep "Error" | wc -l	
 
 .PHONY: all clean fclean re norm
+
