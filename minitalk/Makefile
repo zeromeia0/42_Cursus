@@ -6,41 +6,35 @@
 #    By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/30 16:31:31 by vivaz-ca          #+#    #+#              #
-#    Updated: 2025/06/30 16:35:43 by vivaz-ca         ###   ########.fr        #
+#    Updated: 2025/07/01 19:07:37 by vivaz-ca         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = mini
-SRCDIR = .
-OBJDIR = objs
-
-SRC = \
-	$(SRCDIR)/main.c utils.c \
-
-OBJS = $(SRC:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
-
+NAME = server
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
 
-$(NAME): $(OBJS)
-	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
+SRC = server.c utils.c
+OBJS = $(SRC:.c=.o)
 
-$(OBJDIR)/%.o: %.c
-	@mkdir -p $(dir $@)
-	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+all: $(NAME)
+
+$(NAME): $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
+
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	@rm -rf $(OBJDIR) ./a.out
+	rm -f $(OBJS)
 
 fclean: clean
-	@rm -f $(NAME)
+	rm -f $(NAME)
 
 re: fclean all
-
-la: fclean
 
 norm:
 	@norminette | grep "c: Error"
 	@echo "\nAmount of errors: " && norminette | grep "Error" | wc -l	
 
-.PHONY: all clean fclean re val 
+.PHONY: all clean fclean re norm

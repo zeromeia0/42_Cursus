@@ -1,20 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   server.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 16:29:56 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/06/30 16:30:39 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/07/01 19:09:20 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-int main(void)
+void print_pid(void)
 {
-	char str[] = "salve";
-	ft_putstr(str);
-	return (printf("\n"), 0);
+	pid_t process;
+	process = getpid();
+	printf("PID: %d\n", process);
+}
+
+int main(int argc, char *argv[])
+{
+	(void)argc;
+	(void)argv;
+	print_pid();
+	return (0);
 }
