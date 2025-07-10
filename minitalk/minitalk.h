@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minitalk.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vivaz-ca <vivaz-ca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vivaz-ca <vivaz-ca@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 22:06:40 by vivaz-ca          #+#    #+#             */
-/*   Updated: 2025/07/08 16:42:27 by vivaz-ca         ###   ########.fr       */
+/*   Updated: 2025/07/10 06:06:22 by vivaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 # include <strings.h>
 # include <sys/types.h>
 
-
 void	ft_putstr(char *str);
-void print_pid(void);
+void	print_pid(void);
+int		ft_atoi(char *str);
 
 #endif
