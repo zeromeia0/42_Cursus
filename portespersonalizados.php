@@ -117,30 +117,27 @@ class PortesPersonalizados extends Module
         return $allowedCarriers ?: $carriers; // Fallback to all if none match
     }
 
-    public function hookDisplayBeforeCarrier($params)
-    {
-        try {
-            $cart = $this->context->cart;
-            if (!$cart || !$cart->id_address_delivery) {
-                return '';
-            }
-
-            $address = new Address((int)$cart->id_address_delivery);
-            $region = $this->getRegionFromPostalCode($address->postcode);
-            
-            $this->context->smarty->assign([
-                'portes_region' => $region,
-                'portes_postcode' => $address->postcode,
-                'carrier_error' => Tools::getValue('error') == 'invalid_carrier' ? 
-                    $this->l('Please select a valid carrier for your region') : null
-            ]);
-
-            return $this->display(__FILE__, 'views/templates/hook/beforeCarrier.tpl');
-        } catch (Exception $e) {
-            PrestaShopLogger::addLog('PortesPersonalizados display error: '.$e->getMessage(), 3);
-            return '';
-        }
-    }
+public function hookDisplayBeforeCarrier($params)
+{
+    // 1. Get address data
+    $cart = $this->context->cart;
+    $address = new Address((int)$cart->id_address_delivery);
+    
+    // 2. Detect region
+    $region = $this->getRegionFromPostalCode($address->postcode);
+    
+    // 3. Assign template variables
+    $this->context->smarty->assign([
+        'portes_region' => $region,
+        'portes_postcode' => $address->postcode,
+        'carrier_error' => Tools::getValue('error') == 'invalid_carrier' 
+            ? $this->l('Please select a carrier valid for your region') 
+            : null
+    ]);
+    
+    // 4. Render template
+    return $this->display(__FILE__, 'views/templates/hook/beforeCarrier.tpl');
+}
 
     public function hookActionCarrierProcess($params)
     {
