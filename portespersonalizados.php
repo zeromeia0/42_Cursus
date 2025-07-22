@@ -56,20 +56,37 @@ class PortesPersonalizados extends Module
 
     // CORE FUNCTIONALITY
 
-    public function hookFilterCarrierList($carriers)
-    {
-        if (!$this->context->cart->id_address_delivery) {
-            return $carriers;
-        }
-
-        $address = new Address($this->context->cart->id_address_delivery);
-        $region = $this->getRegionFromPostcode($address->postcode);
-        $allowedCarriers = $this->getCarriersForRegion($region);
-
-        return array_filter($carriers, function($carrier) use ($allowedCarriers) {
-            return in_array($carrier['id_carrier'], $allowedCarriers);
-        });
+public function hookFilterCarrierList($carriers)
+{
+    if (!$this->context->cart->id_address_delivery) {
+        error_log("PortesPersonalizados: No delivery address, returning all carriers.");
+        return $carriers;
     }
+
+    $address = new Address($this->context->cart->id_address_delivery);
+    $region = $this->getRegionFromPostcode($address->postcode);
+    
+    error_log("PortesPersonalizados: Customer postcode {$address->postcode}, Region: $region");
+
+    $allowedCarriers = $this->getCarriersForRegion($region);
+    error_log("PortesPersonalizados: Allowed carriers for region $region: " . json_encode($allowedCarriers));
+
+    // If no allowed carriers found, either block shipment or return empty
+    if (empty($allowedCarriers)) {
+        error_log("PortesPersonalizados: No carriers allowed for region $region, returning empty list");
+        return [];
+    }
+
+    // Filter the carriers list to only allowed carriers
+    $filtered = array_filter($carriers, function($carrier) use ($allowedCarriers) {
+        return in_array($carrier['id_carrier'], $allowedCarriers);
+    });
+
+    error_log("PortesPersonalizados: Carriers filtered count: " . count($filtered));
+
+    return $filtered;
+}
+
 
     public function hookActionCarrierProcess($params)
     {
