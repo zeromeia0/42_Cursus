@@ -118,21 +118,37 @@ class PortesPersonalizados extends Module
         return $regions[$prefix] ?? $regions['default'];
     }
 
-    private function getCarriersForRegion($region)
-    {
-        $carrierMap = [
-            'Portugal Continental' => ['CTT - Portugal Continental'],
-            'Madeira' => ['CTT - Madeira'],
-            'Açores' => ['CTT - Açores']
-        ];
-
-        $validIds = [];
-        foreach ($carrierMap[$region] as $carrierName) {
-            if ($id = Carrier::getIdByName($carrierName)) {
-                $validIds[] = $id;
-            }
-        }
-
-        return $validIds;
+private function getCarriersForRegion($region)
+{
+    error_log("==== DEBUGGING CARRIERS ====");
+    error_log("Requested region: ".$region);
+    
+    $allCarriers = Carrier::getCarriers(
+        $this->context->language->id,
+        true, // active only
+        false, // include deleted
+        false, // id_zone
+        null,  // id_group
+        true   // return name with ID
+    );
+    
+    error_log("All available carriers:");
+    error_log(print_r($allCarriers, true));
+    
+    $carrierMap = [
+        'Portugal Continental' => ['CTT - Portugal Continental'],
+        'Madeira' => ['CTT - Madeira'],
+        'Açores' => ['CTT - Açores']
+    ];
+    
+    $validIds = [];
+    foreach ($carrierMap[$region] as $carrierName) {
+        $id = Carrier::getIdByName($carrierName);
+        error_log("Checking carrier: ".$carrierName." => ID: ".$id);
+        if ($id) $validIds[] = $id;
+    }
+    
+    error_log("Valid IDs for region: ".print_r($validIds, true));
+    return $validIds;
     }
 }
