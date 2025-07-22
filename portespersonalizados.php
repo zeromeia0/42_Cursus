@@ -71,21 +71,41 @@ class PortesPersonalizados extends Module
         });
     }
 
-    public function hookActionCarrierProcess($params)
-    {
-        /*if (!$this->context->cart->id_address_delivery) {
-            return;
+public function hookActionCarrierProcess($params)
+{
+    try {
+        // Debug: Log incoming parameters
+        file_put_contents(__DIR__.'/debug.log', print_r($params, true), FILE_APPEND);
+        
+        // 1. Basic validation
+        if (!isset($params['cart']) {
+            throw new Exception('Missing cart parameter');
         }
 
-        $address = new Address($this->context->cart->id_address_delivery);
-        $region = $this->getRegionFromPostcode($address->postcode);
-        $validCarriers = $this->getCarriersForRegion($region);
+        // 2. Get cart and address
+        $cart = $params['cart'];
+        if (!$cart->id_address_delivery) {
+            return true; // No address set yet
+        }
 
-        if (!in_array($params['cart']->id_carrier, $validCarriers)) {
-            $this->context->controller->errors[] = $this->l('Selected carrier is not available for your region');
-            return false;*/
+        $address = new Address($cart->id_address_delivery);
+        
+        // 3. Debug output
+        file_put_contents(__DIR__.'/debug.log', 
+            "Postcode: ".$address->postcode.PHP_EOL, 
+            FILE_APPEND);
+
+        // 4. Temporary bypass - comment this line after testing
         return true;
-        }
+
+        // [Your original validation code here]
+
+    } catch (Exception $e) {
+        file_put_contents(__DIR__.'/error.log', 
+            date('Y-m-d H:i:s')." - ".$e->getMessage().PHP_EOL, 
+            FILE_APPEND);
+        return false;
+    }
     }
 
     public function hookDisplayBeforeCarrier($params)
