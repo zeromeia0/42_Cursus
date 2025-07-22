@@ -9,7 +9,7 @@ class PortesPersonalizados extends Module
     {
         $this->name = 'portespersonalizados';
         $this->tab = 'shipping_logistics';
-        $this->version = '1.5.0';
+        $this->version = '1.5.1';
         $this->author = 'Vinicius Vaz';
         $this->need_instance = 0;
         $this->bootstrap = true;
