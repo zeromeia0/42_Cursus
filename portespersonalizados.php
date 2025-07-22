@@ -9,7 +9,7 @@ class PortesPersonalizados extends Module
     {
         $this->name = 'portespersonalizados';
         $this->tab = 'shipping_logistics';
-        $this->version = '1.5.1';
+        $this->version = '1.5.2';
         $this->author = 'Vinicius Vaz';
         $this->need_instance = 0;
         $this->bootstrap = true;
@@ -17,17 +17,17 @@ class PortesPersonalizados extends Module
 
         parent::__construct();
 
-        $this->displayName = $this->l('Portes Personalizados');
-        $this->description = $this->l('Calcula portes por região e peso e filtra transportadores por região.');
-        $this->confirmUninstall = $this->l('Tem certeza que quer desinstalar?');
+        $this->displayName = $this->l('Custom Shipping');
+        $this->description = $this->l('Region-based carrier filtering and shipping costs');
+        $this->confirmUninstall = $this->l('Are you sure you want to uninstall?');
     }
 
     public function install()
     {
         return parent::install() &&
-            $this->registerHook('actionCarrierProcess') &&
-            $this->registerHook('displayBeforeCarrier') &&
             $this->registerHook('filterCarrierList') &&
+            $this->registerHook('displayBeforeCarrier') &&
+            $this->registerHook('actionCarrierProcess') &&
             $this->createDatabaseTable() &&
             $this->installDemoData();
     }
@@ -56,7 +56,6 @@ class PortesPersonalizados extends Module
 
     private function installDemoData()
     {
-        // Sample data for Portugal Continental
         $sampleData = [
             ['Portugal Continental', 0, 5, 5.00],
             ['Portugal Continental', 5, 10, 7.50],
@@ -85,93 +84,119 @@ class PortesPersonalizados extends Module
     {
         return Db::getInstance()->execute('DROP TABLE IF EXISTS `'._DB_PREFIX_.'pp_shipping_prices`');
     }
-    
-public function hookActionCarrierProcess($params)
-{
-    // Double-check carrier validity on submission
-    $selectedCarrierId = (int)$params['cart']->id_carrier;
-    $validCarrierIds = array_column($this->getValidCarriers(), 'id_carrier');
-    
-    if (!in_array($selectedCarrierId, $validCarrierIds)) {
-        die('Invalid carrier selected for your region');
-    }
-}
 
     public function hookFilterCarrierList($carriers)
-{
-    // 1. Get current postal code
-    $cart = $this->context->cart;
-    if (!$cart || !$cart->id_address_delivery) {
-        return $carriers; // Fallback
-    }
-
-    $address = new Address((int)$cart->id_address_delivery);
-    $region = $this->getRegionFromPostalCode($address->postcode);
-
-    // 2. Define carrier mapping
-    $carrierMap = [
-        'Portugal Continental' => ['CTT - Portugal Continental'],
-        'Madeira' => ['CTT - Madeira'],
-        'Açores' => ['CTT - Açores']
-    ];
-
-    // 3. Filter carriers
-    $allowedCarriers = [];
-    foreach ($carriers as $carrier) {
-        foreach ($carrierMap[$region] ?? [] as $validName) {
-            if (strpos($carrier['name'], $validName) !== false) {
-                $allowedCarriers[] = $carrier;
-                break;
-            }
-        }
-    }
-
-    return $allowedCarriers ?: $carriers; // Fallback to all if none match
-}
-    
-public function hookDisplayBeforeCarrier($params)
-{
-    try {
-        $cart = Context::getContext()->cart;
+    {
+        // 1. Get current postal code
+        $cart = $this->context->cart;
         if (!$cart || !$cart->id_address_delivery) {
-            return '';
+            return $carriers; // Fallback
         }
 
         $address = new Address((int)$cart->id_address_delivery);
         $region = $this->getRegionFromPostalCode($address->postcode);
-        
-        return '
-        <div class="portes-region-info alert alert-info">
-            '.$this->l('Shipping to').' '.$region.' '.$this->l('with postal code').' '.$address->postcode.'
-        </div>';
-    } catch (Exception $e) {
-        PrestaShopLogger::addLog('PortesPersonalizados display error: '.$e->getMessage(), 3);
-        return '';
+
+        // 2. Define carrier mapping
+        $carrierMap = [
+            'Portugal Continental' => ['CTT - Portugal Continental'],
+            'Madeira' => ['CTT - Madeira'],
+            'Açores' => ['CTT - Açores']
+        ];
+
+        // 3. Filter carriers
+        $allowedCarriers = [];
+        foreach ($carriers as $carrier) {
+            foreach ($carrierMap[$region] ?? [] as $validName) {
+                if (strpos($carrier['name'], $validName) !== false) {
+                    $allowedCarriers[] = $carrier;
+                    break;
+                }
+            }
+        }
+
+        return $allowedCarriers ?: $carriers; // Fallback to all if none match
     }
-}
+
+    public function hookDisplayBeforeCarrier($params)
+    {
+        try {
+            $cart = $this->context->cart;
+            if (!$cart || !$cart->id_address_delivery) {
+                return '';
+            }
+
+            $address = new Address((int)$cart->id_address_delivery);
+            $region = $this->getRegionFromPostalCode($address->postcode);
+            
+            $this->context->smarty->assign([
+                'portes_region' => $region,
+                'portes_postcode' => $address->postcode,
+                'carrier_error' => Tools::getValue('error') == 'invalid_carrier' ? 
+                    $this->l('Please select a valid carrier for your region') : null
+            ]);
+
+            return $this->display(__FILE__, 'views/templates/hook/beforeCarrier.tpl');
+        } catch (Exception $e) {
+            PrestaShopLogger::addLog('PortesPersonalizados display error: '.$e->getMessage(), 3);
+            return '';
+        }
+    }
+
+    public function hookActionCarrierProcess($params)
+    {
+        if (!isset($params['cart'])) {
+            return;
+        }
+
+        $selectedCarrierId = (int)$params['cart']->id_carrier;
+        $validCarrierIds = array_column($this->getValidCarriers(), 'id_carrier');
+
+        if (!empty($validCarrierIds) && !in_array($selectedCarrierId, $validCarrierIds)) {
+            Tools::redirect($this->context->link->getPageLink('order', true, null, [
+                'step' => 2,
+                'error' => 'invalid_carrier'
+            ]));
+        }
+    }
+
+    private function getValidCarriers()
+    {
+        $cart = $this->context->cart;
+        if (!$cart || !$cart->id_address_delivery) {
+            return [];
+        }
+
+        $address = new Address((int)$cart->id_address_delivery);
+        $region = $this->getRegionFromPostalCode($address->postcode);
+
+        $carrierMap = [
+            'Portugal Continental' => ['CTT - Portugal Continental'],
+            'Madeira' => ['CTT - Madeira'],
+            'Açores' => ['CTT - Açores']
+        ];
+
+        $validCarriers = [];
+        foreach (Carrier::getCarriers($this->context->language->id) as $carrier) {
+            foreach ($carrierMap[$region] ?? [] as $validName) {
+                if (strpos($carrier['name'], $validName) !== false) {
+                    $validCarriers[] = $carrier;
+                }
+            }
+        }
+
+        return $validCarriers;
+    }
 
     private function getRegionFromPostalCode($postcode)
     {
-        error_log('Checking postcode: '.$postcode);
-        if (empty($postcode)) {
-            return 'Portugal Continental';
-        }
-
+        // Clean input
         $postcode = preg_replace('/[^0-9]/', '', $postcode);
         
-        if (strlen($postcode) < 4) {
-            return 'Portugal Continental';
-        }
-
-        $prefix = substr($postcode, 0, 2);
-        $firstDigit = substr($postcode, 0, 1);
-
-        // Açores: 9000-9999 (but 9800-9999 are Madeira)s
-        if ($firstDigit == '9') {
-            if ($prefix == '98' || $prefix == '99') {
-                return 'Madeira';
-            }
+        // Hardcoded fallback
+        if (preg_match('/^9[0-9]{3}/', $postcode)) {
             return 'Açores';
+        } elseif (preg_match('/^(98|99)[0-9]{2}/', $postcode)) {
+            return 'Madeira';
         }
 
         return 'Portugal Continental';
@@ -179,13 +204,10 @@ public function hookDisplayBeforeCarrier($params)
 
     private function getShippingPriceByWeightAndRegion($region, $weight)
     {
-        $weight = (float)$weight;
-        $region = pSQL($region);
-
         return (float)Db::getInstance()->getValue('
             SELECT price_normal 
             FROM '._DB_PREFIX_.'pp_shipping_prices
-            WHERE region = "'.$region.'"
+            WHERE region = "'.pSQL($region).'"
             AND '.$weight.' >= weight_min 
             AND '.$weight.' < weight_max
             ORDER BY weight_min ASC
