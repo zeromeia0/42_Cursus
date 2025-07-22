@@ -85,29 +85,17 @@ class PortesPersonalizados extends Module
     {
         return Db::getInstance()->execute('DROP TABLE IF EXISTS `'._DB_PREFIX_.'pp_shipping_prices`');
     }
-
-    public function hookActionCarrierProcess($params)
-    {
-        if (!isset($params['cart'])) {
-            return;
-        }
-
-        $cart = $params['cart'];
-        $total_weight = (float)$cart->getTotalWeight();
-        
-        try {
-            $address = new Address((int)$cart->id_address_delivery);
-            $region = $this->getRegionFromPostalCode($address->postcode) ?: 'Portugal Continental';
-            
-            $price = $this->getShippingPriceByWeightAndRegion($region, $total_weight);
-            $params['shipping_cost'] = (float)$price;
-        } catch (Exception $e) {
-            PrestaShopLogger::addLog('PortesPersonalizados error: '.$e->getMessage(), 3);
-            $params['shipping_cost'] = 0;
-        }
-
-        return $params;
+    
+public function hookActionCarrierProcess($params)
+{
+    // Double-check carrier validity on submission
+    $selectedCarrierId = (int)$params['cart']->id_carrier;
+    $validCarrierIds = array_column($this->getValidCarriers(), 'id_carrier');
+    
+    if (!in_array($selectedCarrierId, $validCarrierIds)) {
+        die('Invalid carrier selected for your region');
     }
+}
 
     public function hookFilterCarrierList($carriers)
 {
