@@ -111,6 +111,18 @@ class PortesPersonalizados extends Module
 
     public function hookFilterCarrierList($carriers)
     {
+         error_log('=== filterCarrierList triggered ===');
+        error_log('Current carriers: '.print_r(array_column($carriers, 'name'), true));
+    
+        $cart = $this->context->cart;
+        if (!$cart || !$cart->id_address_delivery) {
+            error_log('No cart or delivery address');
+            return $carriers;
+        }
+
+        $address = new Address((int)$cart->id_address_delivery);
+        error_log('Address ID '.$address->id.' Postcode: '.$address->postcode);
+        
         $cart = Context::getContext()->cart;
         if (!$cart || !$cart->id_address_delivery) {
             return $carriers;
@@ -168,6 +180,7 @@ public function hookDisplayBeforeCarrier($params)
 
     private function getRegionFromPostalCode($postcode)
     {
+        error_log('Checking postcode: '.$postcode);
         if (empty($postcode)) {
             return 'Portugal Continental';
         }
