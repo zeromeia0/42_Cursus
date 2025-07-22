@@ -9,10 +9,11 @@ class PortesPersonalizados extends Module
     {
         $this->name = 'portespersonalizados';
         $this->tab = 'shipping_logistics';
-        $this->version = '1.2.0';
+        $this->version = '1.3.0';
         $this->author = 'Vinicius Vaz';
         $this->need_instance = 0;
         $this->bootstrap = true;
+        $this->ps_versions_compliancy = ['min' => '1.7', 'max' => _PS_VERSION_];
 
         parent::__construct();
 
@@ -25,13 +26,16 @@ class PortesPersonalizados extends Module
     {
         return parent::install() &&
             $this->registerHook('actionCarrierProcess') &&
-            $this->registerHook('displayCarrierList') &&
-            $this->createDatabaseTable();
+            $this->registerHook('displayBeforeCarrier') &&
+            $this->registerHook('filterCarrierList') &&
+            $this->createDatabaseTable() &&
+            $this->installDemoData();
     }
 
     public function uninstall()
     {
-        return parent::uninstall() && $this->dropDatabaseTable();
+        return parent::uninstall() && 
+            $this->dropDatabaseTable();
     }
 
     private function createDatabaseTable()
@@ -39,13 +43,42 @@ class PortesPersonalizados extends Module
         $sql = 'CREATE TABLE IF NOT EXISTS `'._DB_PREFIX_.'pp_shipping_prices` (
             `id_pp_shipping_prices` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
             `region` varchar(64) NOT NULL,
-            `weight_min` float NOT NULL,
-            `weight_max` float NOT NULL,
-            `price_normal` decimal(10,2) NOT NULL,
-            PRIMARY KEY (`id_pp_shipping_prices`)
-        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;';
+            `weight_min` float NOT NULL DEFAULT 0,
+            `weight_max` float NOT NULL DEFAULT 9999,
+            `price_normal` decimal(10,2) NOT NULL DEFAULT 0,
+            PRIMARY KEY (`id_pp_shipping_prices`),
+            KEY `region` (`region`),
+            KEY `weight_range` (`weight_min`, `weight_max`)
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;';
 
         return Db::getInstance()->execute($sql);
+    }
+
+    private function installDemoData()
+    {
+        // Sample data for Portugal Continental
+        $sampleData = [
+            ['Portugal Continental', 0, 5, 5.00],
+            ['Portugal Continental', 5, 10, 7.50],
+            ['Portugal Continental', 10, 20, 10.00],
+            ['Madeira', 0, 5, 8.00],
+            ['Madeira', 5, 10, 12.00],
+            ['Madeira', 10, 20, 16.00],
+            ['Açores', 0, 5, 10.00],
+            ['Açores', 5, 10, 15.00],
+            ['Açores', 10, 20, 20.00],
+        ];
+
+        foreach ($sampleData as $data) {
+            Db::getInstance()->insert('pp_shipping_prices', [
+                'region' => pSQL($data[0]),
+                'weight_min' => (float)$data[1],
+                'weight_max' => (float)$data[2],
+                'price_normal' => (float)$data[3]
+            ]);
+        }
+
+        return true;
     }
 
     private function dropDatabaseTable()
@@ -55,72 +88,125 @@ class PortesPersonalizados extends Module
 
     public function hookActionCarrierProcess($params)
     {
+        if (!isset($params['cart'])) {
+            return;
+        }
+
         $cart = $params['cart'];
         $total_weight = (float)$cart->getTotalWeight();
-        $address = new Address((int)$cart->id_address_delivery);
-        $region = $this->getRegionFromPostalCode($address->postcode) ?: 'Portugal Continental';
         
-        if ($price = $this->getShippingPriceByWeightAndRegion($region, $total_weight)) {
+        try {
+            $address = new Address((int)$cart->id_address_delivery);
+            $region = $this->getRegionFromPostalCode($address->postcode) ?: 'Portugal Continental';
+            
+            $price = $this->getShippingPriceByWeightAndRegion($region, $total_weight);
             $params['shipping_cost'] = (float)$price;
-        } else {
+        } catch (Exception $e) {
+            PrestaShopLogger::addLog('PortesPersonalizados error: '.$e->getMessage(), 3);
             $params['shipping_cost'] = 0;
         }
 
         return $params;
     }
 
-    public function hookDisplayCarrierList($params)
+    public function hookFilterCarrierList($carriers)
     {
-        $address = new Address((int)Context::getContext()->cart->id_address_delivery);
-        $region = $this->getRegionFromPostalCode($address->postcode);
-        
-        $carrierMap = [
-            'Portugal Continental' => 'CTT - Portugal Continental',
-            'Madeira' => 'CTT - Madeira',
-            'Açores' => 'CTT - Açores'
-        ];
-
-        if (!isset($carrierMap[$region])) {
-            return '';
+        $cart = Context::getContext()->cart;
+        if (!$cart || !$cart->id_address_delivery) {
+            return $carriers;
         }
 
-        $carrierId = (int)Carrier::getIdByName($carrierMap[$region]);
-        if (!$carrierId) {
+        try {
+            $address = new Address((int)$cart->id_address_delivery);
+            $region = $this->getRegionFromPostalCode($address->postcode);
+            
+            $carrierMap = [
+                'Portugal Continental' => 'CTT - Portugal Continental',
+                'Madeira' => 'CTT - Madeira',
+                'Açores' => 'CTT - Açores'
+            ];
+
+            if (!isset($carrierMap[$region])) {
+                return $carriers;
+            }
+
+            $targetCarrierName = $carrierMap[$region];
+            $filteredCarriers = [];
+
+            foreach ($carriers as $carrier) {
+                if (strpos($carrier['name'], $targetCarrierName) !== false) {
+                    $filteredCarriers[] = $carrier;
+                }
+            }
+
+            return $filteredCarriers ?: $carriers;
+        } catch (Exception $e) {
+            PrestaShopLogger::addLog('PortesPersonalizados filter error: '.$e->getMessage(), 3);
+            return $carriers;
+        }
+    }
+
+    public function hookDisplayBeforeCarrier($params)
+    {
+        try {
+            $cart = Context::getContext()->cart;
+            if (!$cart || !$cart->id_address_delivery) {
+                return '';
+            }
+
+            $address = new Address((int)$cart->id_address_delivery);
+            $region = $this->getRegionFromPostalCode($address->postcode);
+            
+            $this->context->smarty->assign([
+                'portes_region' => $region,
+                'portes_postcode' => $address->postcode
+            ]);
+
+            return $this->display(__FILE__, 'views/templates/hook/beforeCarrier.tpl');
+        } catch (Exception $e) {
+            PrestaShopLogger::addLog('PortesPersonalizados display error: '.$e->getMessage(), 3);
             return '';
         }
-
-        return '
-        <script>
-        $(document).ready(function() {
-            var correctId = '.$carrierId.';
-            $(".delivery-option").each(function() {
-                var carrierId = $(this).data("id-carrier") || $(this).find("input").val().split(",")[0];
-                $(this).toggle(carrierId == correctId);
-            });
-            $("input.delivery_option_radio[value=\''.$carrierId.',\']").prop("checked", true).change();
-        });
-        </script>';
     }
 
     private function getRegionFromPostalCode($postcode)
     {
-        $postcode = preg_replace('/\s+/', '', $postcode);
-        
-        if (preg_match('/^9[0-9]{3}/', $postcode)) {
-            return 'Açores';
-        } elseif (preg_match('/^98[0-9]{2}/', $postcode) || preg_match('/^99[0-9]{2}/', $postcode)) {
-            return 'Madeira';
+        if (empty($postcode)) {
+            return 'Portugal Continental';
         }
+
+        $postcode = preg_replace('/[^0-9]/', '', $postcode);
+        
+        if (strlen($postcode) < 4) {
+            return 'Portugal Continental';
+        }
+
+        $prefix = substr($postcode, 0, 2);
+        $firstDigit = substr($postcode, 0, 1);
+
+        // Açores: 9000-9999 (but 9800-9999 are Madeira)
+        if ($firstDigit == '9') {
+            if ($prefix == '98' || $prefix == '99') {
+                return 'Madeira';
+            }
+            return 'Açores';
+        }
+
         return 'Portugal Continental';
     }
 
     private function getShippingPriceByWeightAndRegion($region, $weight)
     {
+        $weight = (float)$weight;
+        $region = pSQL($region);
+
         return (float)Db::getInstance()->getValue('
             SELECT price_normal 
             FROM '._DB_PREFIX_.'pp_shipping_prices
-            WHERE region = "'.pSQL($region).'"
-            AND '.$weight.' BETWEEN weight_min AND weight_max
+            WHERE region = "'.$region.'"
+            AND '.$weight.' >= weight_min 
+            AND '.$weight.' < weight_max
+            ORDER BY weight_min ASC
             LIMIT 1
         ');
     }
