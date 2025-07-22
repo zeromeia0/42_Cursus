@@ -194,7 +194,7 @@ public function hookDisplayBeforeCarrier($params)
         $prefix = substr($postcode, 0, 2);
         $firstDigit = substr($postcode, 0, 1);
 
-        // Açores: 9000-9999 (but 9800-9999 are Madeira)
+        // Açores: 9000-9999 (but 9800-9999 are Madeira)s
         if ($firstDigit == '9') {
             if ($prefix == '98' || $prefix == '99') {
                 return 'Madeira';
