@@ -73,7 +73,7 @@ class PortesPersonalizados extends Module
 
     public function hookActionCarrierProcess($params)
     {
-        if (!$this->context->cart->id_address_delivery) {
+        /*if (!$this->context->cart->id_address_delivery) {
             return;
         }
 
@@ -83,7 +83,8 @@ class PortesPersonalizados extends Module
 
         if (!in_array($params['cart']->id_carrier, $validCarriers)) {
             $this->context->controller->errors[] = $this->l('Selected carrier is not available for your region');
-            return false;
+            return false;*/
+        return true;
         }
     }
 
