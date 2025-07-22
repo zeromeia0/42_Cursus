@@ -145,7 +145,6 @@ class PortesPersonalizados extends Module
             return $carriers;
         }
     }
-
 public function hookDisplayBeforeCarrier($params)
 {
     try {
