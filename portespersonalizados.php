@@ -146,28 +146,26 @@ class PortesPersonalizados extends Module
         }
     }
 
-    public function hookDisplayBeforeCarrier($params)
-    {
-        try {
-            $cart = Context::getContext()->cart;
-            if (!$cart || !$cart->id_address_delivery) {
-                return '';
-            }
-
-            $address = new Address((int)$cart->id_address_delivery);
-            $region = $this->getRegionFromPostalCode($address->postcode);
-            
-            $this->context->smarty->assign([
-                'portes_region' => $region,
-                'portes_postcode' => $address->postcode
-            ]);
-
-            return $this->display(__FILE__, 'views/templates/hook/beforeCarrier.tpl');
-        } catch (Exception $e) {
-            PrestaShopLogger::addLog('PortesPersonalizados display error: '.$e->getMessage(), 3);
+public function hookDisplayBeforeCarrier($params)
+{
+    try {
+        $cart = Context::getContext()->cart;
+        if (!$cart || !$cart->id_address_delivery) {
             return '';
         }
+
+        $address = new Address((int)$cart->id_address_delivery);
+        $region = $this->getRegionFromPostalCode($address->postcode);
+        
+        return '
+        <div class="portes-region-info alert alert-info">
+            '.$this->l('Shipping to').' '.$region.' '.$this->l('with postal code').' '.$address->postcode.'
+        </div>';
+    } catch (Exception $e) {
+        PrestaShopLogger::addLog('PortesPersonalizados display error: '.$e->getMessage(), 3);
+        return '';
     }
+}
 
     private function getRegionFromPostalCode($postcode)
     {
