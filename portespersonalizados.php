@@ -9,7 +9,7 @@ class PortesPersonalizados extends Module
     {
         $this->name = 'portespersonalizados';
         $this->tab = 'shipping_logistics';
-        $this->version = '1.3.0';
+        $this->version = '1.5.0';
         $this->author = 'Vinicius Vaz';
         $this->need_instance = 0;
         $this->bootstrap = true;
@@ -110,53 +110,37 @@ class PortesPersonalizados extends Module
     }
 
     public function hookFilterCarrierList($carriers)
-    {
-         error_log('=== filterCarrierList triggered ===');
-        error_log('Current carriers: '.print_r(array_column($carriers, 'name'), true));
-    
-        $cart = $this->context->cart;
-        if (!$cart || !$cart->id_address_delivery) {
-            error_log('No cart or delivery address');
-            return $carriers;
-        }
+{
+    // 1. Get current postal code
+    $cart = $this->context->cart;
+    if (!$cart || !$cart->id_address_delivery) {
+        return $carriers; // Fallback
+    }
 
-        $address = new Address((int)$cart->id_address_delivery);
-        error_log('Address ID '.$address->id.' Postcode: '.$address->postcode);
-        
-        $cart = Context::getContext()->cart;
-        if (!$cart || !$cart->id_address_delivery) {
-            return $carriers;
-        }
+    $address = new Address((int)$cart->id_address_delivery);
+    $region = $this->getRegionFromPostalCode($address->postcode);
 
-        try {
-            $address = new Address((int)$cart->id_address_delivery);
-            $region = $this->getRegionFromPostalCode($address->postcode);
-            
-            $carrierMap = [
-                'Portugal Continental' => 'CTT - Portugal Continental',
-                'Madeira' => 'CTT - Madeira',
-                'Açores' => 'CTT - Açores'
-            ];
+    // 2. Define carrier mapping
+    $carrierMap = [
+        'Portugal Continental' => ['CTT - Portugal Continental'],
+        'Madeira' => ['CTT - Madeira'],
+        'Açores' => ['CTT - Açores']
+    ];
 
-            if (!isset($carrierMap[$region])) {
-                return $carriers;
+    // 3. Filter carriers
+    $allowedCarriers = [];
+    foreach ($carriers as $carrier) {
+        foreach ($carrierMap[$region] ?? [] as $validName) {
+            if (strpos($carrier['name'], $validName) !== false) {
+                $allowedCarriers[] = $carrier;
+                break;
             }
-
-            $targetCarrierName = $carrierMap[$region];
-            $filteredCarriers = [];
-
-            foreach ($carriers as $carrier) {
-                if (strpos($carrier['name'], $targetCarrierName) !== false) {
-                    $filteredCarriers[] = $carrier;
-                }
-            }
-
-            return $filteredCarriers ?: $carriers;
-        } catch (Exception $e) {
-            PrestaShopLogger::addLog('PortesPersonalizados filter error: '.$e->getMessage(), 3);
-            return $carriers;
         }
     }
+
+    return $allowedCarriers ?: $carriers; // Fallback to all if none match
+}
+    
 public function hookDisplayBeforeCarrier($params)
 {
     try {
