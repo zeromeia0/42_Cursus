@@ -9,7 +9,7 @@ class PortesPersonalizados extends Module
     {
         $this->name = 'portespersonalizados';
         $this->tab = 'shipping_logistics';
-        $this->version = '3.0.0';
+        $this->version = '4.0.0';
         $this->author = 'Vinicius Vaz';
         $this->need_instance = 0;
         $this->bootstrap = true;
@@ -55,6 +55,7 @@ class PortesPersonalizados extends Module
     }
 
     // CORE FUNCTIONALITY
+
     public function hookFilterCarrierList($carriers)
     {
         if (!$this->context->cart->id_address_delivery) {
@@ -63,7 +64,6 @@ class PortesPersonalizados extends Module
 
         $address = new Address($this->context->cart->id_address_delivery);
         $region = $this->getRegionFromPostcode($address->postcode);
-
         $allowedCarriers = $this->getCarriersForRegion($region);
 
         return array_filter($carriers, function($carrier) use ($allowedCarriers) {
@@ -71,46 +71,42 @@ class PortesPersonalizados extends Module
         });
     }
 
-public function hookActionCarrierProcess($params)
-{
-    // 1. Bypass completo para testes (descomente apenas para debug)
-    // return true;
-
-    // 2. Versão de produção (ativa quando o bypass estiver comentado)
-    if (!isset($params['cart'])) {
-        return true;
-    }
-
-    $cart = $params['cart'];
-    
-    // Se não houver endereço, não bloqueie o checkout
-    if (!$cart->id_address_delivery) {
-        return true;
-    }
-
-    try {
-        $address = new Address($cart->id_address_delivery);
-        $region = $this->getRegionFromPostcode($address->postcode);
-        $validCarriers = $this->getCarriersForRegion($region);
-
-        // Se não encontrar carriers válidos, permita continuar
-        if (empty($validCarriers)) {
+    public function hookActionCarrierProcess($params)
+    {
+        if (!isset($params['cart'])) {
             return true;
         }
 
-        // Verifica se o carrier selecionado é válido
-        if (!in_array($cart->id_carrier, $validCarriers)) {
-            $this->context->controller->errors[] = $this->l('Transportadora inválida para sua região');
-            return false;
+        $cart = $params['cart'];
+        
+        // Se não houver endereço, não bloqueie o checkout
+        if (!$cart->id_address_delivery) {
+            return true;
         }
 
-        return true;
+        try {
+            $address = new Address($cart->id_address_delivery);
+            $region = $this->getRegionFromPostcode($address->postcode);
+            $validCarriers = $this->getCarriersForRegion($region);
 
-    } catch (Exception $e) {
-        // Em caso de erro, não quebre o checkout
-        PrestaShopLogger::addLog('PortesPersonalizados Error: '.$e->getMessage(), 3);
-        return true;
-    }
+            // Se não encontrar carriers válidos, permita continuar
+            if (empty($validCarriers)) {
+                return true;
+            }
+
+            // Verifica se o carrier selecionado é válido
+            if (!in_array($cart->id_carrier, $validCarriers)) {
+                $this->context->controller->errors[] = $this->l('Transportadora inválida para sua região');
+                return false;
+            }
+
+            return true;
+
+        } catch (Exception $e) {
+            // Em caso de erro, não quebre o checkout
+            PrestaShopLogger::addLog('PortesPersonalizados Error: '.$e->getMessage(), 3);
+            return true;
+        }
     }
 
     public function hookDisplayBeforeCarrier($params)
@@ -129,6 +125,7 @@ public function hookActionCarrierProcess($params)
     }
 
     // HELPER METHODS
+
     private function getRegionFromPostcode($postcode)
     {
         $postcode = preg_replace('/[^0-9]/', '', $postcode);
@@ -144,37 +141,35 @@ public function hookActionCarrierProcess($params)
         return $regions[$prefix] ?? $regions['default'];
     }
 
-private function getCarriersForRegion($region)
-{
-    error_log("==== DEBUGGING CARRIERS ====");
-    error_log("Requested region: ".$region);
-    
-    $allCarriers = Carrier::getCarriers(
-        $this->context->language->id,
-        true, // active only
-        false, // include deleted
-        false, // id_zone
-        null,  // id_group
-        true   // return name with ID
-    );
-    
-    error_log("All available carriers:");
-    error_log(print_r($allCarriers, true));
-    
-    $carrierMap = [
-        'Portugal Continental' => ['CTT - Portugal Continental'],
-        'Madeira' => ['CTT - Madeira'],
-        'Açores' => ['CTT - Açores']
-    ];
-    
-    $validIds = [];
-    foreach ($carrierMap[$region] as $carrierName) {
-        $id = Carrier::getIdByName($carrierName);
-        error_log("Checking carrier: ".$carrierName." => ID: ".$id);
-        if ($id) $validIds[] = $id;
-    }
-    
-    error_log("Valid IDs for region: ".print_r($validIds, true));
-    return $validIds;
+    private function getCarriersForRegion($region)
+    {
+        $allCarriers = Carrier::getCarriers(
+            $this->context->language->id,
+            true,  // active only
+            false, // include deleted
+            false, // id_zone
+            null,  // id_group
+            true   // return as array
+        );
+
+        $carrierMap = [
+            'Portugal Continental' => ['CTT - Portugal Continental'],
+            'Madeira' => ['CTT - Madeira'],
+            'Açores' => ['CTT - Açores']
+        ];
+
+        $validIds = [];
+        if (!isset($carrierMap[$region])) {
+            return $validIds;
+        }
+
+        foreach ($carrierMap[$region] as $carrierName) {
+            foreach ($allCarriers as $carrier) {
+                if ($carrier['name'] === $carrierName) {
+                    $validIds[] = $carrier['id_carrier'];
+                }
+            }
+        }
+        return $validIds;
     }
 }
