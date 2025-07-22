@@ -90,7 +90,7 @@ public function hookActionCarrierProcess($params)
 
     try {
         $address = new Address($cart->id_address_delivery);
-        $region = $this->getRegionFromPostalCode($address->postcode);
+        $region = $this->getRegionFromPostcode($address->postcode);
         $validCarriers = $this->getCarriersForRegion($region);
 
         // Se não encontrar carriers válidos, permita continuar
