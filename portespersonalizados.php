@@ -73,38 +73,43 @@ class PortesPersonalizados extends Module
 
 public function hookActionCarrierProcess($params)
 {
+    // 1. Bypass completo para testes (descomente apenas para debug)
+    // return true;
+
+    // 2. Versão de produção (ativa quando o bypass estiver comentado)
+    if (!isset($params['cart'])) {
+        return true;
+    }
+
+    $cart = $params['cart'];
+    
+    // Se não houver endereço, não bloqueie o checkout
+    if (!$cart->id_address_delivery) {
+        return true;
+    }
+
     try {
-        // Debug: Log incoming parameters
-        file_put_contents(__DIR__.'/debug.log', print_r($params, true), FILE_APPEND);
-        
-        // 1. Basic validation
-        if (!isset($params['cart']) {
-            throw new Exception('Missing cart parameter');
-        }
-
-        // 2. Get cart and address
-        $cart = $params['cart'];
-        if (!$cart->id_address_delivery) {
-            return true; // No address set yet
-        }
-
         $address = new Address($cart->id_address_delivery);
-        
-        // 3. Debug output
-        file_put_contents(__DIR__.'/debug.log', 
-            "Postcode: ".$address->postcode.PHP_EOL, 
-            FILE_APPEND);
+        $region = $this->getRegionFromPostalCode($address->postcode);
+        $validCarriers = $this->getCarriersForRegion($region);
 
-        // 4. Temporary bypass - comment this line after testing
+        // Se não encontrar carriers válidos, permita continuar
+        if (empty($validCarriers)) {
+            return true;
+        }
+
+        // Verifica se o carrier selecionado é válido
+        if (!in_array($cart->id_carrier, $validCarriers)) {
+            $this->context->controller->errors[] = $this->l('Transportadora inválida para sua região');
+            return false;
+        }
+
         return true;
 
-        // [Your original validation code here]
-
     } catch (Exception $e) {
-        file_put_contents(__DIR__.'/error.log', 
-            date('Y-m-d H:i:s')." - ".$e->getMessage().PHP_EOL, 
-            FILE_APPEND);
-        return false;
+        // Em caso de erro, não quebre o checkout
+        PrestaShopLogger::addLog('PortesPersonalizados Error: '.$e->getMessage(), 3);
+        return true;
     }
     }
 
