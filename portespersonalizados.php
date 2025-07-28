@@ -88,43 +88,26 @@ public function hookFilterCarrierList($carriers)
 }
 
 
-    public function hookActionCarrierProcess($params)
-    {
-        if (!isset($params['cart'])) {
-            return true;
-        }
+public function hookActionCarrierProcess($params)
+{
+    if (!isset($params['cart']) || !$params['cart']->id_address_delivery) {
+        return true;
+    }
 
-        $cart = $params['cart'];
-        
-        // Se não houver endereço, não bloqueie o checkout
-        if (!$cart->id_address_delivery) {
-            return true;
-        }
+    $address = new Address($params['cart']->id_address_delivery);
+    $region = $this->getRegionFromPostcode($address->postcode);
+    $validCarriers = $this->getCarriersForRegion($region);
 
-        try {
-            $address = new Address($cart->id_address_delivery);
-            $region = $this->getRegionFromPostcode($address->postcode);
-            $validCarriers = $this->getCarriersForRegion($region);
-
-            // Se não encontrar carriers válidos, permita continuar
-            if (empty($validCarriers)) {
-                return true;
-            }
-
-            // Verifica se o carrier selecionado é válido
-            if (!in_array($cart->id_carrier, $validCarriers)) {
-                $this->context->controller->errors[] = $this->l('Transportadora inválida para sua região');
-                return false;
-            }
-
-            return true;
-
-        } catch (Exception $e) {
-            // Em caso de erro, não quebre o checkout
-            PrestaShopLogger::addLog('PortesPersonalizados Error: '.$e->getMessage(), 3);
-            return true;
+    if (!empty($validCarriers) {
+        // Force the cart to use a valid carrier if none selected
+        if (!in_array($params['cart']->id_carrier, $validCarriers)) {
+            $params['cart']->id_carrier = $validCarriers[0];
+            $params['cart']->update();
         }
     }
+
+    return true;
+}
 
 public function hookDisplayBeforeCarrier($params)
 {
@@ -133,20 +116,20 @@ public function hookDisplayBeforeCarrier($params)
     }
 
     $address = new Address($this->context->cart->id_address_delivery);
-    $region = $this->getRegionFromPostcode($address->postcode); // assign $region here
-
+    $region = $this->getRegionFromPostcode($address->postcode);
     $allowedCarrierIds = $this->getCarriersForRegion($region);
+
+    // Get the first allowed carrier ID to auto-select
+    $autoSelectCarrierId = !empty($allowedCarrierIds) ? $allowedCarrierIds[0] : null;
 
     $this->context->smarty->assign([
         'shipping_region' => $region,
         'shipping_postcode' => $address->postcode,
         'allowed_carrier_ids' => $allowedCarrierIds,
+        'auto_select_carrier_id' => $autoSelectCarrierId,
     ]);
 
-    // Register your JS file for hiding carriers visually
-    $this->context->controller->addJS($this->_path . 'views/js/hide_carriers.js');
-
-    // Note the template filename 'beforeCarrier.tpl' with lowercase 'b'
+    $this->context->controller->addJS($this->_path . 'views/js/hide_carrier.js');
     return $this->display(__FILE__, 'views/templates/hook/beforeCarrier.tpl');
 }
 
