@@ -1,0 +1,4 @@
+[Tue Jul 22 00:49:18.999035 2025] [mpm_prefork:notice] [pid 72921:tid 72921] AH00163: Apache/2.4.62 (Ubuntu) configured -- resuming normal operations
+[Tue Jul 22 00:49:18.999086 2025] [core:notice] [pid 72921:tid 72921] AH00094: Command line: '/usr/sbin/apache2'
+Tue Jul 22 10:08:57 2025 (429140): Error Cannot kill process 428769!
+Tue Jul 22 10:08:58 2025 (429140): Error Cannot kill process 418673!
