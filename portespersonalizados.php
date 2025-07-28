@@ -9,7 +9,7 @@ class PortesPersonalizados extends Module
     {
         $this->name = 'portespersonalizados';
         $this->tab = 'shipping_logistics';
-        $this->version = '5.4.5';
+        $this->version = '5.5.5';
         $this->author = 'Vinicius Vaz';
         $this->need_instance = 0;
         $this->bootstrap = true;
@@ -66,10 +66,11 @@ class PortesPersonalizados extends Module
         $allowedCarriers = $this->getCarriersForRegion($region);
 
         if (empty($allowedCarriers)) {
+            // No carriers allowed — return empty to block all
             return [];
         }
 
-        return array_filter($carriers, function($carrier) use ($allowedCarriers) {
+        return array_filter($carriers, function ($carrier) use ($allowedCarriers) {
             return in_array($carrier['id_carrier'], $allowedCarriers);
         });
     }
@@ -85,19 +86,23 @@ class PortesPersonalizados extends Module
         $allowedCarriers = $this->getCarriersForRegion($region);
         $allowedCarrierId = !empty($allowedCarriers) ? $allowedCarriers[0] : null;
 
-        // Auto-select correct carrier if none selected
+        // Auto-select first allowed carrier if none selected
         if ($allowedCarrierId && !$this->context->cart->id_carrier) {
             $this->context->cart->id_carrier = $allowedCarrierId;
             $this->context->cart->update();
         }
 
+        // Assign variables for Smarty template and JS
         $this->context->smarty->assign([
-            'allowed_carrier_id' => $allowedCarrierId,
+            'allowed_carrier_id' => $allowedCarrierId ?: 0,
             'shipping_region' => $region,
-            'shipping_postcode' => $address->postcode
+            'shipping_postcode' => $address->postcode,
         ]);
 
-        $this->context->controller->addJS($this->_path.'views/js/hide_carriers.js');
+        // Add your JS with correct path (make sure to create the JS file at views/js/hide_carriers.js)
+        $this->context->controller->addJS($this->_path . 'views/js/hide_carriers.js');
+
+        // Return your template (you need to create this template file)
         return $this->display(__FILE__, 'views/templates/hook/beforeCarrier.tpl');
     }
 
@@ -112,6 +117,7 @@ class PortesPersonalizados extends Module
         $allowedCarriers = $this->getCarriersForRegion($region);
 
         if (!empty($allowedCarriers) && !in_array($params['cart']->id_carrier, $allowedCarriers)) {
+            // Add error; this will show after redirect if checkout reloads
             $this->context->controller->errors[] = $this->l('Transportadora inválida para sua região');
             return false;
         }
@@ -130,7 +136,7 @@ class PortesPersonalizados extends Module
             '90' => 'Açores',
             '98' => 'Madeira',
             '99' => 'Madeira',
-            'default' => 'Portugal Continental'
+            'default' => 'Portugal Continental',
         ];
 
         return $regions[$prefix] ?? $regions['default'];
@@ -140,17 +146,17 @@ class PortesPersonalizados extends Module
     {
         $allCarriers = Carrier::getCarriers(
             $this->context->language->id,
-            true,  // active only
+            true,  // active carriers only
             false, // include deleted
-            false, // id_zone
-            null,  // id_group
+            false, // id_zone not used here
+            null,  // id_group not filtered here
             true   // return as array
         );
 
         $carrierMap = [
             'Portugal Continental' => ['CTT - Portugal Continental'],
             'Madeira' => ['CTT - Madeira'],
-            'Açores' => ['CTT - Açores']
+            'Açores' => ['CTT - Açores'],
         ];
 
         $validIds = [];
