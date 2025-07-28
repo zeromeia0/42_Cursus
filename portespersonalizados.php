@@ -126,29 +126,30 @@ public function hookFilterCarrierList($carriers)
         }
     }
 
-    public function hookDisplayBeforeCarrier($params)
-    {
-        if (!$this->context->cart->id_address_delivery) {
-            return '';
-        }
-
-        $address = new Address($this->context->cart->id_address_delivery);
-        $this->context->smarty->assign([
-            'shipping_region' => $this->getRegionFromPostcode($address->postcode),
-            'shipping_postcode' => $address->postcode
-        ]);
-        $allowedCarrierIds = $this->getCarriersForRegion($region);
-        $this->context->smarty->assign([
-            'shipping_region' => $region,
-            'shipping_postcode' => $address->postcode,
-            'allowed_carrier_ids' => $allowedCarrierIds,
-        ]);
-
-//     Register your JS file that will do the hiding
-    $this->context->controller->addJS($this->_path.'views/js/hide_carriers.js');
-
-        return $this->display(__FILE__, 'views/templates/hook/BeforeCarrier.tpl');
+public function hookDisplayBeforeCarrier($params)
+{
+    if (!$this->context->cart->id_address_delivery) {
+        return '';
     }
+
+    $address = new Address($this->context->cart->id_address_delivery);
+    $region = $this->getRegionFromPostcode($address->postcode); // assign $region here
+
+    $allowedCarrierIds = $this->getCarriersForRegion($region);
+
+    $this->context->smarty->assign([
+        'shipping_region' => $region,
+        'shipping_postcode' => $address->postcode,
+        'allowed_carrier_ids' => $allowedCarrierIds,
+    ]);
+
+    // Register your JS file for hiding carriers visually
+    $this->context->controller->addJS($this->_path . 'views/js/hide_carriers.js');
+
+    // Note the template filename 'beforeCarrier.tpl' with lowercase 'b'
+    return $this->display(__FILE__, 'views/templates/hook/beforeCarrier.tpl');
+}
+
 
     // HELPER METHODS
 
