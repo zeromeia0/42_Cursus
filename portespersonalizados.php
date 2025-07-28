@@ -137,6 +137,15 @@ public function hookFilterCarrierList($carriers)
             'shipping_region' => $this->getRegionFromPostcode($address->postcode),
             'shipping_postcode' => $address->postcode
         ]);
+        $allowedCarrierIds = $this->getCarriersForRegion($region);
+        $this->context->smarty->assign([
+            'shipping_region' => $region,
+            'shipping_postcode' => $address->postcode,
+            'allowed_carrier_ids' => $allowedCarrierIds,
+        ]);
+
+//     Register your JS file that will do the hiding
+    $this->context->controller->addJS($this->_path.'views/js/hide_carriers.js');
 
         return $this->display(__FILE__, 'views/templates/hook/displayBeforeCarrier.tpl');
     }
