@@ -5,4 +5,7 @@
 
 <script>
     window.allowedCarrierIds = {$allowed_carrier_ids|@json_encode nofilter};
+    {if $auto_select_carrier_id}
+        window.autoSelectCarrierId = {$auto_select_carrier_id};
+    {/if}
 </script>
