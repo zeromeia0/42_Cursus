@@ -1,3 +1,6 @@
+{literal}
 <script>
-    window.allowedCarrierId = {$allowed_carrier_id|intval};
+    window.allowed_carrier_id = {$allowed_carrier_id|intval};
 </script>
+{/literal}
+
