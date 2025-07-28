@@ -147,7 +147,7 @@ public function hookFilterCarrierList($carriers)
 //     Register your JS file that will do the hiding
     $this->context->controller->addJS($this->_path.'views/js/hide_carriers.js');
 
-        return $this->display(__FILE__, 'views/templates/hook/displayBeforeCarrier.tpl');
+        return $this->display(__FILE__, 'views/templates/hook/BeforeCarrier.tpl');
     }
 
     // HELPER METHODS
