@@ -1,185 +1,77 @@
 <?php
-if (!defined('_PS_VERSION_')) {
-    exit;
-}
-
 class PortesPersonalizados extends Module
 {
     public function __construct()
     {
         $this->name = 'portespersonalizados';
         $this->tab = 'shipping_logistics';
-        $this->version = '4.0.0';
+        $this->version = '5.6.7';
         $this->author = 'Vinicius Vaz';
         $this->need_instance = 0;
         $this->bootstrap = true;
-        $this->ps_versions_compliancy = ['min' => '1.7', 'max' => _PS_VERSION_];
-
+        
         parent::__construct();
-
-        $this->displayName = $this->l('Custom Shipping by Region');
-        $this->description = $this->l('Filters carriers and calculates shipping by postal code regions');
+        $this->displayName = $this->l('Region Locked Shipping');
+        $this->description = $this->l('Locks carriers to specific postal code regions');
     }
 
     public function install()
     {
-        return parent::install() &&
-            $this->registerHook('filterCarrierList') &&
-            $this->registerHook('displayBeforeCarrier') &&
-            $this->registerHook('actionCarrierProcess') &&
-            $this->installDatabase();
+        return parent::install() && 
+            $this->registerHook('displayBeforeCarrier');
     }
 
-    public function uninstall()
+    public function hookDisplayBeforeCarrier($params)
     {
-        return parent::uninstall() &&
-            $this->uninstallDatabase();
-    }
-
-    private function installDatabase()
-    {
-        return Db::getInstance()->execute('
-            CREATE TABLE IF NOT EXISTS `'._DB_PREFIX_.'portes_regions` (
-                `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-                `postcode_prefix` VARCHAR(5) NOT NULL,
-                `region` VARCHAR(50) NOT NULL,
-                PRIMARY KEY (`id`),
-                INDEX (`postcode_prefix`)
-            ) ENGINE='._MYSQL_ENGINE_.' DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-        ');
-    }
-
-    private function uninstallDatabase()
-    {
-        return Db::getInstance()->execute('DROP TABLE IF EXISTS `'._DB_PREFIX_.'portes_regions`');
-    }
-
-    // CORE FUNCTIONALITY
-
-public function hookFilterCarrierList($carriers)
-{
-    if (!$this->context->cart->id_address_delivery) {
-        error_log("PortesPersonalizados: No delivery address, returning all carriers.");
-        return $carriers;
-    }
-
-    $address = new Address($this->context->cart->id_address_delivery);
-    $region = $this->getRegionFromPostcode($address->postcode);
-    
-    error_log("PortesPersonalizados: Customer postcode {$address->postcode}, Region: $region");
-
-    $allowedCarriers = $this->getCarriersForRegion($region);
-    error_log("PortesPersonalizados: Allowed carriers for region $region: " . json_encode($allowedCarriers));
-
-    // If no allowed carriers found, either block shipment or return empty
-    if (empty($allowedCarriers)) {
-        error_log("PortesPersonalizados: No carriers allowed for region $region, returning empty list");
-        return [];
-    }
-
-    // Filter the carriers list to only allowed carriers
-    $filtered = array_filter($carriers, function($carrier) use ($allowedCarriers) {
-        return in_array($carrier['id_carrier'], $allowedCarriers);
-    });
-
-    error_log("PortesPersonalizados: Carriers filtered count: " . count($filtered));
-
-    return $filtered;
-}
-
-
-public function hookActionCarrierProcess($params)
-{
-    if (!isset($params['cart']) || !$params['cart']->id_address_delivery) {
-        return true;
-    }
-
-    $address = new Address($params['cart']->id_address_delivery);
-    $region = $this->getRegionFromPostcode($address->postcode);
-    $validCarriers = $this->getCarriersForRegion($region);
-
-    if (!empty($validCarriers) {
-        // Force the cart to use a valid carrier if none selected
-        if (!in_array($params['cart']->id_carrier, $validCarriers)) {
-            $params['cart']->id_carrier = $validCarriers[0];
-            $params['cart']->update();
+        if (!$this->context->cart->id_address_delivery) {
+            return '';
         }
+
+        $address = new Address($this->context->cart->id_address_delivery);
+        $region = $this->getRegionFromPostcode($address->postcode);
+        $allowedCarrierId = $this->getCarrierForRegion($region);
+
+        $this->context->smarty->assign([
+            'allowed_carrier_id' => $allowedCarrierId,
+            'shipping_region' => $region
+        ]);
+
+        $this->context->controller->addJS($this->_path.'views/js/hide_carriers.js');
+        return $this->display(__FILE__, 'views/templates/hook/beforeCarrier.tpl');
     }
-
-    return true;
-}
-
-public function hookDisplayBeforeCarrier($params)
-{
-    if (!$this->context->cart->id_address_delivery) {
-        return '';
-    }
-
-    $address = new Address($this->context->cart->id_address_delivery);
-    $region = $this->getRegionFromPostcode($address->postcode);
-    $allowedCarrierIds = $this->getCarriersForRegion($region);
-
-    // Get the first allowed carrier ID to auto-select
-    $autoSelectCarrierId = !empty($allowedCarrierIds) ? $allowedCarrierIds[0] : null;
-
-    $this->context->smarty->assign([
-        'shipping_region' => $region,
-        'shipping_postcode' => $address->postcode,
-        'allowed_carrier_ids' => $allowedCarrierIds,
-        'auto_select_carrier_id' => $autoSelectCarrierId,
-    ]);
-
-    $this->context->controller->addJS($this->_path . 'views/js/hide_carrier.js');
-    return $this->display(__FILE__, 'views/templates/hook/beforeCarrier.tpl');
-}
-
-
-    // HELPER METHODS
 
     private function getRegionFromPostcode($postcode)
     {
-        $postcode = preg_replace('/[^0-9]/', '', $postcode);
-        $prefix = substr($postcode, 0, 2);
-
-        $regions = [
+        $prefix = substr(preg_replace('/[^0-9]/', '', $postcode), 0, 2);
+        return match($prefix) {
             '90' => 'Açores',
-            '98' => 'Madeira',
-            '99' => 'Madeira',
-            'default' => 'Portugal Continental'
-        ];
-
-        return $regions[$prefix] ?? $regions['default'];
+            '98', '99' => 'Madeira',
+            default => 'Portugal Continental'
+        };
     }
 
-    private function getCarriersForRegion($region)
+    private function getCarrierForRegion($region)
     {
-        $allCarriers = Carrier::getCarriers(
+        $carriers = Carrier::getCarriers(
             $this->context->language->id,
-            true,  // active only
-            false, // include deleted
-            false, // id_zone
-            null,  // id_group
-            true   // return as array
+            true,
+            false,
+            false,
+            null,
+            ALL_CARRIERS
         );
 
-        $carrierMap = [
-            'Portugal Continental' => ['CTT - Portugal Continental'],
-            'Madeira' => ['CTT - Madeira'],
-            'Açores' => ['CTT - Açores']
+        $regionCarriers = [
+            'Portugal Continental' => 'CTT - Portugal Continental',
+            'Madeira' => 'CTT - Madeira',
+            'Açores' => 'CTT - Açores'
         ];
 
-        $validIds = [];
-        if (!isset($carrierMap[$region])) {
-            return $validIds;
-        }
-
-        foreach ($carrierMap[$region] as $carrierName) {
-            foreach ($allCarriers as $carrier) {
-                if ($carrier['name'] === $carrierName) {
-                    $validIds[] = $carrier['id_carrier'];
-                }
+        foreach ($carriers as $carrier) {
+            if ($carrier['name'] === $regionCarriers[$region]) {
+                return $carrier['id_carrier'];
             }
         }
-        return $validIds;
+        return null;
     }
 }
