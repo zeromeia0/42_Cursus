@@ -9,7 +9,7 @@ class PortesPersonalizados extends Module
     {
         $this->name = 'portespersonalizados';
         $this->tab = 'shipping_logistics';
-        $this->version = '4.0.0';
+        $this->version = '5.4.5';
         $this->author = 'Vinicius Vaz';
         $this->need_instance = 0;
         $this->bootstrap = true;
@@ -32,8 +32,7 @@ class PortesPersonalizados extends Module
 
     public function uninstall()
     {
-        return parent::uninstall() &&
-            $this->uninstallDatabase();
+        return parent::uninstall() && $this->uninstallDatabase();
     }
 
     private function installDatabase()
@@ -56,77 +55,69 @@ class PortesPersonalizados extends Module
 
     // CORE FUNCTIONALITY
 
-public function hookFilterCarrierList($carriers)
-{
-    if (!$this->context->cart->id_address_delivery) {
-        error_log("PortesPersonalizados: No delivery address, returning all carriers.");
-        return $carriers;
+    public function hookFilterCarrierList($carriers)
+    {
+        if (!$this->context->cart->id_address_delivery) {
+            return $carriers;
+        }
+
+        $address = new Address($this->context->cart->id_address_delivery);
+        $region = $this->getRegionFromPostcode($address->postcode);
+        $allowedCarriers = $this->getCarriersForRegion($region);
+
+        if (empty($allowedCarriers)) {
+            return [];
+        }
+
+        return array_filter($carriers, function($carrier) use ($allowedCarriers) {
+            return in_array($carrier['id_carrier'], $allowedCarriers);
+        });
     }
 
-    $address = new Address($this->context->cart->id_address_delivery);
-    $region = $this->getRegionFromPostcode($address->postcode);
-    
-    error_log("PortesPersonalizados: Customer postcode {$address->postcode}, Region: $region");
+    public function hookDisplayBeforeCarrier($params)
+    {
+        if (!$this->context->cart->id_address_delivery) {
+            return '';
+        }
 
-    $allowedCarriers = $this->getCarriersForRegion($region);
-    error_log("PortesPersonalizados: Allowed carriers for region $region: " . json_encode($allowedCarriers));
+        $address = new Address($this->context->cart->id_address_delivery);
+        $region = $this->getRegionFromPostcode($address->postcode);
+        $allowedCarriers = $this->getCarriersForRegion($region);
+        $allowedCarrierId = !empty($allowedCarriers) ? $allowedCarriers[0] : null;
 
-    // If no allowed carriers found, either block shipment or return empty
-    if (empty($allowedCarriers)) {
-        error_log("PortesPersonalizados: No carriers allowed for region $region, returning empty list");
-        return [];
+        // Auto-select correct carrier if none selected
+        if ($allowedCarrierId && !$this->context->cart->id_carrier) {
+            $this->context->cart->id_carrier = $allowedCarrierId;
+            $this->context->cart->update();
+        }
+
+        $this->context->smarty->assign([
+            'allowed_carrier_id' => $allowedCarrierId,
+            'shipping_region' => $region,
+            'shipping_postcode' => $address->postcode
+        ]);
+
+        $this->context->controller->addJS($this->_path.'views/js/hide_carriers.js');
+        return $this->display(__FILE__, 'views/templates/hook/beforeCarrier.tpl');
     }
 
-    // Filter the carriers list to only allowed carriers
-    $filtered = array_filter($carriers, function($carrier) use ($allowedCarriers) {
-        return in_array($carrier['id_carrier'], $allowedCarriers);
-    });
+    public function hookActionCarrierProcess($params)
+    {
+        if (!isset($params['cart']) || !$params['cart']->id_address_delivery) {
+            return true;
+        }
 
-    error_log("PortesPersonalizados: Carriers filtered count: " . count($filtered));
+        $address = new Address($params['cart']->id_address_delivery);
+        $region = $this->getRegionFromPostcode($address->postcode);
+        $allowedCarriers = $this->getCarriersForRegion($region);
 
-    return $filtered;
-}
+        if (!empty($allowedCarriers) && !in_array($params['cart']->id_carrier, $allowedCarriers)) {
+            $this->context->controller->errors[] = $this->l('Transportadora inválida para sua região');
+            return false;
+        }
 
-public function hookDisplayBeforeCarrier($params)
-{
-    if (!$this->context->cart->id_address_delivery) {
-        return '';
-    }
-    $address = new Address($this->context->cart->id_address_delivery);
-    $region = $this->getRegionFromPostcode($address->postcode);
-    $allowedCarrierId = $this->getCarrierForRegion($region);
-
-    // Auto-select correct carrier if none selected
-    if ($allowedCarrierId && !$this->context->cart->id_carrier) {
-        $this->context->cart->id_carrier = $allowedCarrierId;
-        $this->context->cart->update();
-    }
-    $this->context->smarty->assign([
-        'allowed_carrier_id' => $allowedCarrierId,
-        'shipping_region' => $region
-    ]);
-    return $this->display(__FILE__, 'views/templates/hook/beforeCarrier.tpl');
-}
-
-public function hookActionCarrierProcess($params)
-{
-    if (!isset($params['cart'])) {
         return true;
     }
-
-    $address = new Address($params['cart']->id_address_delivery);
-    $region = $this->getRegionFromPostcode($address->postcode);
-    $allowedCarrierId = $this->getCarrierForRegion($region);
-
-    // BLOCK CHECKOUT if wrong carrier
-    if ($allowedCarrierId && $params['cart']->id_carrier != $allowedCarrierId) {
-        $this->context->controller->errors[] = $this->l('Transportadora inválida para sua região');
-        return false; // This stops checkout completely
-    }
-
-    return true;
-}
-
 
     // HELPER METHODS
 
